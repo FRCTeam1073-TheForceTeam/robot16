@@ -5,8 +5,7 @@ import Library.Picture;
 public class TestExec {
 
 	public static void main(String[] args) {
-		Picture test = new Picture();
-
+		Map test = new Map(0,0,26.583,54.03333);
 	}
 
 }

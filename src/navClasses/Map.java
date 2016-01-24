@@ -1,5 +1,8 @@
 package navClasses;
-	/**
+
+import Library.Picture;
+
+/**
 	 * @author Matt
 	 * 
 	 * Serves to create and format all objects
@@ -34,6 +37,11 @@ public class Map extends primitiveRegion{
 	private double defenseOffsetYOpposing = 0; //TODO
 	
 	/**
+	 * The field Picture
+	 */
+	public Picture fieldPicture = new Picture();
+	
+	/**
 	 * Defense attributes 
 	 */
 	private double defenseHeightY; //TODO
@@ -41,12 +49,17 @@ public class Map extends primitiveRegion{
 
 	public Map(double xStart, double yStart, double xLength, double yLength) {
 		super(xStart, yStart, xLength, yLength);
+		fieldPicture = new Picture(1 + (int) xLength,1 + (int) yLength);
+		fieldPicture = initializeObjects(fieldPicture);
+		
+		
 	}
 	/**
 	 * Initializes the locations of all the defenses
 	 * These shouldn't change
+	 * @return 
 	 */
-	public void initializeObjects(){
+	public Picture initializeObjects(Picture fieldPicture){
 		d0 = new Defense(defenseOffsetXFriendly,defenseOffsetYFriendly,defenseHeightX,defenseHeightY, defense0);
 		d1 = new Defense(defenseOffsetXFriendly + 1 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY, defense1);
 		d2 = new Defense(defenseOffsetXFriendly + 2 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY, defense2);
@@ -57,6 +70,9 @@ public class Map extends primitiveRegion{
 		d7 = new Defense(defenseOffsetXOpposing + 2 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY, defense7);
 		d8 = new Defense(defenseOffsetXOpposing + 3 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY, defense8);
 		d9 = new Defense(defenseOffsetXOpposing + 4 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY, defense9);
+		
+		//d0
+		return fieldPicture;
 	}
 
 }

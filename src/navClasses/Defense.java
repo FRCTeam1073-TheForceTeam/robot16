@@ -1,12 +1,27 @@
 package navClasses;
 
+import Library.Picture;
+
 public class Defense extends primitiveRegion{
+	private double xStartLocal;
+	private double yStartLocal;
+	private double xLengthLocal;
+	private double yLengthLocal;
 	
 	public Defense(double xStart, double yStart, double xLength, double yLength, double defenseID) {
 		super(xStart, yStart, xLength, yLength);
-		// TODO Auto-generated constructor stub
+		
+		xStartLocal = xStart;
+		yStartLocal = yStart;
+		xLengthLocal = xLength;
+		yLengthLocal = yLength;		
+				
 	}
-	
+	public Picture draw(Picture inputPic){
+		//TODO inputPic = imag
+		
+		return inputPic;
+	}
 	public String getDefense(int ID)
 	{
 		if (ID == 0)
