@@ -7,7 +7,7 @@ public abstract class primitiveRegion {
 	 * Establishes the base class for all Map objects
 	 */ 
 
-	public primitiveRegion(int xStart, int yStart, int xLength, int yLength){
+	public primitiveRegion(double xStart, double yStart, double xLength, double yLength){
 		
 	}
 }
