@@ -22,6 +22,10 @@ public class Map extends primitiveRegion{
 	private Defense d8;
 	private Defense d9;
 	
+	private int defense0 = 9, defense1 = 9, defense2 = 9, defense3 = 9, defense4 = 9, defense5 = 9, defense6 = 9, defense7 = 9, defense8 = 9, defense9 = 9;
+	
+	private enum Defense {portcullis, chevalDeFrise, moat, ramparts, drawbridge, sallyPort, rockWall, roughTerrain, lowBar};
+	
 	/**
 	 * The initial bottom-left coordinates 
 	 * of the two series of defenses
@@ -45,16 +49,16 @@ public class Map extends primitiveRegion{
 	 * These shouldn't change
 	 */
 	public void initializeObjects(){
-		d0 = new Defense(defenseOffsetXFriendly,defenseOffsetYFriendly,defenseHeightX,defenseHeightY);
-		d1 = new Defense(defenseOffsetXFriendly + 1 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY);
-		d2 = new Defense(defenseOffsetXFriendly + 2 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY);
-		d3 = new Defense(defenseOffsetXFriendly + 3 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY);
-		d4 = new Defense(defenseOffsetXFriendly + 4 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY);
-		d5 = new Defense(defenseOffsetXOpposing,defenseOffsetYOpposing,defenseHeightX,defenseHeightY);
-		d6 = new Defense(defenseOffsetXOpposing + 1 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY);
-		d7 = new Defense(defenseOffsetXOpposing + 2 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY);
-		d8 = new Defense(defenseOffsetXOpposing + 3 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY);
-		d9 = new Defense(defenseOffsetXOpposing + 4 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY);
+		d0 = new Defense(defenseOffsetXFriendly,defenseOffsetYFriendly,defenseHeightX,defenseHeightY, defense0);
+		d1 = new Defense(defenseOffsetXFriendly + 1 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY, defense1);
+		d2 = new Defense(defenseOffsetXFriendly + 2 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY, defense2);
+		d3 = new Defense(defenseOffsetXFriendly + 3 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY, defense3);
+		d4 = new Defense(defenseOffsetXFriendly + 4 * defenseHeightX,defenseOffsetYFriendly,defenseHeightX,defenseHeightY, defense4);
+		d5 = new Defense(defenseOffsetXOpposing,defenseOffsetYOpposing,defenseHeightX,defenseHeightY, defense5);
+		d6 = new Defense(defenseOffsetXOpposing + 1 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY, defense6);
+		d7 = new Defense(defenseOffsetXOpposing + 2 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY, defense7);
+		d8 = new Defense(defenseOffsetXOpposing + 3 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY, defense8);
+		d9 = new Defense(defenseOffsetXOpposing + 4 * defenseHeightX,defenseOffsetYOpposing,defenseHeightX,defenseHeightY, defense9);
 	}
 
 }
