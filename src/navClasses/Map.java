@@ -22,24 +22,22 @@ public class Map extends primitiveRegion{
 	private Defense d8;
 	private Defense d9;
 	
-	private int defense0 = 9, defense1 = 9, defense2 = 9, defense3 = 9, defense4 = 9, defense5 = 9, defense6 = 9, defense7 = 9, defense8 = 9, defense9 = 9;
-	
-	private enum Defense {portcullis, chevalDeFrise, moat, ramparts, drawbridge, sallyPort, rockWall, roughTerrain, lowBar};
+	private double defense0 = 9, defense1 = 9, defense2 = 9, defense3 = 9, defense4 = 9, defense5 = 9, defense6 = 9, defense7 = 9, defense8 = 9, defense9 = 9;
 	
 	/**
 	 * The initial bottom-left coordinates 
 	 * of the two series of defenses
 	 */
-	private int defenseOffsetXFriendly = 0; //TODO
-	private int defenseOffsetYFriendly = 0; //TODO
-	private int defenseOffsetXOpposing = 0; //TODO
-	private int defenseOffsetYOpposing = 0; //TODO
+	private double defenseOffsetXFriendly = 0; //TODO
+	private double defenseOffsetYFriendly = 0; //TODO
+	private double defenseOffsetXOpposing = 0; //TODO
+	private double defenseOffsetYOpposing = 0; //TODO
 	
 	/**
 	 * Defense attributes 
 	 */
-	private int defenseHeightY; //TODO
-	private int defenseHeightX; //TODO
+	private double defenseHeightY; //TODO
+	private double defenseHeightX; //TODO
 
 	public Map(double xStart, double yStart, double xLength, double yLength) {
 		super(xStart, yStart, xLength, yLength);
