@@ -37,7 +37,7 @@ public class Map extends primitiveRegion{
 	private int defenseHeightY; //TODO
 	private int defenseHeightX; //TODO
 
-	public Map(int xStart, int yStart, int xLength, int yLength) {
+	public Map(double xStart, double yStart, double xLength, double yLength) {
 		super(xStart, yStart, xLength, yLength);
 	}
 	/**
