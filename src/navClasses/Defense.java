@@ -2,7 +2,7 @@ package navClasses;
 
 public class Defense extends primitiveRegion{
 	
-	public Defense(int xStart, int yStart, int xLength, int yLength, int defenseID) {
+	public Defense(double xStart, double yStart, double xLength, double yLength, double defenseID) {
 		super(xStart, yStart, xLength, yLength);
 		// TODO Auto-generated constructor stub
 	}
