@@ -7,19 +7,11 @@
 ~*
 
 #Other Various Files & Operating System
-/bin
 *.xml
 sysProps.xml
-
 build/
-/build/
-\build\
-build\
-
 dist/
-/dist/
-dist\
-\dist\
+bin/
 
 *.class
 .classpath
