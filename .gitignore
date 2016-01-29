@@ -13,7 +13,7 @@ build/
 dist/
 bin/
 *.class
-
+.classpath
 
 #OS related
 .DS_STORE
