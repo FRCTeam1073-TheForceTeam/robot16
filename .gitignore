@@ -12,7 +12,6 @@ sysProps.xml
 build/
 dist/
 bin/
-.classpath
 *.class
 
 
