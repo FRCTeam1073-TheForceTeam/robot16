@@ -53,7 +53,7 @@ public class Drive extends Command {
     }
     
     public double checkDeadZone(double side){
-    	if(Math.abs(side) >= deadZone) side = 0;
+    	if(Math.abs(side) <= deadZone) side = 0;
     	return side;
     }
     
