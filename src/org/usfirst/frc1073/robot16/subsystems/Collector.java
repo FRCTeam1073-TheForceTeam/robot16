@@ -41,8 +41,16 @@ public class Collector extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	// Turns on roller (Single direction)
+    private final int encoderTicksToDegrees = 1;
     
+    /**
+     * allUp = all the way up
+     * allDown = all the way down
+     */
+    private final double allUp = 90;
+    private final double allDown = 0;
+    
+	// Turns on roller (Single direction)    
 	public void rollerOn(){
 		rollerMotor.set(1.0f);
 	}
@@ -52,22 +60,32 @@ public class Collector extends Subsystem {
 		rollerMotor.set(0);
 	}
 	
-	// Raises collector
+	
+	/**
+	 * Makes collector rotate up
+	 */
 	public void collectorUp(){
 		elevationMotor.set(1.0f);
 	}
 	
-	// Lowers collector
+	
 	/**
-	 * 
+	 * Makes collector rotate down
 	 */
 	public void collectorDown(){
 		elevationMotor.set(-1.0f);
 	}
 	
+	public double getAngle(){
+		return elevationEncoder.get();
+	}
+	
+	public void setAngle(double angle){
+		elevatorEncoder.
+		
+	}
 	
 	
-	// Ball in robot = true
 	/**
 	 * Returns when a ball is in the robot.
 	 * 
@@ -75,11 +93,10 @@ public class Collector extends Subsystem {
 	 *	else false
 	 */
 	public boolean isCollected(){
-		return 
+		return ballSensor.get();
 	}
 	
-	// Ball in robot = false
-	// Ball launched = true
+	
 	
 	/**
 	 * 
@@ -87,7 +104,7 @@ public class Collector extends Subsystem {
 	 * 	else false
 	 */
 	public boolean isReadyToCollect(){
-		return 
+		return ballSensor.get();
 	}
 	
 	// Ball in robot = false
