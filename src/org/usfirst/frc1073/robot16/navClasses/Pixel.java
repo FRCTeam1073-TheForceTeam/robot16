@@ -1,5 +1,10 @@
 package org.usfirst.frc1073.robot16.navClasses;
 
+/**
+ * Sets states of "pixels"
+ * @author Matt
+ */
+
 public class Pixel {
 	//states: 0 = empty, 1 = impassable, 2-10 = obstacle
 	private int state = 0;
