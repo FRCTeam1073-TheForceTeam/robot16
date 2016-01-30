@@ -40,24 +40,30 @@ public class Collector extends Subsystem {
     // here. Call these from Commands.
 
 	// Turns on roller (Single direction)
+    
 	public void rollerOn(){
-		
+		rollerMotor.set(1.0f);
 	}
 	
 	// Turns off roller
 	public void rollerOff(){
-		
+		rollerMotor.set(0);
 	}
 	
 	// Raises collector
 	public void collectorUp(){
-		
+		elevationMotor.set(1.0f);
 	}
 	
 	// Lowers collector
-	public void collectorOff(){
-		
+	/**
+	 * 
+	 */
+	public void collectorDown(){
+		elevationMotor.set(-1.0f);
 	}
+	
+	
 	
 	// Ball in robot = true
 	/**
