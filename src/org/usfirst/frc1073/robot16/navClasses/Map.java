@@ -8,7 +8,14 @@ package org.usfirst.frc1073.robot16.navClasses;
 	 * dashboard and to create a graphical representation
 	 * of the field
 	 */
-public class Map extends primitiveRegion{
+public class Map{
+	
+	private int[][] mapArray;
+	
+	/*
+	 * Begin Defense config
+	 */
+	
 	/**
 	 * The initial bottom-left coordinates 
 	 * of the two series of defenses (ft.decInch)
@@ -24,6 +31,10 @@ public class Map extends primitiveRegion{
 	private double defenseHeightY; //TODO
 	private double defenseHeightX; //TODO
 
+	/*
+	 * End Defense config
+	 */
+	
 	/**
 	 * Constructor for the Map
 	 * 
@@ -33,9 +44,17 @@ public class Map extends primitiveRegion{
 	 * @param yLength - Should be y Length of the field (ft.decInch)
 	 */
 	public Map(double xStart, double yStart, double xLength, double yLength) {
-		super(xStart, yStart, xLength, yLength);		
-		
-		
+		mapArray = regionManager.rectangleBuilder(xStart, yStart, xLength, yLength);		
+	}
+	/**
+	 * Returns the array containing data
+	 * for the entire field
+	 * 
+	 * @author Matt
+	 * @return mapArray
+	 */
+	public int[][] getMapArray(){
+		return mapArray;
 	}
 
 }

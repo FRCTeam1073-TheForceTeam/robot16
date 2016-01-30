@@ -18,7 +18,7 @@ public class Pixel {
 	public void notOccupied(){
 		state = 0;
 	}
-	public void impassable(){
+	public void robot(){
 		state = 1;
 	}
 	public void obstacle(int obstacleCode){
