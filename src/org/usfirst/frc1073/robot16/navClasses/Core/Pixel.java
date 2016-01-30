@@ -1,4 +1,4 @@
-package org.usfirst.frc1073.robot16.navClasses;
+package org.usfirst.frc1073.robot16.navClasses.Core;
 
 /**
  * Sets states of "pixels"
@@ -26,6 +26,9 @@ public class Pixel {
 	}
 	public int getState(){
 		return state;
+	}
+	public void setState(int state){
+		this.state = state;
 	}
 
 

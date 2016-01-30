@@ -1,6 +1,8 @@
-package org.usfirst.frc1073.robot16.navClasses;
+package org.usfirst.frc1073.robot16.navClasses.gameObjects;
 
-	/**
+import org.usfirst.frc1073.robot16.navClasses.Core.RegionManager;
+
+/**
 	 * @author Matt
 	 * 
 	 * Serves to create and format all objects
@@ -44,7 +46,7 @@ public class Map{
 	 * @param yLength - Should be y Length of the field (ft.decInch)
 	 */
 	public Map(double xStart, double yStart, double xLength, double yLength) {
-		mapArray = regionManager.rectangleBuilder(xStart, yStart, xLength, yLength);		
+		mapArray = RegionManager.rectangleBuilder(xStart, yStart, xLength, yLength, 0);	//Returns array for map	
 	}
 	/**
 	 * Returns the array containing data
