@@ -26,8 +26,8 @@ public class RegionManager {
 		int[][]  abstractPixelChart = new int[(int)(10*xLength)][(int)(10*yLength)];
 
 		//Nested for loops to progress pixels through a 2D array
-		for(int x = (int) (xStart * 10); x < (int) (xStart * 10) + (int) (xLength * 10); x++){
-			for(int y = (int) (yStart * 10); y < (int) (yStart * 10) + (int) (yLength * 10); y++){
+		for(int x = 0; x < (int) (xLength * 10); x++){
+			for(int y = 0; y < (int) (yLength * 10); y++){
 				Pixel writer = new Pixel(x,y);
 				writer.setState(type);
 				abstractPixelChart[x][y] = writer.getState();
@@ -53,7 +53,6 @@ public class RegionManager {
 		
 		for(int x = (int) (xStart * 10); x < (int) (xStart * 10) + (int) (xLength * 10); x++){
 			for(int y = (int) (yStart * 10); y < (int) (yStart * 10) + (int) (yLength * 10); y++){
-				Pixel writer = new Pixel(x,y);
 				mapArray[x][y] = bumpyArray[x-xStatic][y-yStatic];
 			}
 		}
