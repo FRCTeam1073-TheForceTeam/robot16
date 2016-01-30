@@ -12,11 +12,8 @@ sysProps.xml
 build/
 dist/
 bin/
-
 *.class
 .classpath
-*.classpath
-classpath
 
 #OS related
 .DS_STORE
