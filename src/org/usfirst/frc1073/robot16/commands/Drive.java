@@ -48,7 +48,7 @@ public class Drive extends Command implements PIDCommand {
     }
     
     private double checkDirection(double angle){
-    	if(angle >= 180 && angle <= 360) return -1;
+    	if((angle <= -90 && angle >= -180) || (angle <= 180 && angle >= 90)) return -1;
     	else return 1;
     }
     
