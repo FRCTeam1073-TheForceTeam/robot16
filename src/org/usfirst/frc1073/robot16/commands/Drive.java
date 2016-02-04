@@ -71,7 +71,15 @@ public class Drive extends Command implements PIDCommand {
     	left = checkDeadZone(left);
     	right = checkDeadZone(right);
     	
-    	Robot.driveTrain.move(left, right);
+    	// Inverse Check
+    	if(Robot.inverseLeft) left *= -1;
+    	if(Robot.inverseRight) right *= -1;
+    	
+    	if(!Robot.isPID) {
+    		Robot.driveTrain.move(left, right);
+    		left = 0;
+    		right = 0;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -92,13 +100,18 @@ public class Drive extends Command implements PIDCommand {
 
 	@Override
 	public double getPIDSetpoint(int marker) {
-		// TODO Auto-generated method stub
-		return 0;
+		switch(marker) {
+		case 0:
+			return left;
+		case 1:
+			return right;
+		default:
+			return 0;
+		}
 	}
 
 	@Override
 	public boolean isPIDEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return Robot.isPID;
 	}
 }
