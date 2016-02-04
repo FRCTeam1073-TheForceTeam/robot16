@@ -48,11 +48,11 @@ public class Robot extends IterativeRobot {
     //DriveTrain Preferences
     public static double cubicScale;
     public static double deadZone;
-    public static boolean inverseLeft = true;
+    public static boolean inverseLeft = true; // Initialize one side inverted
     public static boolean inverseRight = false;
     public static double robotTopSpeed;
-    public static boolean isPID = true; // Change this later to have a button toggle on driver stick
-    public static boolean isCubic = true; // Change this later to have a button toggle on driver stick
+    public static boolean isPID = true;
+    public static boolean isCubic = true;
     //PID Preferences
     private static double driveTrainP; //P
     private static double driveTrainI; //I
