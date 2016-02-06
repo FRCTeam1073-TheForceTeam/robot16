@@ -92,8 +92,16 @@ public class Map{
 	public void assignDefenses(int F2, int F3, int F4, int F5, int O2, int O3, int O4, int O5)
 	{
 	//TODO Michaela - set this.F2 = F2 and the like
-		
-		
+		this.F1 = 10;
+		this.F2 = F2;
+		this.F3 = F3;
+		this.F4 = F4;
+		this.F5 = F5;
+		this.O1 = 10;
+		this.O2 = O2;
+		this.O3 = O3;
+		this.O4 = O4;
+		this.O5 = O5;
 
 	}
 	/**
