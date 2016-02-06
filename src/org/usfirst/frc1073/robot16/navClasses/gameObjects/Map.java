@@ -2,6 +2,13 @@ package org.usfirst.frc1073.robot16.navClasses.gameObjects;
 
 import org.usfirst.frc1073.robot16.navClasses.Core.RegionManager;
 
+	/*
+	 * TODO Kyle - first thing, there are 2 units of measure stored as doubles
+	 * ft.decIn - Example, 5 feet 6 inches = 5.5 feet
+	 * decFeet - increments of 1/10 foot. 10 decFeet = 1 foot (provides resolution)
+	 * Lets make all of these the second one, for simplicity's sake. Pretty sure
+	 * ft.decIn is labeled everywhere. 
+	 */
 /**
 	 * @author Matt
 	 * 
