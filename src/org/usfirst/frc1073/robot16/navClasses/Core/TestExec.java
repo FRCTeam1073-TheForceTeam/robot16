@@ -8,9 +8,11 @@ public class TestExec {
 
 	public static void main(String[] args) {
 		Map test = new Map(5.0,5.0);
-		RobotNav testRobot = new RobotNav(2.0,2.0,1.0,1.0,test);
+		//RobotNav testRobot = new RobotNav(2.0,2.0,1.0,1.0,test);
+		test.addItem(2.0, 2.0, 1.0, 1.0, 1);
 		
-		int[][] localInt = testRobot.getMapWithRobotArray();
+		//int[][] localInt = testRobot.getMapWithRobotArray();
+		int [][] localInt = test.getMapArray();
 		
 		for(int y = 0; y < 50; y++){
 			for(int x = 0; x < 50; x++){

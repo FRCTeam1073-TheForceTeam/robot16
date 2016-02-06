@@ -127,5 +127,13 @@ public class Map {
 		RobotNav testRobot = new RobotNav(robotX, robotY, 1.0, 1.0, this);
 		mapArray = testRobot.getMapWithRobotArray();
 	}
+	
+	public void addItem(double x, double y, double robotWidth, double robotHeight, int type){
+		for(int xCoord = (int) (10 * x); x < (10 * (x + robotWidth)); x++){
+			for(int yCoord = (int) (10 * y); y < (10 * (y + robotHeight)); y++){
+				mapArray[xCoord][yCoord] = type;
+			}
+		}
+	}
 
 }
