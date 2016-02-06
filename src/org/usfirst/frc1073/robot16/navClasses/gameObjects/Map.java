@@ -105,7 +105,9 @@ public class Map{
 	 */
 	
 	public void initializeMap(double robotX, double robotY){
+		RobotNav testRobot = new RobotNav(2.0,2.0,1.0,1.0,this);
 		
+		mapArray = testRobot.getMapWithRobotArray();
 	}
 
 
