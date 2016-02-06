@@ -21,10 +21,16 @@ public class RobotNav {
 		robotArray = RegionManager.rectangleBuilder(xStart, yStart, robotXWidth, robotYWidth, 1); //Return the array for the robot
 		mapArray = gameMap.getMapArray(); //Return the array for the map
 		
+		for(int x = (int) (10 * xStart); x < (10 * (xStart + robotXWidth)); x++){
+			for(int y = (int) (10 * yStart); y < (10 * (yStart + robotYWidth)); y++){
+				mapArray[x][y] = 1;
+			}
+		}
 	}
 	
 	public int[][] getMapRobotArray(){
-		return robotArray;
+		//return robotArray;
+		return mapArray;
 	}
 	
 	
