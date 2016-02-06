@@ -69,5 +69,37 @@ public class Map{
 	public int[][] getMapArray(){
 		return mapArray;
 	}
+	
+	public void assignDefenses(int Bl2, int Bl3, int Bl4, int Bl5, int Re2, int Re3, int Re4, int Re5)
+	{
+		/*
+		 * Category A:
+		 * 2- Portcullis
+		 * 3- Cheval de Frise
+		 * Category B:
+		 * 4- Moat
+		 * 5- Ramparts
+		 * Category C:
+		 * 6- Drawbridge
+		 * 7- Sally Port
+		 * Category D:
+		 * 8- Rock Wall
+		 * 9- Rough Terrain
+		 * Non-Selectable
+		 * 10- Low Bar
+		 */
+		
+		// e.g. B1- Blue Alliance Defense 1 //
+		int B1 = 10;
+		int B2 = Bl2;
+		int B3 = Bl3;
+		int B4 = Bl4;
+		int B5 = Bl5;
+		int R1 = 10;
+		int R2 = Re2;
+		int R3 = Re3;
+		int R4 = Re4;
+		int R5 = Re5;
+	}
 
 }
