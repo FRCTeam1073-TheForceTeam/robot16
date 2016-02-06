@@ -4,6 +4,7 @@ import org.usfirst.frc1073.robot16.navClasses.gameObjects.Map;
 import org.usfirst.frc1073.robot16.navClasses.gameObjects.RobotNav;
 
 public class TestExec {
+	//TODO Kyle - OOB error. May fix after you update units of measure
 
 	public static void main(String[] args) {
 		Map test = new Map(0.0,0.0,5.0,5.0);
