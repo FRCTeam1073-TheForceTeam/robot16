@@ -26,11 +26,7 @@ import org.usfirst.frc1073.robot16.navClasses.Core.RegionManager;
 public class Map{
 	
 	private int[][] mapArray;
-	
-	/*
-	 * Begin Defense config
-	 */
-	
+
 	/**
 	 * The initial bottom-left coordinates 
 	 * of the two series of defenses (ft.decInch)
@@ -46,10 +42,6 @@ public class Map{
 	private double defenseHeightY; //TODO
 	private double defenseHeightX; //TODO
 
-	/*
-	 * End Defense config
-	 */
-	
 	/**
 	 * Constructor for the Map
 	 * 
@@ -69,37 +61,58 @@ public class Map{
 	public int[][] getMapArray(){
 		return mapArray;
 	}
-	
-	public void assignDefenses(int Bl2, int Bl3, int Bl4, int Bl5, int Re2, int Re3, int Re4, int Re5)
+
+	/*
+	 * Category A:
+	 * 2- Portcullis
+	 * 3- Cheval de Frise
+	 * Category B:
+	 * 4- Moat
+	 * 5- Ramparts
+	 * Category C:
+	 * 6- Drawbridge
+	 * 7- Sally Port
+	 * Category D:
+	 * 8- Rock Wall
+	 * 9- Rough Terrain
+	 * Non-Selectable
+	 * 10- Low Bar
+	 */
+	private int F1 = 10;
+	private int F2;
+	private int F3;
+	private int F4;
+	private int F5;
+	private int O1 = 10;
+	private int O2;
+	private int O3;
+	private int O4;
+	private int O5;
+
+	public void assignDefenses(int F2, int F3, int F4, int F5, int O2, int O3, int O4, int O5)
 	{
-		/*
-		 * Category A:
-		 * 2- Portcullis
-		 * 3- Cheval de Frise
-		 * Category B:
-		 * 4- Moat
-		 * 5- Ramparts
-		 * Category C:
-		 * 6- Drawbridge
-		 * 7- Sally Port
-		 * Category D:
-		 * 8- Rock Wall
-		 * 9- Rough Terrain
-		 * Non-Selectable
-		 * 10- Low Bar
-		 */
+	//TODO Michaela - set this.F2 = F2 and the like
 		
-		// e.g. B1- Blue Alliance Defense 1 //
-		int B1 = 10;
-		int B2 = Bl2;
-		int B3 = Bl3;
-		int B4 = Bl4;
-		int B5 = Bl5;
-		int R1 = 10;
-		int R2 = Re2;
-		int R3 = Re3;
-		int R4 = Re4;
-		int R5 = Re5;
+		
+
 	}
+	/**
+	 * Puts the appropriate defenses on the map array
+	 * (requires they've been set first)
+	 * 
+	 * @param robotX
+	 * @param robotY
+	 */
+	/*
+	 * TODO Kyle - this is going to be a project. Basically,
+	 * take the 10 defenses with the integer values passed
+	 * in by Michaela's method, then, using the initial defense
+	 * offsets and heights above, put them on the mapArray
+	 */
+	
+	public void initializeMap(double robotX, double robotY){
+		
+	}
+
 
 }
