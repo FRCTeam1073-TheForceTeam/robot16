@@ -7,7 +7,7 @@ public class TestExec {
 	//TODO Kyle - OOB error. May fix after you update units of measure
 
 	public static void main(String[] args) {
-		Map test = new Map(0.0,0.0,5.0,5.0);
+		Map test = new Map(5.0,5.0);
 		RobotNav testRobot = new RobotNav(2.0,2.0,1.0,1.0,test);
 		
 		int[][] localInt = testRobot.getMapRobotArray();

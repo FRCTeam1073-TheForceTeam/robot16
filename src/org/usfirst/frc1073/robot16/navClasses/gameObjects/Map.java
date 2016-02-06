@@ -47,13 +47,11 @@ public class Map{
 	/**
 	 * Constructor for the Map
 	 * 
-	 * @param xStart - Should be 0.0
-	 * @param yStart - Should be 0.0
 	 * @param xLength - Should be x Length of the field (ft.decInch)
 	 * @param yLength - Should be y Length of the field (ft.decInch)
 	 */
-	public Map(double xStart, double yStart, double xLength, double yLength) {
-		mapArray = RegionManager.rectangleBuilder(xStart, yStart, xLength, yLength, 0);	//Returns array for map	
+	public Map(double xLength, double yLength) {
+		mapArray = RegionManager.rectangleBuilder(0.0, 0.0, xLength, yLength, 0);	//Returns array for map	
 	}
 	/**
 	 * Returns the array containing data
