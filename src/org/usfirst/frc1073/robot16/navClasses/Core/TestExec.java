@@ -10,7 +10,7 @@ public class TestExec {
 		Map test = new Map(5.0,5.0);
 		RobotNav testRobot = new RobotNav(2.0,2.0,1.0,1.0,test);
 		
-		int[][] localInt = testRobot.getMapRobotArray();
+		int[][] localInt = testRobot.getMapWithRobotArray();
 		
 		for(int y = 0; y < 50; y++){
 			for(int x = 0; x < 50; x++){
