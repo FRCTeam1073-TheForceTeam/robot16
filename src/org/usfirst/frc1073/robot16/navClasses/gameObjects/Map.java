@@ -3,6 +3,12 @@ package org.usfirst.frc1073.robot16.navClasses.gameObjects;
 import org.usfirst.frc1073.robot16.navClasses.Core.RegionManager;
 
 	/*
+	 * TODO Michaela - create a method to set defense types integers, 2-10
+	 * Store them in integers in this class, appropriately named
+	 * Create a table (in comments) assigning integer values to all defense types
+	 */
+
+	/*
 	 * TODO Kyle - first thing, there are 2 units of measure stored as doubles
 	 * ft.decIn - Example, 5 feet 6 inches = 5.5 feet
 	 * decFeet - increments of 1/10 foot. 10 decFeet = 1 foot (provides resolution)
