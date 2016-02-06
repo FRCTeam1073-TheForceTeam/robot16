@@ -1,4 +1,4 @@
-package org.usfirst.frc1073.robot16.navClasses.Core;
+package org.usfirst.frc1073.robot16.navClasses;
 
 /**
  * Sets states of "pixels"

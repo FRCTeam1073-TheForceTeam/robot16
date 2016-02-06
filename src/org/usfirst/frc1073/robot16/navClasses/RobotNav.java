@@ -1,6 +1,4 @@
-package org.usfirst.frc1073.robot16.navClasses.gameObjects;
-
-import org.usfirst.frc1073.robot16.navClasses.Core.RegionManager;
+package org.usfirst.frc1073.robot16.navClasses;
 
 /**
  * The class that represents the robot on the map
