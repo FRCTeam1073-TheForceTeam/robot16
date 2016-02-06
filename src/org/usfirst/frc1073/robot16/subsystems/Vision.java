@@ -53,8 +53,8 @@ public class Vision extends Subsystem
         // setDefaultCommand(new MySpecialCommand());
     }
 
-    public void targetFound()
-    {
+   public void targetFound() 
+   {
     	//boolean isIt = false;
     	try 
     	{
