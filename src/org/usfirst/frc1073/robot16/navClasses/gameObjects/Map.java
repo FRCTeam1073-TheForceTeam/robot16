@@ -2,19 +2,6 @@ package org.usfirst.frc1073.robot16.navClasses.gameObjects;
 
 import org.usfirst.frc1073.robot16.navClasses.Core.RegionManager;
 
-	/*
-	 * TODO Michaela - create a method to set defense types integers, 2-10
-	 * Store them in integers in this class, appropriately named
-	 * Create a table (in comments) assigning integer values to all defense types
-	 */
-
-	/*
-	 * TODO Kyle - first thing, there are 2 units of measure stored as doubles
-	 * ft.decIn - Example, 5 feet 6 inches = 5.5 feet
-	 * decFeet - increments of 1/10 foot. 10 decFeet = 1 foot (provides resolution)
-	 * Lets make all of these the second one, for simplicity's sake. Pretty sure
-	 * ft.decIn is labeled everywhere. 
-	 */
 /**
 	 * @author Matt
 	 * 
@@ -91,7 +78,6 @@ public class Map{
 
 	public void assignDefenses(int F2, int F3, int F4, int F5, int O2, int O3, int O4, int O5)
 	{
-	//TODO Michaela - set this.F2 = F2 and the like
 		this.F1 = 10;
 		this.F2 = F2;
 		this.F3 = F3;

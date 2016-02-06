@@ -4,7 +4,7 @@ import org.usfirst.frc1073.robot16.navClasses.Core.RegionManager;
 
 /**
  * The class that represents the robot on the map
- * @author Matt
+ * @author Matt & Kyle
  */
 
 public class RobotNav {
