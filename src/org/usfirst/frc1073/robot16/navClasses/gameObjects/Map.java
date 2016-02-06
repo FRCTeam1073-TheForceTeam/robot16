@@ -16,11 +16,11 @@ import org.usfirst.frc1073.robot16.navClasses.Core.RegionManager;
  */
 public class Map {
 
-	private int[][] mapArray;
+	private int[][] robotlessMapArray; // Map array with defenses, but without
+										// robot
+	private int[][] mapArray; // Active map array with robot
 	private double robotStartX;
 	private double robotStartY;
-	private double lastX;
-	private double lastY;
 
 	/**
 	 * The initial bottom-left coordinates of the two series of defenses
@@ -96,11 +96,13 @@ public class Map {
 	 * Updates the robots position on the map. This will be called constantly
 	 * 
 	 * @author Matt
-	 * @param xDistance - distance changed in x, can be + or -
-	 * @param yDistance - distance changed in y, can be + or -
+	 * @param xDistance
+	 *            - distance changed in x, can be + or -
+	 * @param yDistance
+	 *            - distance changed in y, can be + or -
 	 */
 	public void updateRobotPosition(int xDistance, int yDistance) {
-		
+
 		RobotNav testRobot = new RobotNav(robotStartX + xDistance, robotStartY + yDistance, 1.0, 1.0, this);
 		mapArray = testRobot.getMapWithRobotArray();
 	}
@@ -122,9 +124,8 @@ public class Map {
 	public void initializeMap(double robotX, double robotY) {
 		robotStartX = robotX;
 		robotStartY = robotY;
-		lastX = robotX;
-		lastY = robotY;
 		RobotNav testRobot = new RobotNav(robotX, robotY, 1.0, 1.0, this);
+		robotlessMapArray = mapArray;		
 		mapArray = testRobot.getMapWithRobotArray();
 	}
 
