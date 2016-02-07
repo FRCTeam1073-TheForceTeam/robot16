@@ -49,7 +49,7 @@ public class Navigation extends Subsystem {
 	 */
 	public void initializeMap(double robotStartX, double robotStartY) {
 		//Calls the map constructor, generates robot and defenses
-		gameMap = new Map(mapLengthX, mapLengthY, robotStartX, robotStartY);
+		gameMap = new Map(robotStartX, robotStartY);
 
 		//Calibrates the gyro
 		RobotMap.navGyro.calibrate(); //IMPORTANT: ROBOT NEEDS TO STAY STATIONARY AFTER BOOT

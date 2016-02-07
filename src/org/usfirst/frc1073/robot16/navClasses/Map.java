@@ -11,6 +11,14 @@ public class Map {
 	//Active map array with robot
 	private int[][] mapArray;
 	
+	//Map Dimensions
+	private final double mapHeight = 541;
+	private final double mapWidth = 266;
+	
+	//Robot Dimensions
+	private final double robotWidth = 28;
+	private final double robotHeight = 32;
+	
 	//Map array with defenses, but without robot
 	private int[][] robotlessMapArray;
 	
@@ -29,8 +37,8 @@ public class Map {
 	private final double defenseOffsetYOpposing = 0.0; //TODO
 
 	//Defense attributes
-	private final double defenseHeightY = 0.0; //TODO
-	private final double defenseHeightX = 0.0; //TODO
+	private final double defenseHeightY = 40; //TODO
+	private final double defenseHeightX = 42; //TODO
 
 	/**
 	 * Constructor for the Map
@@ -40,13 +48,13 @@ public class Map {
 	 * @param robotStartX - Starting X value
 	 * @param robotStartY - Starting Y value
 	 */
-	public Map(double xLength, double yLength, double robotStartX, double robotStartY) {
+	public Map(double robotStartX, double robotStartY) {
 		//Saves the starting position of the robot
 		this.robotStartX = robotStartX;
 		this.robotStartY = robotStartY;
 		
 		//Initializes the map with the a robot and the defenses
-		initializeMap(xLength, yLength);
+		initializeMap(mapWidth, mapHeight);
 	}
 
 	/**
@@ -60,12 +68,12 @@ public class Map {
 		mapArray = new int[(int) mapLengthX][(int) mapLengthY];
 
 		//TODO Need to add defense regions with variables above
-		
+		uploadDefenses();
 		//Establishes the base map array with defenses, but no robot
 		robotlessMapArray = mapArray;
 		
 		//TODO Magic numbers, adds robot to map array
-		addItem(robotStartX, robotStartY, 10, 10, 1);
+		addItem(robotStartX, robotStartY, robotWidth, robotHeight, 1);
 		
 		//Initializes the relative last value
 		lastX = robotStartX;
@@ -107,4 +115,18 @@ public class Map {
 		return mapArray;
 	}
 
+	
+	public void uploadDefenses(){
+		addItem(56, 160, defenseHeightX, defenseHeightY, 2);
+		addItem(98, 160, defenseHeightX, defenseHeightY, 3);
+		addItem(140, 160, defenseHeightX, defenseHeightY, 2);
+		addItem(182, 160, defenseHeightX, defenseHeightY, 3);
+		addItem(224, 160, defenseHeightX, defenseHeightY, 2);
+		
+		addItem(0, 340, defenseHeightX, defenseHeightY, 3);
+		addItem(42, 340, defenseHeightX, defenseHeightY, 2);
+		addItem(83, 340, defenseHeightX, defenseHeightY, 3);
+		addItem(125, 340, defenseHeightX, defenseHeightY, 2);
+		addItem(167, 340, defenseHeightX, defenseHeightY, 3);
+	}
 }
