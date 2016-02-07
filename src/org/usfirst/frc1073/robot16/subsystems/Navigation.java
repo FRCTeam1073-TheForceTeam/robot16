@@ -45,7 +45,7 @@ public class Navigation extends Subsystem {
 	 */
 	public void initializeMap(double robotStartX, double robotStartY) {
 		//Calls the map constructor, generates robot and defenses
-		gameMap = new Map(mapLengthX, mapLengthY, robotStartX, robotStartY);
+		gameMap = new Map(robotStartX, robotStartY);
 
 		//Saves the starting value of the robot
 		robotStartX = 0.0;
