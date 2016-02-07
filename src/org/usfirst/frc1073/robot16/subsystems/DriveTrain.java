@@ -89,17 +89,20 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * @author Matt
      */
     
+    //TODO Totally arbitrary, needs to be calibrated for distance
+    private final double wheelRadiusConstant = 2.0;
+    
     public double leftEncoderDistance(){
-    	return leftSideEncoder.getDistance();
+    	return leftSideEncoder.getDistance() * wheelRadiusConstant;
     }
     public double rightEncoderDistance(){
-    	return rightSideEncoder.getDistance();  			
+    	return rightSideEncoder.getDistance() * wheelRadiusConstant;  			
     }
     public double leftEncoderRate(){
-    	return leftSideEncoder.getRate();
+    	return leftSideEncoder.getRate() * wheelRadiusConstant;
     }
     public double rightEncoderRate(){
-    	return rightSideEncoder.getRate();
+    	return rightSideEncoder.getRate() * wheelRadiusConstant;
     }
     
     //End Navigation Accessor Methods
