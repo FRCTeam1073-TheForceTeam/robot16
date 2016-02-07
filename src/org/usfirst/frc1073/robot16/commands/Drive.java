@@ -47,14 +47,36 @@ public class Drive extends Command implements PIDCommand {
     	right = 0;
     }
     
+    /*************************************************
+     * 
+     * Method to change direction of the joystick
+     * based on angle
+     * 
+     * @param angle is the angle to the corresponding
+     * joystick magnitude
+     * 
+     * @return a 1 or -1 to change direction of
+     * magnitude of the joystick
+     * 
+     *************************************************/
     private double checkDirection(double angle){
     	if((angle <= -90 && angle >= -180) || (angle <= 180 && angle >= 90)) return -1;
     	else return 1;
     }
     
-    public double checkDeadZone(double side){
-    	if(Math.abs(side) <= deadZone) side = 0;
-    	return side;
+    /***********************************************
+     * 
+     * Method to adjust a dead zone on joystick
+     * 
+     * @param mag is the magnitude of the joystick
+     * 
+     * @return an adjusted value based on deadZone
+     * set in Robot Main
+     * 
+     ***********************************************/
+    public double checkDeadZone(double mag){
+    	if(Math.abs(mag) <= deadZone) mag = 0;
+    	return mag;
     }
     
     // Called repeatedly when this Command is scheduled to run
@@ -71,7 +93,16 @@ public class Drive extends Command implements PIDCommand {
     	left = checkDeadZone(left);
     	right = checkDeadZone(right);
     	
-    	Robot.driveTrain.move(left, right);
+    	// Inverse Check
+    	if(Robot.inverseLeft) left *= -1;
+    	if(Robot.inverseRight) right *= -1;
+    	
+    	// Uses regular tank drive if PID is disabled
+    	if(!Robot.isPID) {
+    		Robot.driveTrain.move(left, right);
+    		left = 0;
+    		right = 0;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -92,13 +123,18 @@ public class Drive extends Command implements PIDCommand {
 
 	@Override
 	public double getPIDSetpoint(int marker) {
-		// TODO Auto-generated method stub
-		return 0;
+		switch(marker) {
+		case 0:
+			return left;
+		case 1:
+			return right;
+		default:
+			return 0;
+		}
 	}
 
 	@Override
 	public boolean isPIDEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return Robot.isPID;
 	}
 }
