@@ -97,7 +97,7 @@ public class Navigation extends Subsystem {
 		final double k = 1.0;
 		
 		
-		while(distanceTravelled < targetDistance){
+		while(distanceTravelled <= targetDistance){
 			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
 			theta = navGyro.getAngle();
 			Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
@@ -108,11 +108,16 @@ public class Navigation extends Subsystem {
 			if(Vy >= 1.0){Vy = 1.0;}
 			
 			//TODO Method doesn't exist yet; Napes is writing it
-			//Robot.driveTrain.getDriveCommand().move();
+			//Robot.driveTrain.getDriveCommand().move(Vx,Vy);
 		}
+		//Resets distance for 2nd stage
+		distanceTravelled = 0.0;
+		//Distance equation, taking into account the off center initial coordinate of the robot
+		targetDistance = Math.sqrt((x - 14 + robotStartX) * (x - 14 + robotStartX) + (y - robotStartY + targetDistance) * (y - robotStartY + targetDistance));
 		
-		
-		
+		while(distanceTravelled <= targetDistance){
+			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
+		}
 		
 	}
 	
