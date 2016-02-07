@@ -47,6 +47,19 @@ public class Drive extends Command implements PIDCommand {
     	right = 0;
     }
     
+    /************************************************
+     * 
+     * Method to move the robot using PID
+     * 
+     * @param left is the left side drive value
+     * @param right is the right side drive value
+     * 
+     ************************************************/
+    public void movePID(double left, double right) {
+    	this.left = left;
+    	this.right = right;
+    }
+    
     /*************************************************
      * 
      * Method to change direction of the joystick
