@@ -81,7 +81,6 @@ public class Collector extends Subsystem {
 	}
 	
 	public void setAngle(double angle){
-		elevatorEncoder.
 		
 	}
 	
