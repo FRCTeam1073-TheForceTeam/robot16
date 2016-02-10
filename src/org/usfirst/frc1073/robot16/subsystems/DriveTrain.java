@@ -18,7 +18,6 @@ import org.usfirst.frc1073.robot16.commands.*;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -43,7 +42,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     
     private Drive drive = new Drive(); //drive command
     
-    private static final double distancePurPulse = 0.017453; // Constant for the distance traveled per pulse
+    private static final double DISTANCE_PUR_PULSE = 0.017453; // Constant for the distance traveled per pulse
     
     private double robotTopSpeed = Robot.robotTopSpeed; // Constant for the top speed of the robot in FPS
     double cubicConstant = Robot.cubicScale;
@@ -59,8 +58,8 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * 
      ****************************/
     public DriveTrain() {
-    	leftSideEncoder.setDistancePerPulse(distancePurPulse);
-    	rightSideEncoder.setDistancePerPulse(distancePurPulse);
+    	leftSideEncoder.setDistancePerPulse(DISTANCE_PUR_PULSE);
+    	rightSideEncoder.setDistancePerPulse(DISTANCE_PUR_PULSE);
     }
     
     /***************************
@@ -146,7 +145,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 	 ****************************************/
 	@Override
 	public double getPIDSource(int marker) {
-		if(Robot.isPID) {
+		if(Robot.isDriveTrainPID) {
 			switch(marker) {
 			case 0:
 				return getLeftRateFps() / robotTopSpeed;
@@ -169,7 +168,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 	 *******************************************/
 	@Override
 	public void setPIDOutput(double output, int marker) {
-		if(Robot.isPID) {
+		if(Robot.isDriveTrainPID) {
 			switch(marker) {
 			case 0:
 				leftMotor1.set(output, leftSyncGroup);

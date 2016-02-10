@@ -72,7 +72,7 @@ public class Drive extends Command implements PIDCommand {
      * magnitude of the joystick
      * 
      *************************************************/
-    private double checkDirection(double angle){
+    private double checkDirection(double angle) {
     	if((angle <= -90 && angle >= -180) || (angle <= 180 && angle >= 90)) return -1;
     	else return 1;
     }
@@ -87,7 +87,7 @@ public class Drive extends Command implements PIDCommand {
      * set in Robot Main
      * 
      ***********************************************/
-    public double checkDeadZone(double mag){
+    public double checkDeadZone(double mag) {
     	if(Math.abs(mag) <= deadZone) mag = 0;
     	return mag;
     }
@@ -111,7 +111,7 @@ public class Drive extends Command implements PIDCommand {
     	if(Robot.inverseRight) right *= -1;
     	
     	// Uses regular tank drive if PID is disabled
-    	if(!Robot.isPID) {
+    	if(!Robot.isDriveTrainPID) {
     		Robot.driveTrain.move(left, right);
     		left = 0;
     		right = 0;
@@ -148,6 +148,6 @@ public class Drive extends Command implements PIDCommand {
 
 	@Override
 	public boolean isPIDEnabled() {
-		return Robot.isPID;
+		return Robot.isDriveTrainPID;
 	}
 }
