@@ -43,6 +43,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     
     private Drive drive = new Drive(); //drive command
     
+    // fix spelling of this, consider changing name to inchesPerPulse if it generates inches. 
     private static final double distancePurPulse = 0.017453; // Constant for the distance traveled per pulse
     
     private double robotTopSpeed = Robot.robotTopSpeed; // Constant for the top speed of the robot in FPS
@@ -70,7 +71,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * 
      ***************************/
     public double getLeftRateFps() {
-    	return leftSideEncoder.getRate() / 12;
+    	return leftSideEncoder.getRate() / 12;		// SC: 12 because getRate returns inches/sec because of distancePurPulse?
     }
     
     /***************************
@@ -115,6 +116,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     	rightMotor2.set(right, rightSyncGroup);
     }
     
+    // SC: maybe rename these xyzEncoderDistanceInches to make it clear
     public double leftEncoderDistance(){
     	return leftSideEncoder.getDistance();
     }
@@ -123,6 +125,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     	return rightSideEncoder.getDistance();  			
     }
     
+    // SC: maybe rename these xyzEncoderInchesPerSec if that's correct, or put a comment here saying it returns inches/sec
     public double leftEncoderRate(){
     	return leftSideEncoder.getRate();
     }
