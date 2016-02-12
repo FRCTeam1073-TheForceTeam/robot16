@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
     public static PIDThread rightDriveTrainPIDThread;
     
     private static final long dt = 100; // refresh rate of PIDThreads 
-    
+    private boolean isFirstStartup;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -114,9 +114,11 @@ public class Robot extends IterativeRobot {
         leftDriveTrainThread = new Thread(leftDriveTrainPIDThread);
         rightDriveTrainPIDThread = new PIDThread(driveTrainP, driveTrainI, driveTrainD, dt, driveTrainTolerance, 1);
         rightDriveTrainThread = new Thread(rightDriveTrainPIDThread);
-        
+        /*
         leftDriveTrainThread.start();
         rightDriveTrainThread.start();
+    	*/
+        isFirstStartup = true;
     }
 
     /**
@@ -160,10 +162,14 @@ public class Robot extends IterativeRobot {
         collectorElevationSpeed = prefs.getDouble("collectorElevationSpeed", 0.90);
         invertRoller = prefs.getBoolean("invertRoller", false);
         invertElevation = prefs.getBoolean("invertElevation", false);
-        
-        leftDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
-        rightDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
-        
+        if (isFirstStartup) {
+	        leftDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
+	        rightDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
+	        
+	        leftDriveTrainThread.start();
+	        rightDriveTrainThread.start();
+	        isFirstStartup = false;
+    	}
         leftDriveTrainPIDThread.enable();
         rightDriveTrainPIDThread.enable();
     }
