@@ -47,7 +47,6 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     private static final double DISTANCE_PUR_PULSE = 0.017453; // Constant for the distance traveled per pulse
     
     private double robotTopSpeed = Robot.robotTopSpeed; // Constant for the top speed of the robot in FPS
-    double cubicConstant = Robot.cubicScale;
     
     // Sync groups information
     private byte leftSyncGroup = 0;
@@ -71,7 +70,9 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * 
      ***************************/
     public double getLeftRateFps() {
-    	return (leftSideEncoder.getRate() * -1) / 12;		// SC: 12 because getRate returns inches/sec because of distancePurPulse?
+    	double rate = leftSideEncoder.getRate();
+    	double left = (rate) / 12;
+    	return left;		// SC: 12 because getRate returns inches/sec because of distancePurPulse?
     }
     
     /***************************
@@ -81,17 +82,9 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * 
      ***************************/
     public double getRightRateFps() {
-    	return rightSideEncoder.getRate() / 12;
-    }
-    
-    /***************************************
-     * 
-     * Method to scale a joystick value.
-     *    @param arg is the joystick value
-     *
-     ***************************************/
-    private double cubicScale(double arg) {
-    	return (cubicConstant*arg + (1 - cubicConstant) * Math.pow((double)arg, 3));
+    	double rate = rightSideEncoder.getRate();
+    	double right = rate / 12;
+    	return right;
     }
     
     /*********************************************
@@ -103,12 +96,6 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * 
      *********************************************/
     public void move(double left, double right){
-    	
-    	// Checks for cubic scaling
-    	if(Robot.isCubic) {
-    		left = cubicScale(left);
-        	right = cubicScale(right);
-    	}
     	
     	leftMotor1.set(left, leftSyncGroup);
     	leftMotor2.set(left, leftSyncGroup);
@@ -152,9 +139,9 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 		if(Robot.isDriveTrainPID) {
 			switch(marker) {
 			case 0:
-				return getLeftRateFps() / robotTopSpeed;
+				return getLeftRateFps() / 10.5; // NEEDS TO BE CHNAGED --FOOBAR--
 			case 1:
-				return getRightRateFps() / robotTopSpeed;
+				return getRightRateFps() / 10.5; // NEEDS TO BE CHNAGED --FOOBAR--
 			default:
 				return 0;
 			}
@@ -172,6 +159,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 	 *******************************************/
 	@Override
 	public void setPIDOutput(double output, int marker) {
+		SmartDashboard.putBoolean("isDriveTrainPID", Robot.isDriveTrainPID);
 		if(Robot.isDriveTrainPID) {
 			switch(marker) {
 			case 0:

@@ -27,6 +27,7 @@ public class Drive extends Command implements PIDCommand {
 	
 	
 	private double deadZone = Robot.deadZone;
+	double cubicConstant = Robot.cubicScale;
 	private double left;
 	private double right;
 	
@@ -95,6 +96,16 @@ public class Drive extends Command implements PIDCommand {
     	return mag;
     }
     
+    /***************************************
+     * 
+     * Method to scale a joystick value.
+     *    @param arg is the joystick value
+     *
+     ***************************************/
+    private double cubicScale(double arg) {
+    	return (cubicConstant*arg + (1 - cubicConstant) * Math.pow((double)arg, 3));
+    }
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// Sets left and right
@@ -112,6 +123,12 @@ public class Drive extends Command implements PIDCommand {
     	// Inverse Check
     	if(Robot.inverseLeft) left *= -1;
     	if(Robot.inverseRight) right *= -1;
+    	
+    	// Checks for cubic scaling
+    	if(Robot.isCubic) {
+    		left = cubicScale(left);
+        	right = cubicScale(right);
+    	}
     	
     	// Uses regular tank drive if PID is disabled
     	if(!Robot.isDriveTrainPID) {

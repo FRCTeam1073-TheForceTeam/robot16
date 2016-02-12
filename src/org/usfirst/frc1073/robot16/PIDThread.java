@@ -106,7 +106,7 @@ public class PIDThread implements Runnable {
 				//set the PIDoutput to the generated output (again, use the specific marker to prevent cross-thread data transmission, ex. left front encoder reading used in right front PID)
 				SmartDashboard.putString("PID is", "4");
 				PIDOutput.setPIDOutput(output, marker);
-				SmartDashboard.putNumber("the output", output);
+				SmartDashboard.putString("PID is", "5");
 				previous = current;
 			}
 			//if PID disabled, just set output to 0 and 0 integral.
