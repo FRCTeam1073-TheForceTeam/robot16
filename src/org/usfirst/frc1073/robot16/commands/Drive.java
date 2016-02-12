@@ -11,7 +11,9 @@
 
 package org.usfirst.frc1073.robot16.commands;
 
-import edu.wpi.first.wpilibj.command.Command; 
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc1073.robot16.Robot;
 
 /**
@@ -137,10 +139,13 @@ public class Drive extends Command implements PIDCommand {
 
 	@Override
 	public double getPIDSetpoint(int marker) {
+		SmartDashboard.putString("PID is", "2.6");
 		switch(marker) {
 		case 0:
+			SmartDashboard.putNumber("left", left);
 			return left;
 		case 1:
+			SmartDashboard.putNumber("right", right);
 			return right;
 		default:
 			return 0;

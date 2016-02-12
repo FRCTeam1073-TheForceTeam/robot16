@@ -3,6 +3,7 @@ package org.usfirst.frc1073.robot16;
 import org.usfirst.frc1073.robot16.commands.PIDCommand;
 import org.usfirst.frc1073.robot16.subsystems.PIDSubsystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 	/**
 	 * 
@@ -81,8 +82,9 @@ public class PIDThread implements Runnable {
 		while (true) { 
 			//skip PID if the thread is disabled
 			if(enabled){
-				
+				SmartDashboard.putString("PID is", "1");
 				current = (long) Timer.getFPGATimestamp() * Math.pow(10, -3);
+				SmartDashboard.putNumber("PID time", current);
 				dtMeasured = (long) (current - previous);
 				if(dtMeasured == 0){
 					dtMeasured = 5;
@@ -90,7 +92,9 @@ public class PIDThread implements Runnable {
 				//Core PID Code follows: 
 				//setpoint get the setpoint from the PIDSetpoint passed in (use this thread's marker)
 				//currentMeasurement gets the current reading from the PIDinput (use this thread's marker)
+				SmartDashboard.putString("PID is", "2.5");
 				setpoint = PIDSetpoint.getPIDSetpoint(marker);
+				SmartDashboard.putString("PID is", "3");
 				currentMeasurement = PIDinput.getPIDSource(marker);
 				//PID Calculation (includes tolerance adjustment)
 				double error = (setpoint) - (currentMeasurement);
@@ -100,7 +104,9 @@ public class PIDThread implements Runnable {
 				output = (kP * error) + (kI * integral) + (kD * derivative);
 				previousError = error;
 				//set the PIDoutput to the generated output (again, use the specific marker to prevent cross-thread data transmission, ex. left front encoder reading used in right front PID)
+				SmartDashboard.putString("PID is", "4");
 				PIDOutput.setPIDOutput(output, marker);
+				SmartDashboard.putNumber("the output", output);
 				previous = current;
 			}
 			//if PID disabled, just set output to 0 and 0 integral.
@@ -108,10 +114,12 @@ public class PIDThread implements Runnable {
 			else{
 				PIDOutput.setPIDOutput(0.0, marker);
 				integral = 0;
+				SmartDashboard.putString("PID is", "disabled");
 			}
 			//thread frequency adjustment. catch statement can also be used to trigger events
 			try {
 				Thread.sleep(dt);
+				SmartDashboard.putString("PID Thread", "running" +  marker);
 			} catch (InterruptedException e) {
 				System.out.println("PIDThread #" + marker + "interupted");
 			}
@@ -164,6 +172,10 @@ public class PIDThread implements Runnable {
 	
 	public void updateCurrentMeasurement(double newMeasurement) {
 		this.currentMeasurement = newMeasurement;
+	}
+	
+	public void toggleEnabled() {
+		enabled = !enabled;
 	}
 	
 	public double getOutput(){

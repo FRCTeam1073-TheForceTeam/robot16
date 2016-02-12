@@ -38,6 +38,8 @@ public class TogglePID extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.isDriveTrainPID = !Robot.isDriveTrainPID;
+    	Robot.leftDriveTrainPIDThread.toggleEnabled();
+    	Robot.rightDriveTrainPIDThread.toggleEnabled();
     }
 
     // Called repeatedly when this Command is scheduled to run

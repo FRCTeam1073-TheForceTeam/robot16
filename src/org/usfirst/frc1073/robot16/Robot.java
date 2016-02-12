@@ -66,12 +66,12 @@ public class Robot extends IterativeRobot {
     public static boolean invertElevation = false;
     
     //PID Thread declarations
-    Thread leftDriveTrainThread;
-    PIDThread leftDriveTrainPIDThread;
-    Thread rightDriveTrainThread;
-    PIDThread rightDriveTrainPIDThread;
+    public static Thread leftDriveTrainThread;
+    public static PIDThread leftDriveTrainPIDThread;
+    public static Thread rightDriveTrainThread;
+    public static PIDThread rightDriveTrainPIDThread;
     
-    private static final long dt = 5; // refresh rate of PIDThreads 
+    private static final long dt = 100; // refresh rate of PIDThreads 
     
     
     /**
@@ -115,8 +115,6 @@ public class Robot extends IterativeRobot {
         rightDriveTrainPIDThread = new PIDThread(driveTrainP, driveTrainI, driveTrainD, dt, driveTrainTolerance, 1);
         rightDriveTrainThread = new Thread(rightDriveTrainPIDThread);
         
-        leftDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
-        rightDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
         leftDriveTrainThread.start();
         rightDriveTrainThread.start();
     }
@@ -163,6 +161,9 @@ public class Robot extends IterativeRobot {
         invertRoller = prefs.getBoolean("invertRoller", false);
         invertElevation = prefs.getBoolean("invertElevation", false);
         
+        leftDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
+        rightDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
+        
         leftDriveTrainPIDThread.enable();
         rightDriveTrainPIDThread.enable();
     }
@@ -172,6 +173,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("left side encoder (fps)", driveTrain.getLeftRateFps());
+        SmartDashboard.putNumber("right side encoder (fps)", driveTrain.getRightRateFps());
     }
 
     /**
