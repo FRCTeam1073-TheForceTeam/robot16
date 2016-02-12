@@ -45,8 +45,6 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     
     private static final double INCHES_PER_PULSE = 0.017453; // Constant for the distance traveled per pulse
     
-    private double robotTopSpeed = Robot.robotTopSpeed; // Constant for the top speed of the robot in FPS
-    
     // Sync groups information
     private byte leftSyncGroup = 0;
     private byte rightSyncGroup = 1;
@@ -138,9 +136,9 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 		if(Robot.isDriveTrainPID) {
 			switch(marker) {
 			case 0:
-				return getLeftRateFps() / 10.5; // NEEDS TO BE CHNAGED --FOOBAR--
+				return getLeftRateFps() / Robot.robotTopSpeed;
 			case 1:
-				return getRightRateFps() / 10.5; // NEEDS TO BE CHNAGED --FOOBAR--
+				return getRightRateFps() / Robot.robotTopSpeed;
 			default:
 				return 0;
 			}
@@ -161,16 +159,12 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 		if(Robot.isDriveTrainPID) {
 			switch(marker) {
 			case 0:
-				//leftMotor1.set(output, leftSyncGroup);
-				//leftMotor2.set(output, leftSyncGroup);
-				leftMotor1.set(output);
-				leftMotor2.set(output);
+				leftMotor1.set(output, leftSyncGroup);
+				leftMotor2.set(output, leftSyncGroup);
 			break;
 			case 1:
-				//rightMotor1.set(output, rightSyncGroup);
-				//rightMotor2.set(output, rightSyncGroup);
-				rightMotor1.set(output);
-				rightMotor2.set(output);
+				rightMotor1.set(output, rightSyncGroup);
+				rightMotor2.set(output, rightSyncGroup);
 			break;
 			}
 		}

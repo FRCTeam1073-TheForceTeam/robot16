@@ -151,6 +151,8 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         
+        prefs = prefs.getInstance();
+        
         cubicScale = prefs.getDouble("cubicScale", 0.07);
         deadZone = prefs.getDouble("deadZone", 0.05);
         inverseLeft = prefs.getBoolean("inverseLeft", true);
