@@ -43,8 +43,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     
     public Drive drive; //drive command
     
-// fix spelling of this, consider changing name to inchesPerPulse if it generates inches. 
-    private static final double DISTANCE_PUR_PULSE = 0.017453; // Constant for the distance traveled per pulse
+    private static final double INCHES_PER_PULSE = 0.017453; // Constant for the distance traveled per pulse
     
     private double robotTopSpeed = Robot.robotTopSpeed; // Constant for the top speed of the robot in FPS
     
@@ -59,8 +58,8 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * 
      ****************************/
     public DriveTrain() {
-    	leftSideEncoder.setDistancePerPulse(DISTANCE_PUR_PULSE);
-    	rightSideEncoder.setDistancePerPulse(DISTANCE_PUR_PULSE);
+    	leftSideEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    	rightSideEncoder.setDistancePerPulse(INCHES_PER_PULSE);
     }
     
     /***************************
@@ -71,8 +70,8 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      ***************************/
     public double getLeftRateFps() {
     	double rate = leftSideEncoder.getRate();
-    	double left = (rate) / 12;
-    	return left;		// SC: 12 because getRate returns inches/sec because of distancePurPulse?
+    	double left = (rate) / 12; // divide by 12 to convert to feet
+    	return left;
     }
     
     /***************************
@@ -83,7 +82,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      ***************************/
     public double getRightRateFps() {
     	double rate = rightSideEncoder.getRate();
-    	double right = rate / 12;
+    	double right = rate / 12; // divide by 12 to convert to feet
     	return right;
     }
     
@@ -159,18 +158,15 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 	 *******************************************/
 	@Override
 	public void setPIDOutput(double output, int marker) {
-		SmartDashboard.putBoolean("isDriveTrainPID", Robot.isDriveTrainPID);
 		if(Robot.isDriveTrainPID) {
 			switch(marker) {
 			case 0:
-				SmartDashboard.putNumber("left out", output);
 				//leftMotor1.set(output, leftSyncGroup);
 				//leftMotor2.set(output, leftSyncGroup);
 				leftMotor1.set(output);
 				leftMotor2.set(output);
 			break;
 			case 1:
-				SmartDashboard.putNumber("right out", output);
 				//rightMotor1.set(output, rightSyncGroup);
 				//rightMotor2.set(output, rightSyncGroup);
 				rightMotor1.set(output);

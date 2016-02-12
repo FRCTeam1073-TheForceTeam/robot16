@@ -90,10 +90,9 @@ public class Drive extends Command implements PIDCommand {
      * set in Robot Main
      * 
      ***********************************************/
-// SC: bad practice to change the value of a passed in parameter, just do return 0
     public double checkDeadZone(double mag) {
-    	if(Math.abs(mag) <= deadZone) mag = 0;
-    	return mag;
+    	if(Math.abs(mag) <= deadZone) return 0;
+    	else return mag;
     }
     
     /***************************************
@@ -133,7 +132,8 @@ public class Drive extends Command implements PIDCommand {
     	// Uses regular tank drive if PID is disabled
     	if(!Robot.isDriveTrainPID) {
     		Robot.driveTrain.move(left, right);
-    		left = 0;								// SC: put in comment explaining why set to 0 so someone doesn't take it out
+    		// This sets left and right back to 0 for PID
+    		left = 0;								
     		right = 0;
     	}
     }
@@ -156,13 +156,10 @@ public class Drive extends Command implements PIDCommand {
 
 	@Override
 	public double getPIDSetpoint(int marker) {
-		SmartDashboard.putString("PID is", "2.6");
 		switch(marker) {
 		case 0:
-			SmartDashboard.putNumber("left", left);
 			return left;
 		case 1:
-			SmartDashboard.putNumber("right", right);
 			return right;
 		default:
 			return 0;

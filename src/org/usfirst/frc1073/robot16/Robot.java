@@ -112,12 +112,10 @@ public class Robot extends IterativeRobot {
         
         leftDriveTrainPIDThread = new PIDThread(driveTrainP, driveTrainI, driveTrainD, dt, driveTrainTolerance, 0);
         leftDriveTrainThread = new Thread(leftDriveTrainPIDThread);
+        
         rightDriveTrainPIDThread = new PIDThread(driveTrainP, driveTrainI, driveTrainD, dt, driveTrainTolerance, 1);
         rightDriveTrainThread = new Thread(rightDriveTrainPIDThread);
-        /*
-        leftDriveTrainThread.start();
-        rightDriveTrainThread.start();
-    	*/
+
         isFirstStartup = true;
     }
 
@@ -162,16 +160,19 @@ public class Robot extends IterativeRobot {
         collectorElevationSpeed = prefs.getDouble("collectorElevationSpeed", 0.90);
         invertRoller = prefs.getBoolean("invertRoller", false);
         invertElevation = prefs.getBoolean("invertElevation", false);
+        
         if (isFirstStartup) {
 	        leftDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
 	        rightDriveTrainPIDThread.setPIDObjects(driveTrain, driveTrain, driveTrain.getDriveCommand());
 	        
 	        leftDriveTrainThread.start();
 	        rightDriveTrainThread.start();
+	        
 	        isFirstStartup = false;
     	}
         
         isDriveTrainPID = true;
+        
         leftDriveTrainPIDThread.enable();
         rightDriveTrainPIDThread.enable();
     }
@@ -181,8 +182,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putNumber("left side encoder (fps)", driveTrain.getLeftRateFps());
-        SmartDashboard.putNumber("right side encoder (fps)", driveTrain.getRightRateFps());
     }
 
     /**
