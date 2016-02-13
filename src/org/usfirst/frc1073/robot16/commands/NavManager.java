@@ -49,7 +49,7 @@ public class NavManager extends Command {
 	
 	protected void alternateExecute() {
 		Robot.navigation.moveTo(Robot.targetXGlobal, Robot.targetYGlobal, Robot.targetAngleGlobal);
-		
+		//TODO Move moveTo to its own command
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

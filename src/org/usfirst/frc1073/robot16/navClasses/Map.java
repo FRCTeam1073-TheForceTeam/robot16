@@ -29,14 +29,14 @@ public class Map {
 	private double lastY;
 	
 	//The initial bottom-left coordinates of the two series of defenses
-	private final double defenseOffsetXFriendly = 69.0; //TODO
-	private final double defenseOffsetYFriendly = 160.0; //TODO
-	private final double defenseOffsetXOpposing = 0.0; //TODO
-	private final double defenseOffsetYOpposing = 240.0; //TODO
+	private final double defenseOffsetXFriendly = 69.0;
+	private final double defenseOffsetYFriendly = 160.0;
+	private final double defenseOffsetXOpposing = 0.0;
+	private final double defenseOffsetYOpposing = 240.0;
 
 	//Defense attributes
-	private final double defenseHeightY = 40; //TODO
-	private final double defenseHeightX = 42; //TODO
+	private final double defenseHeightY = 40;
+	private final double defenseHeightX = 42;
 
 	/**
 	 * Constructor for the Map

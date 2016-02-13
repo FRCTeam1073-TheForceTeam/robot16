@@ -26,6 +26,8 @@ public class Navigation extends Subsystem {
 	//Robot Dimensions
 	private final double robotLengthX = 28;
 	private final double robotLengthY = 32;
+	
+	private double priorEncoderAverage = 0.0;
 
 	//Not in Robot Builder yet -Matt
 	private final AnalogGyro navGyro = RobotMap.navGyro;
@@ -63,8 +65,10 @@ public class Navigation extends Subsystem {
 	 */
 	public void updateMap() {
 		//Prepares and sends updated values to the Map for updating
-		double encoderAverage = (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
+		//TODO The theta considered should take into account the initial angle, not exclusively the end
+		double encoderAverage = ((Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2) - priorEncoderAverage;
 		gameMap.updateRobotPosition(encoderAverage * Math.sin(navGyro.getAngle()), encoderAverage * Math.cos(navGyro.getAngle()));
+		priorEncoderAverage = encoderAverage;
 
 	}
 	/**
