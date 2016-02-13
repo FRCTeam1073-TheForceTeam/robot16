@@ -3,6 +3,7 @@ package org.usfirst.frc1073.robot16;
 import org.usfirst.frc1073.robot16.commands.PIDCommand;
 import org.usfirst.frc1073.robot16.subsystems.PIDSubsystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 	/**
 	 * 
@@ -81,7 +82,6 @@ public class PIDThread implements Runnable {
 		while (true) { 
 			//skip PID if the thread is disabled
 			if(enabled){
-				
 				current = (long) Timer.getFPGATimestamp() * Math.pow(10, -3);
 				dtMeasured = (long) (current - previous);
 				if(dtMeasured == 0){
@@ -155,6 +155,16 @@ public class PIDThread implements Runnable {
 	**/
 	public void enable() {
 		enabled = true;
+	}
+	
+	/******************************
+	 * 
+	 * Method to toggle the thread
+	 * enabled
+	 * 
+	 ******************************/
+	public void toggleEnabled() {
+		enabled = !enabled;
 	}
 	
 	//unused methods but kept in for future reference
