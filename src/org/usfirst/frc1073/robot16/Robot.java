@@ -37,6 +37,15 @@ public class Robot extends IterativeRobot {
 	 */
 	public static double robotGlobalStartX = 30; //Needs to be set somewhere
 	public static double robotGlobalStartY = 30; //Needs to be set somewhere
+	
+	//These need to be set to allow NavManager to drive the robot to a location
+	public static double targetXGlobal = 50;
+	public static double targetYGlobal = 50;
+	public static double targetAngleGlobal = 20;
+	
+	//This, when set, tells the robot to navigate to the above coordinates (only works from match start)
+	public static boolean isNavigatingGlobal = false;
+	
 
     Command autonomousCommand;
 

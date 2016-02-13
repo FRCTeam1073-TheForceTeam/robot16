@@ -120,6 +120,9 @@ public class Navigation extends Subsystem {
 			
 			//Will cycle until the distance is traversed
 		}
+		//Momentarily stops the motors
+		Robot.driveTrain.getDriveCommand().movePID(0,0);
+				
 		/*
 		 * Sets the target distance for the robot to travel
 		 * 
@@ -134,25 +137,70 @@ public class Navigation extends Subsystem {
 		 */
 		targetDistance = Math.sqrt(Math.pow((x - (robotLengthX / 2) - Robot.robotGlobalStartX), 2) + Math.pow((y - Robot.robotGlobalStartY - distanceTravelled - (robotLengthY / 2)), 2));
 	
-			
-		if(x < Robot.robotGlobalStartX){
+		//If the target point is left of the robot's start location	(or at it)
+		if(x <= Robot.robotGlobalStartX){
 			//Supposedly, the gyro continues to the negative region (-1/0, -2.0)
-			while(navGyro.getAngle() > (Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(Robot.robotGlobalStartX - x))){
+			//Rotates the robot so it drives straight at the target point, saving time
+			while(navGyro.getAngle() > -1*(Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(Robot.robotGlobalStartX - x))){
 				Robot.driveTrain.getDriveCommand().movePID(-.75, .75);
 			}
-			
-		
-			
-			Robot.driveTrain.getDriveCommand().movePID(-.5, .5);}
+			//Sets the new target theta towards the target position
+			targetTheta = -1*(Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(Robot.robotGlobalStartX - x));
+		}
+		else{
+			//Rotates the robot so it drives straight at the target point, saving time
+			while(navGyro.getAngle() < (Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(x - Robot.robotGlobalStartX))){
+				Robot.driveTrain.getDriveCommand().movePID(.75, -.75);
+			}
+			//Sets the new target theta towards the target position
+			targetTheta = (Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(x - Robot.robotGlobalStartX));
+		}
+		//Momentarily stops the motors (so we don't go from 3/4 back to full front)
+		Robot.driveTrain.getDriveCommand().movePID(0,0);
 		
 		//Resets distance for 2nd stage
 		distanceTravelled = 0.0;
 		
+		/*
+		 * Begins 2nd stage. At this point, the robot is oriented towards the target point.
+		 * TODO This is literally the same while loop a second time. We need to restructure
+		 * this
+		 */
 		while(distanceTravelled <= targetDistance){
+			//TODO Make sure units from drive train are correct
 			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
 			
+			//Updates gyro angle
+			theta = navGyro.getAngle();
+			
+			//Modifies voltage output to motors based on a drift correction algorithm
+			Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+			Vy = Vy * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+			
+			//Prevents motors from receiving weird values outside their threshold 
+			if(Vx >= 1.0){Vx = 1.0;}
+			if(Vy >= 1.0){Vy = 1.0;}
+			
+			//Physically moves the robot using the PID move method
+			Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
+			
+			//Will cycle until the distance is traversed
 		}
+		//Momentarily stops the motors
+		Robot.driveTrain.getDriveCommand().movePID(0,0);
 		
+		//Realigns the robot to the desired angle
+		while(navGyro.getAngle() > endAngle){
+			Robot.driveTrain.getDriveCommand().movePID(-.75, .75);
+		}
+		while(navGyro.getAngle() < endAngle){
+					Robot.driveTrain.getDriveCommand().movePID(.75, -.75);
+		}
+		//Sets the new target theta towards the target position
+		targetTheta = (Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(x - Robot.robotGlobalStartX));
+		
+		//Momentarily stops the motors (so we don't go from 3/4 back to full front
+		Robot.driveTrain.getDriveCommand().movePID(0, 0);
 	}
 	
 
