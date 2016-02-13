@@ -8,7 +8,7 @@ import java.io.IOException;
 public class TestExec {
 
 	public static void main(String[] args) {
-		Map test = new Map(20,20);
+		Map test = new Map();
 		int [][] localInt = test.getMapArray();
 		for(int y = 0; y < localInt[0].length; y++){
 			for(int x = 0; x < localInt.length; x++){
