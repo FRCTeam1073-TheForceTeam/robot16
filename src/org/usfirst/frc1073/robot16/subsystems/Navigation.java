@@ -22,6 +22,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Navigation extends Subsystem {
 
 	Map gameMap;
+	
+	//Robot Dimensions
+	private final double robotLengthX = 28;
+	private final double robotLengthY = 32;
 
 	//Not in Robot Builder yet -Matt
 	private final AnalogGyro navGyro = RobotMap.navGyro;
@@ -73,40 +77,80 @@ public class Navigation extends Subsystem {
 	 * @param x - the final x position (10ths's of an inch)
 	 * @param y - the final y position (10th's of an inch)
 	 */
-	public void moveTo(double x, double y){
+	public void moveTo(double x, double y, double endAngle){
 		//Sets initial motor values
 		double Vx = 0.9;
 		double Vy = 0.9;
+		
 		//Sets angles
 		double theta = navGyro.getAngle();
 		double targetTheta = 0.0;
-		//Initialized to distance from start to total clearance of opposing defense
-		double targetDistance = 94;
+		
+		//Initialized to the distance from robot start to total clearance of opposing defense
+		double targetDistance = 94;		
 		double distanceTravelled = 0.0;
-		//TODO Needs to be calibrated
+		
+		//TODO Needs to be calibrated, describes the aggression of drive correction algorithm
 		final double k = 1.0;
 		
-		
+		/*
+		 * First stage drive; clears defense immediately in front of the the robot.
+		 * This does not provision for any time to interact with the defense. Ideally,
+		 * we'll need a switch/case block to handle each potential defense separately.
+		 * This has the potential to take over most autonomous movement functions, at
+		 * least to firing position. 
+		 */
 		while(distanceTravelled <= targetDistance){
+			//TODO Make sure units from drive train are correct
 			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
+			
+			//Updates gyro angle
 			theta = navGyro.getAngle();
+			
+			//Modifies voltage output to motors based on a drift correction algorithm
 			Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
 			Vy = Vy * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
 			
-			//Prevents motors from receiving weird values
+			//Prevents motors from receiving weird values outside their threshold 
 			if(Vx >= 1.0){Vx = 1.0;}
 			if(Vy >= 1.0){Vy = 1.0;}
 			
-			//TODO Method doesn't exist yet; Napes is writing it
-			//Robot.driveTrain.getDriveCommand().move(Vx,Vy);
+			//Physically moves the robot using the PID move method
+			Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
+			
+			//Will cycle until the distance is traversed
 		}
+		/*
+		 * Sets the target distance for the robot to travel
+		 * 
+		 * X manipulation:
+		 * 	-Reduced by half the length of the robot; the initial coordinates of the robot are at the bottom left corner; this centers the robot
+		 * 	-Subtracts the start X from the target X; if the robot starts halfway across the map, that's half the map it doesn't have to travel
+		 * 
+		 * Y manipulation:
+		 * 	-Reduced by half the height of the robot; the initial coordinates of the robot are at the bottom left corner; this centers the robot
+		 * 	-Subtracts the start Y from the target Y; if the robot starts halfway across the map, that's half the map it doesn't have to travel
+		 * 	-Subtracts the distance already traveled by the robot, presumably only in the Y; there's been movement since the starting position
+		 */
+		targetDistance = Math.sqrt(Math.pow((x - (robotLengthX / 2) - Robot.robotGlobalStartX), 2) + Math.pow((y - Robot.robotGlobalStartY - distanceTravelled - (robotLengthY / 2)), 2));
+	
+			
+		if(x < Robot.robotGlobalStartX){
+			//Supposedly, the gyro continues to the negative region (-1/0, -2.0)
+			while(navGyro.getAngle() > (Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(Robot.robotGlobalStartX - x))){
+				Robot.driveTrain.getDriveCommand().movePID(-.75, .75);
+			}
+			
+		
+			
+			Robot.driveTrain.getDriveCommand().movePID(-.5, .5);}
+		
 		//Resets distance for 2nd stage
 		distanceTravelled = 0.0;
-		//Distance equation, taking into account the off center initial coordinate of the robot
-		targetDistance = Math.sqrt((x - 14 + Robot.robotGlobalStartX) * (x - 14 + Robot.robotGlobalStartX) + (y - Robot.robotGlobalStartY + targetDistance) * (y - Robot.robotGlobalStartY + targetDistance));
 		
 		while(distanceTravelled <= targetDistance){
 			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
+			
 		}
 		
 	}

@@ -108,26 +108,23 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * @author Matt
      */
     
-    //TODO Unnecessary, calibrated in constructor
-    private final double wheelRadiusConstant = 2.0;
-
     // SC: maybe rename these xyzEncoderDistanceInches to make it clear
 
     public double leftEncoderDistance(){
-    	return leftSideEncoder.getDistance() * wheelRadiusConstant;
+    	return leftSideEncoder.getDistance();
     }
     
     public double rightEncoderDistance(){
-    	return rightSideEncoder.getDistance() * wheelRadiusConstant;  			
+    	return rightSideEncoder.getDistance();  			
     }
     
     // SC: maybe rename these xyzEncoderInchesPerSec if that's correct, or put a comment here saying it returns inches/sec
     public double leftEncoderRate(){
-    	return leftSideEncoder.getRate() * wheelRadiusConstant;
+    	return leftSideEncoder.getRate();
     }
     
     public double rightEncoderRate(){
-    	return rightSideEncoder.getRate() * wheelRadiusConstant;
+    	return rightSideEncoder.getRate();
     }
     
 	public Drive getDriveCommand() {
