@@ -29,10 +29,10 @@ public class Map {
 	private double lastY;
 	
 	//The initial bottom-left coordinates of the two series of defenses
-	private final double defenseOffsetXFriendly = 0.0; //TODO
-	private final double defenseOffsetYFriendly = 0.0; //TODO
+	private final double defenseOffsetXFriendly = 69.0; //TODO
+	private final double defenseOffsetYFriendly = 160.0; //TODO
 	private final double defenseOffsetXOpposing = 0.0; //TODO
-	private final double defenseOffsetYOpposing = 0.0; //TODO
+	private final double defenseOffsetYOpposing = 240.0; //TODO
 
 	//Defense attributes
 	private final double defenseHeightY = 40; //TODO
@@ -105,16 +105,10 @@ public class Map {
 
 	
 	public void addDefenses(){
-		addItem(56, 160, defenseHeightX, defenseHeightY, 2);
-		addItem(98, 160, defenseHeightX, defenseHeightY, 3);
-		addItem(140, 160, defenseHeightX, defenseHeightY, 2);
-		addItem(182, 160, defenseHeightX, defenseHeightY, 3);
-		addItem(224, 160, defenseHeightX, defenseHeightY, 2);
 		
-		addItem(0, 340, defenseHeightX, defenseHeightY, 3);
-		addItem(42, 340, defenseHeightX, defenseHeightY, 2);
-		addItem(83, 340, defenseHeightX, defenseHeightY, 3);
-		addItem(125, 340, defenseHeightX, defenseHeightY, 2);
-		addItem(167, 340, defenseHeightX, defenseHeightY, 3);
+		for(int i = 0; i < 5; i++){
+			addItem(defenseOffsetXFriendly + defenseHeightX * i, defenseOffsetYFriendly, defenseHeightX, defenseHeightY, 2 + i%2);
+			addItem(defenseOffsetXOpposing + defenseHeightX * i, defenseOffsetYOpposing, defenseHeightX, defenseHeightY, 2 + i%2);
+		}
 	}
 }
