@@ -29,6 +29,14 @@ import org.usfirst.frc1073.robot16.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	/*
+	 * TODO These variables control the initial starting position
+	 * of the robot in Navigation (necessary for the Map & Movement).
+	 * Nick, you mentioned that you would handle assigning them.
+	 * -Matt
+	 */
+	public static double robotGlobalStartX = 30; //Needs to be set somewhere
+	public static double robotGlobalStartY = 30; //Needs to be set somewhere
 
     Command autonomousCommand;
 

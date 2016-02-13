@@ -1,5 +1,7 @@
 package org.usfirst.frc1073.robot16.navClasses;
 
+import org.usfirst.frc1073.robot16.Robot;
+
 /**
  * @author Nav Group
  * 
@@ -12,20 +14,16 @@ public class Map {
 	private int[][] mapArray;
 	
 	//Map Dimensions
-	private final double mapHeight = 541;
-	private final double mapWidth = 266;
+	private final double mapLengthY = 541;
+	private final double mapLengthX = 266;
 	
 	//Robot Dimensions
-	private final double robotWidth = 28;
-	private final double robotHeight = 32;
+	private final double robotLengthX = 28;
+	private final double robotLengthY = 32;
 	
 	//Map array with defenses, but without robot
 	private int[][] robotlessMapArray;
-	
-	//Robot starting location
-	private double robotStartX;
-	private double robotStartY;
-	
+
 	//Last robot location
 	private double lastX;
 	private double lastY;
@@ -42,46 +40,36 @@ public class Map {
 
 	/**
 	 * Constructor for the Map
-	 * 
-	 * @param xLength - Should be x Length of the field (10th's of an inch)
-	 * @param yLength - Should be y Length of the field (10th's of an inch)
-	 * @param robotStartX - Starting X value
-	 * @param robotStartY - Starting Y value
 	 */
-	public Map(double robotStartX, double robotStartY) {
-		//Saves the starting position of the robot
-		this.robotStartX = robotStartX;
-		this.robotStartY = robotStartY;
-		
+	public Map() {
 		//Initializes the map with the a robot and the defenses
-		initializeMap(mapWidth, mapHeight);
+		initializeMap();
 	}
 
 	/**
-	 * Sets up the map for the first time
-	 * 
-	 * @param mapLengthX - length of map in 10th's of a foot
-	 * @param mapLengthY - length of map in 10th's of a foot
+	 * Sets up the map for the first time 
+	 * with defenses and the robot position
 	 */
-	public void initializeMap(double mapLengthX, double mapLengthY) {
+	public void initializeMap() {
 		//Creates a map array the size of the field
 		mapArray = new int[(int) mapLengthX][(int) mapLengthY];
 
-		//TODO Need to add defense regions with variables above
-		uploadDefenses();
+		//Adds defense regions with variables above
+		addDefenses();
+		
 		//Establishes the base map array with defenses, but no robot
 		robotlessMapArray = mapArray;
 		
-		//TODO Magic numbers, adds robot to map array
-		addItem(robotStartX, robotStartY, robotWidth, robotHeight, 1);
+		//Adds robot to map array
+		addItem(Robot.robotGlobalStartX, Robot.robotGlobalStartY, robotLengthX, robotLengthY, 1);
 		
 		//Initializes the relative last value
-		lastX = robotStartX;
-		lastY = robotStartY;
+		lastX = Robot.robotGlobalStartX;
+		lastY = Robot.robotGlobalStartY;
 	}
 
 	/**
-	 * Updates the robots position on the map. This will be called constantly
+	 * Updates the robot's position on the map. This will be called constantly
 	 * 
 	 * @param d - distance changed in x, can be + or -
 	 * @param e - distance changed in y, can be + or -
@@ -116,7 +104,7 @@ public class Map {
 	}
 
 	
-	public void uploadDefenses(){
+	public void addDefenses(){
 		addItem(56, 160, defenseHeightX, defenseHeightY, 2);
 		addItem(98, 160, defenseHeightX, defenseHeightY, 3);
 		addItem(140, 160, defenseHeightX, defenseHeightY, 2);
