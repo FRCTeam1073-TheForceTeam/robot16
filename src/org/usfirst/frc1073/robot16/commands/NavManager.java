@@ -46,16 +46,9 @@ public class NavManager extends Command {
 		Robot.navigation.updateMap();
 		
 	}
-	
-	protected void alternateExecute() {
-		Robot.navigation.moveTo(Robot.targetXGlobal, Robot.targetYGlobal, Robot.targetAngleGlobal);
-		//TODO Move moveTo to its own command
-	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if(Robot.isNavigatingGlobal){alternateExecute();}
-		Robot.isNavigatingGlobal = false;
 		return false;
 	}
 

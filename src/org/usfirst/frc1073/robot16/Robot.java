@@ -11,15 +11,19 @@
 
 package org.usfirst.frc1073.robot16;
 
+import org.usfirst.frc1073.robot16.subsystems.Climber;
+import org.usfirst.frc1073.robot16.subsystems.Collector;
+import org.usfirst.frc1073.robot16.subsystems.Defense;
+import org.usfirst.frc1073.robot16.subsystems.DriveTrain;
+import org.usfirst.frc1073.robot16.subsystems.Laucher;
+import org.usfirst.frc1073.robot16.subsystems.Navigation;
+import org.usfirst.frc1073.robot16.subsystems.Vision;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc1073.robot16.commands.*;
-import org.usfirst.frc1073.robot16.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
