@@ -13,6 +13,7 @@ package org.usfirst.frc1073.robot16.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc1073.robot16.Robot;
+import org.usfirst.frc1073.robot16.subsystems.Laucher.laucherState;
 
 /**
  *
@@ -42,6 +43,7 @@ public class TestLoad extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.laucher.move(laucherState.primed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -51,10 +53,12 @@ public class TestLoad extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.laucher.stopLaucherMotor();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
