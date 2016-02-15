@@ -74,11 +74,12 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     private laucherState destination; // Where you want to be
     
     private final double SPEED = 1.00;
-    private final double ELEVATION_SPEED = 0.65;
+    private final double ELEVATION_SPEED = 0.45;
     
     public Laucher() {
     	current = laucherState.emptyForwards; // This makes the default position of the robot emptyForwards
     	pullBackMotor.setInverted(Robot.invertLaucher);
+    	elevationMotor.setInverted(Robot.invertLaucherElevation);
     }
     
     /**********************************
@@ -124,14 +125,14 @@ public class Laucher extends Subsystem implements PIDSubsystem {
             	break;
             	case emptyBackwards:
             		// The if statement is just for safety
-            		if(!laucherBackLimit.get()) { 
+            		if(laucherBackLimit.get()) { 
             			driveLaucherMotorBackwards(); 
                 		current = laucherState.emptyMiddle;
             		}
             	break;
             	case emptyMiddle:
             		// The if statement is just for safety
-            		if(!laucherBackLimit.get()) {
+            		if(laucherBackLimit.get()) {
             			driveLaucherMotorBackwards(); 
             			current = laucherState.emptyMiddle;
             		}
@@ -139,7 +140,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
             	case primedMiddle:
             		toggleRelease(); //Grabs the spring
             		// The if statement is just for safety
-            		if(!laucherBackLimit.get()) {
+            		if(laucherBackLimit.get()) {
             			driveLaucherMotorBackwards(); 
             			current = laucherState.emptyMiddle;
             		}
@@ -151,7 +152,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
             	case loaded:
             		toggleRelease(); //Grabs the spring
             		// The if statement is just for safety
-            		if(!laucherBackLimit.get()) {
+            		if(laucherBackLimit.get()) {
             			driveLaucherMotorBackwards(); 
             			current = laucherState.primedMiddle;
             		}
@@ -162,7 +163,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     		switch(destination) {
     		case emptyForwards:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.emptyMiddle;
     			}
@@ -173,28 +174,28 @@ public class Laucher extends Subsystem implements PIDSubsystem {
         	break;
         	case emptyMiddle:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.emptyMiddle;
     			}
         	break;
         	case primedMiddle:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.emptyMiddle;
     			}
         	break;
         	case primed:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.emptyMiddle;
     			}
         	break;
         	case loaded:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.emptyMiddle;
     			}
@@ -205,13 +206,13 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     		switch(destination) {
     		case emptyForwards:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     			}
         	break;
         	case emptyBackwards:
     			// The if statement is just for safety
-    			if(!laucherBackLimit.get()) {
+    			if(laucherBackLimit.get()) {
     				driveLaucherMotorBackwards();
     			}
         	break;
@@ -221,19 +222,19 @@ public class Laucher extends Subsystem implements PIDSubsystem {
         	break;
         	case primedMiddle:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     			}
         	break;
         	case primed:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     			}
         	break;
         	case loaded:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     			}
         	break;
@@ -243,19 +244,19 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     		switch(destination) {
     		case emptyForwards:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     			}
         	break;
         	case emptyBackwards:
     			// The if statement is just for safety
-    			if(!laucherBackLimit.get()) {
+    			if(laucherBackLimit.get()) {
     				driveLaucherMotorBackwards();
     			}
         	break;
         	case emptyMiddle:
     			// The if statement is just for safety
-    			if(!laucherBackLimit.get()) {
+    			if(laucherBackLimit.get()) {
     				driveLaucherMotorBackwards();
     			}
         	break;
@@ -265,13 +266,13 @@ public class Laucher extends Subsystem implements PIDSubsystem {
         	break;
         	case primed:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     			}
         	break;
         	case loaded:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorBackwards();
     			}
         	break;
@@ -281,28 +282,28 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     		switch(destination) {
     		case emptyForwards:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.primedMiddle;
     			}
         	break;
         	case emptyBackwards:
     			// The if statement is just for safety
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.primedMiddle;
     			}
         	break;
         	case emptyMiddle:
         		// The if statement is just for safety
-        		if(!laucherBackLimit.get()) {
+        		if(laucherBackLimit.get()) {
         			driveLaucherMotorBackwards();
         			current = laucherState.primedMiddle;
         		}
         	break;
         	case primedMiddle:
         		// The if statement is just for safety
-        		if(!laucherBackLimit.get()) {
+        		if(laucherBackLimit.get()) {
         			driveLaucherMotorBackwards();
         			current = laucherState.primedMiddle;
         		}
@@ -313,7 +314,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
         	break;
         	case loaded:
         		// The if statement is just for safety
-        		if(!laucherBackLimit.get()) {
+        		if(laucherBackLimit.get()) {
         			driveLaucherMotorBackwards();
         			current = laucherState.primedMiddle;
         		}
@@ -325,7 +326,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     		case emptyForwards:
     			toggleRelease();
     			current = laucherState.emptyBackwards;
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.emptyMiddle;
     			}
@@ -337,19 +338,19 @@ public class Laucher extends Subsystem implements PIDSubsystem {
         	case emptyMiddle:
     			toggleRelease();
     			current = laucherState.emptyBackwards;
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.emptyMiddle;
     			}
         	break;
         	case primedMiddle:
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.primedMiddle;
     			}
         	break;
         	case primed:
-    			if(!laucherFrontLimit.get()) {
+    			if(laucherFrontLimit.get()) {
     				driveLaucherMotorForwards();
     				current = laucherState.primedMiddle;
     			}
@@ -379,7 +380,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      * 
      *********************************/
     public void driveLaucherMotorForwards() {
-    	pullBackMotor.set(SPEED);
+    	if(laucherFrontLimit.get()) pullBackMotor.set(SPEED);
     }
     
     /*********************************
@@ -389,7 +390,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      * 
      *********************************/
     public void driveLaucherMotorBackwards() {
-    	pullBackMotor.set(-SPEED);
+    	if(laucherBackLimit.get()) pullBackMotor.set(-SPEED);
     }
     
     /*********************************
