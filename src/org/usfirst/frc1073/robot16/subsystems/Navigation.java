@@ -82,20 +82,7 @@ public class Navigation extends Subsystem {
 	 * @param y - the final y position (10th's of an inch)
 	 */
 	public void moveTo(double x, double y, double endAngle){
-		//Sets initial motor values
-		double Vx = 0.9;
-		double Vy = 0.9;
 		
-		//Sets angles
-		double theta = navGyro.getAngle();
-		double targetTheta = 0.0;
-		
-		//Initialized to the distance from robot start to total clearance of opposing defense
-		double targetDistance = 94;		
-		double distanceTravelled = 0.0;
-		
-		//TODO Needs to be calibrated, describes the aggression of drive correction algorithm
-		final double k = 1.0;
 		
 		/*
 		 * First stage drive; clears defense immediately in front of the the robot.
@@ -105,24 +92,7 @@ public class Navigation extends Subsystem {
 		 * least to firing position. 
 		 */
 		while(distanceTravelled <= targetDistance){
-			//TODO Make sure units from drive train are correct
-			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
 			
-			//Updates gyro angle
-			theta = navGyro.getAngle();
-			
-			//Modifies voltage output to motors based on a drift correction algorithm
-			Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
-			Vy = Vy * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
-			
-			//Prevents motors from receiving weird values outside their threshold 
-			if(Vx >= 1.0){Vx = 1.0;}
-			if(Vy >= 1.0){Vy = 1.0;}
-			
-			//Physically moves the robot using the PID move method
-			Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
-			
-			//Will cycle until the distance is traversed
 		}
 		//Momentarily stops the motors
 		Robot.driveTrain.getDriveCommand().movePID(0,0);
