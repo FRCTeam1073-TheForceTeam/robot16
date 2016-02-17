@@ -44,6 +44,7 @@ public class NavManager extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.navigation.updateMap();
+		if(Robot.isNavigatingGlobal){new NavDriver(8, false);} //TODO Decide on the whole "state" thing
 		
 	}
 

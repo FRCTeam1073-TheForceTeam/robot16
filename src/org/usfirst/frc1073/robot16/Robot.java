@@ -42,13 +42,16 @@ public class Robot extends IterativeRobot {
 	public static double robotGlobalStartX = 30; //Needs to be set somewhere
 	public static double robotGlobalStartY = 30; //Needs to be set somewhere
 	
-	//These need to be set to allow NavManager to drive the robot to a location
+	//These need to be set to allow NavDriver to drive the robot to a location
 	public static double targetXGlobal = 50;
 	public static double targetYGlobal = 50;
 	public static double targetAngleGlobal = 20;
 	
+	//Tells us which defense we start in front of; consult table for proper int values
+	public static double globalProximalDefenseID = 8; //TODO I like 8 at the moment, but this needs to be set from the dashboard
+	
 	//This, when set, tells the robot to navigate to the above coordinates (only works from match start)
-	public static boolean isNavigatingGlobal = false;
+	public static boolean isNavigatingGlobal = true;
 	
 
     Command autonomousCommand;
