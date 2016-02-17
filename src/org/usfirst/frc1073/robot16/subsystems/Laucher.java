@@ -108,10 +108,10 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     	
     	// This uses the sensors to check the current position and will set the current position to where ever it actually is
     	if(laucherFrontLimit.get() && laucherRelease.get()) current = laucherState.primed;
-    	else if(laucherFrontLimit.get() && !laucherRelease.get()) current = laucherState.emptyForwards;
-    	else if(laucherBackLimit.get() && laucherRelease.get()) current = laucherState.loaded;
-    	else if(laucherBackLimit.get() && !laucherRelease.get()) current = laucherState.emptyBackwards;
-    	else if((!laucherFrontLimit.get() && !laucherBackLimit.get()) && laucherRelease.get()) current = laucherState.primedMiddle;
+    	else if(!laucherFrontLimit.get() && !laucherRelease.get()) current = laucherState.emptyForwards;
+    	else if(!laucherBackLimit.get() && laucherRelease.get()) current = laucherState.loaded;
+    	else if(!laucherBackLimit.get() && !laucherRelease.get()) current = laucherState.emptyBackwards;
+    	else if((laucherFrontLimit.get() && laucherBackLimit.get()) && laucherRelease.get()) current = laucherState.primedMiddle;
     	else current = laucherState.emptyMiddle;
     	
     	this.destination = destination; // Sets global to current destination
@@ -124,26 +124,21 @@ public class Laucher extends Subsystem implements PIDSubsystem {
         			stopLaucherMotor(); // Just a safety stop
             	break;
             	case emptyBackwards:
-            		// The if statement is just for safety
-            		if(laucherBackLimit.get()) { 
-            			driveLaucherMotorBackwards(); 
-                		current = laucherState.emptyMiddle;
-            		}
+            		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+            		driveLaucherMotorBackwards(); 
+                	current = laucherState.emptyMiddle;
             	break;
             	case emptyMiddle:
-            		// The if statement is just for safety
-            		if(laucherBackLimit.get()) {
-            			driveLaucherMotorBackwards(); 
-            			current = laucherState.emptyMiddle;
-            		}
+            		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+            		driveLaucherMotorBackwards(); 
+            		current = laucherState.emptyMiddle;
             	break;
             	case primedMiddle:
             		toggleRelease(); //Grabs the spring
-            		// The if statement is just for safety
-            		if(laucherBackLimit.get()) {
-            			driveLaucherMotorBackwards(); 
-            			current = laucherState.emptyMiddle;
-            		}
+            		current = laucherState.primed;
+            		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+            		driveLaucherMotorBackwards(); 
+            		current = laucherState.emptyMiddle;
             	break;
             	case primed:
             		toggleRelease();
@@ -151,173 +146,131 @@ public class Laucher extends Subsystem implements PIDSubsystem {
             	break;
             	case loaded:
             		toggleRelease(); //Grabs the spring
-            		// The if statement is just for safety
-            		if(laucherBackLimit.get()) {
-            			driveLaucherMotorBackwards(); 
-            			current = laucherState.primedMiddle;
-            		}
+            		current = laucherState.primed;
+            		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+            		driveLaucherMotorBackwards(); 
+            		current = laucherState.primedMiddle;
             	break;
     		}
     	break;
     	case emptyBackwards:
     		switch(destination) {
     		case emptyForwards:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.emptyMiddle;
-    			}
+    			if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.emptyMiddle;
         	break;
         	case emptyBackwards:
         		// Do nothing
         		stopLaucherMotor(); // Just for safety
         	break;
         	case emptyMiddle:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.emptyMiddle;
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.emptyMiddle;
         	break;
         	case primedMiddle:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.emptyMiddle;
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.emptyMiddle;
         	break;
         	case primed:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.emptyMiddle;
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.emptyMiddle;
         	break;
         	case loaded:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.emptyMiddle;
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.emptyMiddle;
         	break;
 		}
     	break;
     	case emptyMiddle:
     		switch(destination) {
     		case emptyForwards:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
         	break;
         	case emptyBackwards:
-    			// The if statement is just for safety
-    			if(laucherBackLimit.get()) {
-    				driveLaucherMotorBackwards();
-    			}
+        		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorBackwards();
         	break;
         	case emptyMiddle:
         		// do nothing
         		stopLaucherMotor();
         	break;
         	case primedMiddle:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
         	break;
         	case primed:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
         	break;
         	case loaded:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
         	break;
 		}
     	break;
     	case primedMiddle:
     		switch(destination) {
     		case emptyForwards:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    			}
+    			if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
         	break;
         	case emptyBackwards:
-    			// The if statement is just for safety
-    			if(laucherBackLimit.get()) {
-    				driveLaucherMotorBackwards();
-    			}
+        		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorBackwards();
         	break;
         	case emptyMiddle:
-    			// The if statement is just for safety
-    			if(laucherBackLimit.get()) {
-    				driveLaucherMotorBackwards();
-    			}
+        		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorBackwards();
         	break;
         	case primedMiddle:
         		// do nothing
         		stopLaucherMotor();
         	break;
         	case primed:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
         	break;
         	case loaded:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorBackwards();
-    			}
+        		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorBackwards();
         	break;
 		}
     	break;
     	case primed:
     		switch(destination) {
     		case emptyForwards:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.primedMiddle;
-    			}
+    			toggleRelease();
         	break;
         	case emptyBackwards:
-    			// The if statement is just for safety
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.primedMiddle;
-    			}
+        		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorBackwards();
+    			current = laucherState.primedMiddle;
         	break;
         	case emptyMiddle:
-        		// The if statement is just for safety
-        		if(laucherBackLimit.get()) {
-        			driveLaucherMotorBackwards();
-        			current = laucherState.primedMiddle;
-        		}
+        		toggleRelease();
+        		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorBackwards();
+    			current = laucherState.emptyMiddle;
         	break;
         	case primedMiddle:
-        		// The if statement is just for safety
-        		if(laucherBackLimit.get()) {
-        			driveLaucherMotorBackwards();
-        			current = laucherState.primedMiddle;
-        		}
+        		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorBackwards();
+    			current = laucherState.primedMiddle;
         	break;
         	case primed:
         		// do nothing
         		stopLaucherMotor();
         	break;
         	case loaded:
-        		// The if statement is just for safety
-        		if(laucherBackLimit.get()) {
-        			driveLaucherMotorBackwards();
-        			current = laucherState.primedMiddle;
-        		}
+        		if(!laucherBackLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorBackwards();
+    			current = laucherState.primedMiddle;
         	break;
 		}
     	break;
@@ -326,34 +279,30 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     		case emptyForwards:
     			toggleRelease();
     			current = laucherState.emptyBackwards;
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.emptyMiddle;
-    			}
+    			if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.emptyMiddle;
         	break;
         	case emptyBackwards:
         		toggleRelease();
         		current = laucherState.emptyBackwards;
         	break;
         	case emptyMiddle:
-    			toggleRelease();
+        		toggleRelease();
     			current = laucherState.emptyBackwards;
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.emptyMiddle;
-    			}
+    			if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.emptyMiddle;
         	break;
         	case primedMiddle:
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.primedMiddle;
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.primedMiddle;
         	break;
         	case primed:
-    			if(laucherFrontLimit.get()) {
-    				driveLaucherMotorForwards();
-    				current = laucherState.primedMiddle;
-    			}
+        		if(!laucherFrontLimit.get()) break; // if the limit switch is hit DONT DO ANYTHING check
+    			driveLaucherMotorForwards();
+    			current = laucherState.primedMiddle;
         	break;
         	case loaded:
         		// Do nothing
@@ -381,6 +330,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      *********************************/
     public void driveLaucherMotorForwards() {
     	if(laucherFrontLimit.get()) pullBackMotor.set(SPEED);
+    	else stopLaucherMotor();
     }
     
     /*********************************
@@ -391,6 +341,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      *********************************/
     public void driveLaucherMotorBackwards() {
     	if(laucherBackLimit.get()) pullBackMotor.set(-SPEED);
+    	else stopElevationMotor();
     }
     
     /*********************************
