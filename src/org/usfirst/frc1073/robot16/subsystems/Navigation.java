@@ -20,27 +20,28 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Navigation extends Subsystem {
-
-	Map gameMap;
+	//The Map object
+	private Map gameMap;
 	
 	//Robot Dimensions
 	private final double robotLengthX = 28;
 	private final double robotLengthY = 32;
 	
-	private double priorEncoderAverage = 0.0;
-
 	//Not in Robot Builder yet -Matt
 	private final AnalogGyro navGyro = RobotMap.navGyro;
-	
-	//Sets initial motor values
+
+	//Used for relative distance tracking from encoders
+	private double priorEncoderAverage = 0.0;
+
+	//Declares motor voltage variables
 	private double Vx;
 	private double Vy;
 			
-	//Sets angles
+	//Declares the initial angle measures
 	private double theta;
 	private double targetTheta;
 			
-	//Initialized to the distance from robot start to total clearance of opposing defense
+	//Used in the isFinished() of the navDrive command
 	private double targetDistance;		
 	private double distanceTravelled;
 			
@@ -100,7 +101,13 @@ public class Navigation extends Subsystem {
 
 	}
 	/**
-	 * The first time navDrive configuration
+	 * The first time navDrive configuration.
+	 * Sets initial voltages, target angle,
+	 * and distance to be traveled (may have
+	 * to be integrated into the defenseApproach()
+	 * case statements; the distance to be
+	 * traveled depends completely on the 
+	 * defense).
 	 */
 	public void driveConfig(){
 		//Sets initial motor values
@@ -110,7 +117,8 @@ public class Navigation extends Subsystem {
 		//Sets angles
 		this.theta = navGyro.getAngle();
 		this.targetTheta = 0.0;
-				
+			
+		//TODO This will have to be changed so that its conditional on defense type
 		//Initialized to the distance from robot start to total clearance of opposing defense
 		this.targetDistance = 94;		
 		this.distanceTravelled = 0.0;
@@ -124,7 +132,7 @@ public class Navigation extends Subsystem {
 	 * @param defenseID - This identifies each type of defense
 	 */
 	public void defenseApproach(int defenseID){
-		switch(8){ //TODO Make a variable, just for testing
+		switch(8){ //TODO Will be a variable, constant just for testing
 		case 0: defense0();
 			break;
 		case 1: defense1();
@@ -173,7 +181,7 @@ public class Navigation extends Subsystem {
 			//Sets the new target theta towards the target position
 			targetTheta = -1*(Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(Robot.robotGlobalStartX - x));
 		}
-		
+		//If the target point is to the right of the robot's start location
 		else{
 			//Rotates the robot so it drives straight at the target point, saving time
 			while(navGyro.getAngle() < (Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(x - Robot.robotGlobalStartX))){
@@ -183,7 +191,7 @@ public class Navigation extends Subsystem {
 			targetTheta = (Math.PI/2) - Math.atan((y - Robot.robotGlobalStartY - distanceTravelled)/(x - Robot.robotGlobalStartX));
 		}
 		
-		//Momentarily stops the motors (so we don't go from 3/4 back to full front)
+		//Momentarily stops the motors
 		Robot.driveTrain.getDriveCommand().movePID(0,0);
 		
 		//Resets distance for 2nd stage

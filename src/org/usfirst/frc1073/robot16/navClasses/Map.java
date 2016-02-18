@@ -5,9 +5,9 @@ import org.usfirst.frc1073.robot16.Robot;
 /**
  * @author Nav Group
  * 
- *         Serves to create and format all objects on the map. Will eventually
- *         interact with dashboard and to create a graphical representation of
- *         the field
+ * Serves to create and format all objects on the map. Will eventually
+ * interact with dashboard and to create a graphical representation of
+ * the field
  */
 public class Map {
 	//Active map array with robot

@@ -38,6 +38,8 @@ public class Robot extends IterativeRobot {
 	 * of the robot in Navigation (necessary for the Map & Movement).
 	 * Nick, you mentioned that you would handle assigning them.
 	 * -Matt
+	 * 
+	 * TODO Also, autonomous needs to instantiate a new navManager() -Matt
 	 */
 	public static double robotGlobalStartX = 30; //Needs to be set somewhere
 	public static double robotGlobalStartY = 30; //Needs to be set somewhere
@@ -51,7 +53,8 @@ public class Robot extends IterativeRobot {
 	public static double globalProximalDefenseID = 8; //TODO I like 8 at the moment, but this needs to be set from the dashboard
 	
 	//This, when set, tells the robot to navigate to the above coordinates (only works from match start)
-	public static boolean isNavigatingGlobal = true;
+	//TODO Autonomous needs to set this true
+	public static boolean isNavigatingGlobal = false;
 	
 
     Command autonomousCommand;
