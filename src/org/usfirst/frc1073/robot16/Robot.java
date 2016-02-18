@@ -147,6 +147,7 @@ public class Robot extends IterativeRobot {
 
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
+        
     }
 
     public void autonomousInit() {
@@ -189,6 +190,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Laucher Elevation", laucher.getAngle());
     }
 
     /**
