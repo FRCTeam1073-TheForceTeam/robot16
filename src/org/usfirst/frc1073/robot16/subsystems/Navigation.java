@@ -118,9 +118,7 @@ public class Navigation extends Subsystem {
 		this.theta = navGyro.getAngle();
 		this.targetTheta = 0.0;
 			
-		//TODO This will have to be changed so that its conditional on defense type
 		//Initialized to the distance from robot start to total clearance of opposing defense
-		this.targetDistance = 94;		
 		this.distanceTravelled = 0.0;
 	}
 	/**
@@ -239,6 +237,15 @@ public class Navigation extends Subsystem {
 		targetTheta = (Math.PI/2) - Math.atan((Robot.targetYGlobal - Robot.robotGlobalStartY - distanceTravelled)/(Robot.targetXGlobal - Robot.robotGlobalStartX));
 	}
 
+	/**
+	 * @return True - Robot has finished navigating, False - Robot has not
+	 */
+	public boolean areWeThereYet(){
+		if(distanceTravelled>=targetDistance){return true;}
+		return false; //Else
+		
+	}
+
 	private void defense0(){
 		
 	}
@@ -265,6 +272,9 @@ public class Navigation extends Subsystem {
 	}
 	//Low bar
 	private void defense8(){
+		//The distance required for simply driving through a defense
+		this.targetDistance = 94;
+		
 		//TODO Make sure units from drive train are correct
 		distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
 				
@@ -281,13 +291,5 @@ public class Navigation extends Subsystem {
 				
 		//Physically moves the robot using the PID move method
 		Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
-	}
-	/**
-	 * @return True - Robot has finished navigating, False - Robot has not
-	 */
-	public boolean areWeThereYet(){
-		if(distanceTravelled>=targetDistance){return true;}
-		return false; //Else
-		
 	}
 }
