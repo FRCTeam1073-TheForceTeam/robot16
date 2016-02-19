@@ -100,7 +100,7 @@ public class RobotMap {
         laucherlaucherFrontLimit = new DigitalInput(8);
         LiveWindow.addSensor("Laucher", "laucherFrontLimit", laucherlaucherFrontLimit);
         
-        laucherlaucherRelease = new Solenoid(0, 2);
+        laucherlaucherRelease = new Solenoid(1, 2);
         LiveWindow.addActuator("Laucher", "laucherRelease", laucherlaucherRelease);
         
         collectorrollerMotor = new VictorSP(7);
@@ -112,13 +112,13 @@ public class RobotMap {
         climberclimberMotor = new VictorSP(6);
         LiveWindow.addActuator("Climber", "climberMotor", (VictorSP) climberclimberMotor);
         
-        climberextensionPiston = new Solenoid(0, 1);
+        climberextensionPiston = new Solenoid(1, 1);
         LiveWindow.addActuator("Climber", "extensionPiston", climberextensionPiston);
         
         defensedefenseAngle = new AnalogPotentiometer(1, 1.0, 0.0);
         LiveWindow.addSensor("Defense", "defenseAngle", defensedefenseAngle);
         
-        defensearmExtension = new Solenoid(0, 0);
+        defensearmExtension = new Solenoid(1, 0);
         LiveWindow.addActuator("Defense", "armExtension", defensearmExtension);
         
         defenseelevationMotor = new VictorSP(8);
