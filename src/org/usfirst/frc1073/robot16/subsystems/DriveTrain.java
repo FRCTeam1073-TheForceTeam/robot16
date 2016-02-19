@@ -95,9 +95,9 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     public void move(double left, double right){
     	
     	leftMotor1.set(left, leftSyncGroup);
-    	leftMotor2.set(left, leftSyncGroup);
+    	leftMotor2.set(-left, leftSyncGroup);
     	rightMotor1.set(right, rightSyncGroup);
-    	rightMotor2.set(right, rightSyncGroup);
+    	rightMotor2.set(-right, rightSyncGroup);
     }
     
     // SC: maybe rename these xyzEncoderDistanceInches to make it clear
@@ -160,11 +160,11 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 			switch(marker) {
 			case 0:
 				leftMotor1.set(output, leftSyncGroup);
-				leftMotor2.set(output, leftSyncGroup);
+				leftMotor2.set(-output, leftSyncGroup);
 			break;
 			case 1:
 				rightMotor1.set(output, rightSyncGroup);
-				rightMotor2.set(output, rightSyncGroup);
+				rightMotor2.set(-output, rightSyncGroup);
 			break;
 			}
 		}
