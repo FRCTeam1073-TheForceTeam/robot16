@@ -11,6 +11,7 @@
 
 package org.usfirst.frc1073.robot16.subsystems;
 
+import org.usfirst.frc1073.robot16.Robot;
 import org.usfirst.frc1073.robot16.RobotMap;
 import org.usfirst.frc1073.robot16.commands.*;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -45,8 +46,26 @@ public class Defense extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
+    public Defense() {
+    	elevationMotor.setInverted(Robot.invertDefenseDir);
+    }
+    
+    private final double SPEED = 0.6;
+    
     public void toggleArm() {
     	armExtension.set(!armExtension.get());
+    }
+    
+    public void driveDefenseUp() {
+    	elevationMotor.set(SPEED);
+    }
+    
+    public void driveDefenseDown() {
+    	elevationMotor.set(-SPEED);
+    }
+    
+    public void stopDefenseMotor() {
+    	elevationMotor.set(0.0);
     }
     
     public void initDefaultCommand() {
