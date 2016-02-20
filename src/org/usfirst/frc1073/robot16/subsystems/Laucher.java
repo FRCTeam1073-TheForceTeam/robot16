@@ -74,7 +74,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     private laucherState destination; // Where you want to be
     
     private final double SPEED = 1.00;
-    private final double ELEVATION_SPEED = 0.45;
+    private final double ELEVATION_SPEED = 0.38;
     
     public Laucher() {
     	current = laucherState.emptyForwards; // This makes the default position of the robot emptyForwards

@@ -38,6 +38,7 @@ public class LaucherReleaseToggle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.laucher.toggleRelease();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -46,7 +47,7 @@ public class LaucherReleaseToggle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
@@ -56,5 +57,6 @@ public class LaucherReleaseToggle extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
