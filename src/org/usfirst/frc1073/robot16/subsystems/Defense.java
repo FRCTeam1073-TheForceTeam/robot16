@@ -52,6 +52,14 @@ public class Defense extends Subsystem {
     
     private final double SPEED = 0.5;
     
+    public double getAngle() {
+    	return defenseAngle.get() * 360.0;
+    }
+    
+    public boolean isExtended() {
+    	return extended;
+    }
+    
     public void toggleArm() {
     	armExtension.set(!armExtension.get());
     }

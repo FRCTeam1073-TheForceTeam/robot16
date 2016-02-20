@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc1073.robot16.commands.*;
@@ -194,8 +195,40 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	
         Scheduler.getInstance().run();
+        
+        // for dankboard dankness
+        
+        // for radio buttons
+        //SendableChooser chooser = new SendableChooser();
+        //SmartDashboard.putData("Chooser", chooser);
+        //SmartDashboard.addDefault("string name / title", do this);
+        //SmartDashboard.addObject("name", do this);
+        
+        // map
+        int[][] fieldArray = navigation.getMap();
+        int xc = 0; int yc = 0;
+        double xtotal = 319.0; double ytotal = 649.0;
+        for(double i = 0.0; i < fieldArray[0].length; i++) {
+            for(double j = 0.0; j < fieldArray.length; j++) {
+                if(fieldArray[(int)j][(int)i] == 1) {
+                    xc = (int)(xtotal * (j / fieldArray.length));
+                    yc = (int)(ytotal * (i / fieldArray[0].length));
+                }
+            }
+        }
+        SmartDashboard.putNumber("x coordinate of robot on field", xc);
+        SmartDashboard.putNumber("y coordinate of robot on field", yc);
+        
+        // ribot
         SmartDashboard.putNumber("Laucher Elevation", laucher.getAngle());
+        SmartDashboard.putNumber("defense manip", defense.getAngle());
+        SmartDashboard.putBoolean("Piston", defense.isExtended());
+        
+        // key to success : "the cheat sheet"
+        //SmartDashboard.putNumber(key, value);
+        
     }
 
     /**
