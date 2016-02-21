@@ -245,32 +245,89 @@ public class Navigation extends Subsystem {
 		return false; //Else
 		
 	}
-
+	
+	/*
+	 * Category A:
+	 *    ID 1: Portcullis
+	 *    ID 2: Cheval De Frise
+	 * Category B:
+	 *    ID 3: Moat
+	 *    ID 4: Ramparts
+	 * Category C:
+	 *    ID 5: Drawbridge
+	 *    ID 6: Sally Port
+	 * Category D:
+	 *    ID 7: Rock Wall
+	 *    ID 8: Rough Terrain
+	 * Non-Selectable:
+	 *    ID 9: Low Bar
+	 */
+	
+	//Portcullis
 	private void defense0(){
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigatePortcullis()
+		 */
 	}
+	
+	//Cheval De Frise
 	private void defense1(){
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigateCheval()
+		 */
 	}
+	
+	//Moat
 	private void defense2(){
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigateMoat()
+		 */
 	}
+	
+	//Ramparts
 	private void defense3(){
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigateRamparts()
+		 */
 	}
+	
+	//Drawbridge
 	private void defense4(){
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigatePort()
+		 */
 	}
+	
+	//Sally Port
 	private void defense5(){
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigatePort()
+		 */
 	}
+	
+	//Rock Wall
 	private void defense6(){
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigateWall()
+		 */
 	}
+	
+	//Rough Terrain
 	private void defense7(){
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigateTerrain()
+		 */
 	}
-	//Low bar
+	
+	//Low Bar
 	private void defense8(){
 		//The distance required for simply driving through a defense
 		this.targetDistance = 94;
