@@ -206,7 +206,7 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.addDefault("string name / title", do this);
         //SmartDashboard.addObject("name", do this);
         
-        // map
+        // dankmap
         int[][] fieldArray = navigation.getMap();
         int xc = 0; int yc = 0;
         double xtotal = 319.0; double ytotal = 649.0;
@@ -218,13 +218,13 @@ public class Robot extends IterativeRobot {
                 }
             }
         }
-        SmartDashboard.putNumber("x coordinate of robot on field", xc);
-        SmartDashboard.putNumber("y coordinate of robot on field", yc);
+        SmartDashboard.putNumber("xcRobot", xc);
+        SmartDashboard.putNumber("ycRobot", yc);
         
         // ribot
-        SmartDashboard.putNumber("Laucher Elevation", laucher.getAngle());
-        SmartDashboard.putNumber("defense manip", defense.getAngle());
-        SmartDashboard.putBoolean("Piston", defense.isExtended());
+        SmartDashboard.putNumber("lauchElev", laucher.getAngle());
+        SmartDashboard.putNumber("defManip", defense.getAngle());
+        SmartDashboard.putBoolean("piston", defense.isExtended());
         
         // key to success : "the cheat sheet"
         //SmartDashboard.putNumber(key, value);
