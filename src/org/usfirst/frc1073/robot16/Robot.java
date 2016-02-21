@@ -76,8 +76,8 @@ public class Robot extends IterativeRobot {
     public static Thread rightDriveTrainThread;
     public static PIDThread rightDriveTrainPIDThread;
     
-    public static int targetXglobal;
-    public static int targetYglobal;
+    public static int targetXGlobal;
+    public static int targetYGlobal;
     
     private static final long dt = 5; // refresh rate of PIDThreads 
     private boolean isFirstStartup;
@@ -161,8 +161,8 @@ public class Robot extends IterativeRobot {
     }
     
     public void driveTo(int x, int y) {
-    	targetXglobal = x;
-    	targetYglobal = y;
+    	targetXGlobal = x;
+    	targetYGlobal = y;
     	navigation.driveConfigStage2();
     }
 
