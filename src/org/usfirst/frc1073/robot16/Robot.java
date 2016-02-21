@@ -160,11 +160,7 @@ public class Robot extends IterativeRobot {
         
     }
     
-    public void driveTo(int x, int y) {
-    	targetXGlobal = x;
-    	targetYGlobal = y;
-    	navigation.driveConfigStage2();
-    }
+    
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
@@ -215,21 +211,6 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putData("pickAuto", chooser);
         //SmartDashboard.addDefault("string name / title", do);
         //SmartDashboard.addObject("name", do this);
-        
-        // dankmap
-        int[][] fieldArray = navigation.getMap();
-        int xc = 0; int yc = 0;
-        double xtotal = 319.0; double ytotal = 649.0;
-        for(double i = 0.0; i < fieldArray[0].length; i++) {
-            for(double j = 0.0; j < fieldArray.length; j++) {
-                if(fieldArray[(int)j][(int)i] == 1) {
-                    xc = (int)(xtotal * (j / fieldArray.length));
-                    yc = (int)(ytotal * (i / fieldArray[0].length));
-                }
-            }
-        }
-        SmartDashboard.putNumber("xcRobot", xc);
-        SmartDashboard.putNumber("ycRobot", yc);
         
         // ribot
         SmartDashboard.putNumber("lauchElev", laucher.getAngle());
