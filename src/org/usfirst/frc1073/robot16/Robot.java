@@ -76,6 +76,9 @@ public class Robot extends IterativeRobot {
     public static Thread rightDriveTrainThread;
     public static PIDThread rightDriveTrainPIDThread;
     
+    public static int targetXglobal;
+    public static int targetYglobal;
+    
     private static final long dt = 5; // refresh rate of PIDThreads 
     private boolean isFirstStartup;
     
@@ -155,6 +158,12 @@ public class Robot extends IterativeRobot {
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
         
+    }
+    
+    public void driveTo(int x, int y) {
+    	targetXglobal = x;
+    	targetYglobal = y;
+    	navigation.driveConfigStage2();
     }
 
     public void autonomousInit() {
