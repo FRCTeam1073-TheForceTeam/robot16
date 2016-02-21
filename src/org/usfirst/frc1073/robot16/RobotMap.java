@@ -46,6 +46,7 @@ public class RobotMap {
     public static DigitalInput laucherlaucherBackLimit;
     public static DigitalInput laucherlaucherFrontLimit;
     public static Solenoid laucherlaucherRelease;
+    public static Solenoid laucherlockLaucher;
     public static SpeedController collectorrollerMotor;
     public static DigitalInput collectorballSensor;
     public static SpeedController climberclimberMotor;
@@ -102,6 +103,9 @@ public class RobotMap {
         
         laucherlaucherRelease = new Solenoid(1, 2);
         LiveWindow.addActuator("Laucher", "laucherRelease", laucherlaucherRelease);
+        
+        laucherlockLaucher = new Solenoid(1, 3);
+        LiveWindow.addActuator("Laucher", "lockLaucher", laucherlockLaucher);
         
         collectorrollerMotor = new VictorSP(7);
         LiveWindow.addActuator("Collector", "rollerMotor", (VictorSP) collectorrollerMotor);
