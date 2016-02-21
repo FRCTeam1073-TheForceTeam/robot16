@@ -13,6 +13,7 @@ package org.usfirst.frc1073.robot16;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -202,8 +203,8 @@ public class Robot extends IterativeRobot {
         
         // for radio buttons
         //SendableChooser chooser = new SendableChooser();
-        //SmartDashboard.putData("Chooser", chooser);
-        //SmartDashboard.addDefault("string name / title", do this);
+        //SmartDashboard.putData("pickAuto", chooser);
+        //SmartDashboard.addDefault("string name / title", do);
         //SmartDashboard.addObject("name", do this);
         
         // dankmap
@@ -225,6 +226,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("lauchElev", laucher.getAngle());
         SmartDashboard.putNumber("defManip", defense.getAngle());
         SmartDashboard.putBoolean("piston", defense.isExtended());
+        
+        Timer timer = new Timer();
+        SmartDashboard.putNumber("matchTime", timer.getMatchTime());
+        
+        
         
         // key to success : "the cheat sheet"
         //SmartDashboard.putNumber(key, value);
