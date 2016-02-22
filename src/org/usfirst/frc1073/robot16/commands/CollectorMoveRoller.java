@@ -57,7 +57,7 @@ public class CollectorMoveRoller extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double mag = Robot.oi.getoperatorStick().getRawAxis(5); // MUM GET DA CAMERA BECAUSE I JUST 360 NOSCOPED THAT AXIS... I hope. I don't know what axis the slider is so this may need to be changed
+    	double mag = Robot.oi.getoperatorStick().getRawAxis(4); // MUM GET DA CAMERA BECAUSE I JUST 360 NOSCOPED THAT AXIS... I hope. I don't know what axis the slider is so this may need to be changed
     	mag = checkDeadZone(mag);
     	
     	if(mag >= 0.3) Robot.collector.rollerIn();
