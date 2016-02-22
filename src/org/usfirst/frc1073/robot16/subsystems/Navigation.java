@@ -248,19 +248,19 @@ public class Navigation extends Subsystem {
 	
 	/*
 	 * Category A:
-	 *    ID 1: Portcullis
-	 *    ID 2: Cheval De Frise
+	 *    ID 0: Portcullis
+	 *    ID 1: Cheval De Frise
 	 * Category B:
-	 *    ID 3: Moat
-	 *    ID 4: Ramparts
+	 *    ID 2: Moat
+	 *    ID 3: Ramparts
 	 * Category C:
-	 *    ID 5: Drawbridge
-	 *    ID 6: Sally Port
+	 *    ID 4: Drawbridge
+	 *    ID 5: Sally Port
 	 * Category D:
-	 *    ID 7: Rock Wall
-	 *    ID 8: Rough Terrain
+	 *    ID 6: Rock Wall
+	 *    ID 7: Rough Terrain
 	 * Non-Selectable:
-	 *    ID 9: Low Bar
+	 *    ID 8: Low Bar
 	 */
 	
 	//Portcullis
