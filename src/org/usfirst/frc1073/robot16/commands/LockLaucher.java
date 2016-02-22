@@ -48,11 +48,11 @@ public class LockLaucher extends Command {
     	{
     		if(Robot.laucher.getAngle() > .1)
     		{
-    			Robot.laucher.elevateLaucherDown();
+    			Robot.laucher.elevateLaucherDown(1);
     		}
     		else if(Robot.laucher.getAngle() < -.1)
     		{
-    			Robot.laucher.elevateLaucherUp();
+    			Robot.laucher.elevateLaucherUp(1);
     		}
     		else
     		{

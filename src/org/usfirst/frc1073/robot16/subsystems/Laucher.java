@@ -360,8 +360,8 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      * Elevates the motor up manually
      * 
      *********************************/
-    public void elevateLaucherUp() {
-    	if(!isHighElevationHit()) elevationMotor.set(ELEVATION_SPEED);
+    public void elevateLaucherUp(double rate) {
+    	if(!isHighElevationHit()) elevationMotor.set(ELEVATION_SPEED * rate);	// rate is fraction of max elevation speed to move
     	else stopElevationMotor();
     }
     
@@ -371,8 +371,8 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      * manually
      * 
      *********************************/
-    public void elevateLaucherDown() {
-    	if(!isLowElevationHit()) elevationMotor.set(-ELEVATION_SPEED);
+    public void elevateLaucherDown(double rate) {
+    	if(!isLowElevationHit()) elevationMotor.set(-ELEVATION_SPEED * rate);
     	else stopElevationMotor();
     }
     
