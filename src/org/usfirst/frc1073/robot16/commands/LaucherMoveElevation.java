@@ -60,8 +60,8 @@ public class LaucherMoveElevation extends Command {
     	double mag = Robot.oi.getoperatorStick().getThrottle();
     	mag = checkDeadZone(mag);
     	
-    	if(mag >= 0.3) Robot.laucher.elevateLaucherUp();
-    	else if(mag <= -0.3) Robot.laucher.elevateLaucherDown();
+    	if(mag >= 0.3) Robot.laucher.elevateLaucherUp(1);
+    	else if(mag <= -0.3) Robot.laucher.elevateLaucherDown(1);
     	else Robot.laucher.stopElevationMotor();
     }
 
