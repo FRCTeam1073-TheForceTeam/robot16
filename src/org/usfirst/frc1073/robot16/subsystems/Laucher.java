@@ -395,6 +395,10 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     public double getAngle() {
     	return elevationAngle.get() * 360;
     }
+    public void lockIt()
+    {
+    	RobotMap.laucherlockLaucher.set(true);
+    }
     
     public boolean isFrontLimitHit() {
     	return !laucherFrontLimit.get();
