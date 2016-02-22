@@ -38,6 +38,17 @@ public class AdjustWinch extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
+    	int hatVal = Robot.oi.getoperatorStick().getPOV(); // degrees
+    	switch (hatVal) {
+    	case 90:
+    		Robot.climber.climb();
+    		break;
+    	case 270:
+    		Robot.climber.descend();
+    		break;
+		default:
+    		break;	
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
