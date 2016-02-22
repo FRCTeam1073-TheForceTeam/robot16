@@ -89,7 +89,7 @@ public class OI {
         allowAdjustWinchBut = new JoystickButton(operatorStick, 2);
         allowAdjustWinchBut.whileHeld(new AdjustWinch());
         allowAdjustLaucherBut = new JoystickButton(operatorStick, 10);
-        allowAdjustLaucherBut.whileHeld(new AdjustLaucher(0));
+        allowAdjustLaucherBut.whileHeld(new AdjustLaucher());
         
         //TODO Launcher team needs to fix this, 0 is just a placeholder
         lowGoalBut = new JoystickButton(operatorStick, 8);
