@@ -15,6 +15,8 @@ package org.usfirst.frc1073.robot16.commands;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc1073.robot16.Robot;
 import org.usfirst.frc1073.robot16.subsystems.Laucher.laucherState;
 
@@ -76,6 +78,8 @@ public class LaucherPrime extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
+    	SmartDashboard.putString("Launcher state", Robot.laucher.enumReturn(Robot.laucher.getState()));
+    	
     	switch(Robot.laucher.getState()){
     	case closedForwards: 
     		Robot.laucher.driveLaucherMotorBackwards();
@@ -111,9 +115,7 @@ public class LaucherPrime extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//if((Robot.laucher.isBackLimitHit() && Robot.laucher.isClamed())
-    	if ((Robot.laucher.isBackLimitHit())
-    			|| isTimedOut() 
-    			|| Robot.laucher.getState().equals(laucherState.readyToLauch)){
+    	if ((Robot.laucher.isBackLimitHit() || isTimedOut() || Robot.laucher.getState().equals(laucherState.readyToLauch))){
     		return true;
     	}
     	return false;
