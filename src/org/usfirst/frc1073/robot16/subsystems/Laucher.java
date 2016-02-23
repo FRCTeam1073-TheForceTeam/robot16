@@ -119,33 +119,41 @@ public class Laucher extends Subsystem implements PIDSubsystem
 		current = newState;
 	}
 
-	public void updateCurrentState() {
-		if (isBackLimitHit()) {
-			if (isClamped()) {
+	public void updateCurrentState()
+	{
+		if (isBackLimitHit())
+		{
+			if (isClamped())
+			{
 				setCurrentState(laucherState.readyToLauch);
-			}
-			else {
+			} 
+			else
+			{
 				setCurrentState(laucherState.emptyBackwards);
 			}
-		}
-		else if (isFrontLimitHit()) {
-			if (isClamped()) {
+		} else if (isFrontLimitHit())
+		{
+			if (isClamped())
+			{
 				setCurrentState(laucherState.closedForwards);
-			}
-			else {
+			} 
+			else
+			{
 				setCurrentState(laucherState.emptyForwards);
 			}
-		}
-		else {
-			if (isClamped()) {
+		} 
+		else
+		{
+			if (isClamped())
+			{
 				setCurrentState(laucherState.closedMiddle);
-			}
-			else {
+			} else
+			{
 				setCurrentState(laucherState.emptyMiddle);
 			}
 		}
 	}
-	
+
 	public void setReady()
 	{
 		current = laucherState.readyToLauch;
@@ -160,7 +168,7 @@ public class Laucher extends Subsystem implements PIDSubsystem
 	{
 		current = laucherState.emptyBackwards;
 	}
-	
+
 	public void setEmptyForwards()
 	{
 		current = laucherState.emptyForwards;
@@ -223,7 +231,7 @@ public class Laucher extends Subsystem implements PIDSubsystem
 		if (!isBackLimitHit())
 			pullBackMotor.set(-SPEED);
 		else
-			stopElevationMotor();
+			stopLaucherMotor();
 	}
 
 	/*********************************
@@ -292,12 +300,12 @@ public class Laucher extends Subsystem implements PIDSubsystem
 
 	public void lockIt()
 	{
-		lockLaucher.set(true);
+		lockLaucher.set(false);
 	}
 
 	public void unlockIt()
 	{
-		lockLaucher.set(false);
+		lockLaucher.set(true);
 	}
 
 	public boolean isFrontLimitHit()

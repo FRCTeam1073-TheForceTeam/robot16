@@ -48,7 +48,7 @@ public class OI {
     public JoystickButton lowBarConfigurationButton;
     public Joystick driverRightStick;
     public JoystickButton lowGoalBut;
-    public JoystickButton allowAdjustLaucherBut;
+    public JoystickButton unlockPistonBut;
     public JoystickButton allowAdjustWinchBut;
     public JoystickButton deployScissorLiftBut;
     public JoystickButton lauchBut;
@@ -77,8 +77,8 @@ public class OI {
         deployScissorLiftBut.whileHeld(new DeployScissorLift());
         allowAdjustWinchBut = new JoystickButton(operatorStick, 2);
         allowAdjustWinchBut.whileHeld(new AdjustWinch());
-        allowAdjustLaucherBut = new JoystickButton(operatorStick, 10);
-        allowAdjustLaucherBut.whileHeld(new AdjustLaucher());
+        unlockPistonBut = new JoystickButton(operatorStick, 10);
+        unlockPistonBut.whileHeld(new UnlockLaucher());
         lowGoalBut = new JoystickButton(operatorStick, 8);
         lowGoalBut.whileHeld(new Purge());
         primeBut = new JoystickButton(operatorStick, 12);
