@@ -27,6 +27,10 @@ public class Navigation extends Subsystem {
 	private final double robotLengthX = 28;
 	private final double robotLengthY = 32;
 	
+	//Necessary Auto Dimensions
+	private final double autoLineOverhang = 2;
+	private final double robotToOuterWorks = robotLengthY - autoLineOverhang;
+	
 	//Not in Robot Builder yet -Matt
 	private final AnalogGyro navGyro = RobotMap.navGyro;
 
