@@ -309,10 +309,25 @@ public class Navigation extends Subsystem {
 	
 	//Ramparts
 	private void defense3(){
-		/*
-		 * 1. Drive to defense
-		 * 2. navigateRamparts()
-		 */
+		//distance for driving through a defense
+		this.targetDistance = 103; //TODO needs calibration
+		
+		//TODO Make sure units from drive train are correct
+		distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
+		
+		//Updates gyro angle
+		theta = navGyro.getAngle();
+		
+		//Modifies voltage output to motors based on a drift correction algorithm
+		Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+		Vy = Vy * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+		
+		//Prevents motors from receiving weird values outside their threshold 
+		if(Vx >= 0.7){Vx = 0.7;}
+		if(Vy >= 0.7){Vy = 0.7;}
+		
+		//Physically moves the robot using the PID move method
+		Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
 	}
 	
 	//Drawbridge
