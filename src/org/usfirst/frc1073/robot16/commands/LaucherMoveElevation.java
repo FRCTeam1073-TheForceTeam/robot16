@@ -69,7 +69,7 @@ public class LaucherMoveElevation extends Command
 		if (mag > 0 && !Robot.laucher.isHighElevationHit())
 			Robot.laucher.elevateLaucherUp(mag);
 		else if (mag < 0 && !Robot.laucher.isLowElevationHit())
-			Robot.laucher.elevateLaucherDown(mag);
+			Robot.laucher.elevateLaucherDown(-mag);
 		else
 			Robot.laucher.stopElevationMotor();
 	}

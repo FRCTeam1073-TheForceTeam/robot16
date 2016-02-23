@@ -66,7 +66,7 @@ public class Laucher extends Subsystem implements PIDSubsystem
 	 ****************************************/
 	public enum laucherState
 	{
-		readyToLauch, emptyMiddle, closedForwards, emptyBackwards, closedMiddle
+		readyToLauch, emptyMiddle, closedForwards, emptyForwards, emptyBackwards, closedMiddle
 	};
 
 	/*
@@ -132,6 +132,11 @@ public class Laucher extends Subsystem implements PIDSubsystem
 	public void setEmptyBackwards()
 	{
 		current = laucherState.emptyBackwards;
+	}
+	
+	public void setEmptyForwards()
+	{
+		current = laucherState.emptyForwards;
 	}
 
 	public void setClosedForwards()

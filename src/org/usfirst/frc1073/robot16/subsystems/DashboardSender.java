@@ -52,6 +52,7 @@ public class DashboardSender extends Subsystem {
         SmartDashboard.putNumber("lauchElev", Robot.laucher.getAngle());
         SmartDashboard.putNumber("defManip", Robot.defense.getAngle());
         SmartDashboard.putBoolean("piston", Robot.defense.isExtended());
+      //  SmartDashboard.putString("Help", "4;44");
         
         SmartDashboard.putNumber("matchTime", Timer.getMatchTime());
         

@@ -53,7 +53,16 @@ public class LauchBoulder extends Command
 		//setTimeout(2);
 		
 		Robot.laucher.openClamp();
-		Robot.laucher.setEmptyBackwards();
+		
+		if (Robot.laucher.isBackLimitHit()) {
+			Robot.laucher.setEmptyBackwards();			
+		}
+		else if (Robot.laucher.isFrontLimitHit()) {
+			Robot.laucher.setEmptyForwards();
+		}
+		else {
+			Robot.laucher.setEmptyMiddle();
+		}
 		SmartDashboard.putString("Launcher state", Robot.laucher.enumReturn(Robot.laucher.getState()));
 	}
 
