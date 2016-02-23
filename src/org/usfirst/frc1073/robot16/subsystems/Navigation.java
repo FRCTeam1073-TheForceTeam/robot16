@@ -29,6 +29,7 @@ public class Navigation extends Subsystem {
 	
 	//Necessary Auto Dimensions
 	private final double autoLineOverhang = 2;
+	//TODO There's space between the robot and the outerworks at the start of the match; needs updating
 	private final double robotToOuterWorks = robotLengthY - autoLineOverhang;
 	
 	//Not in Robot Builder yet -Matt
