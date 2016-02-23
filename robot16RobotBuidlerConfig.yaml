@@ -820,7 +820,7 @@ Children:
           name: Command
           type: Command
           validators: *id020
-          value: LauchBoulder
+          value: Shoot
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id021
           default: whileHeld
@@ -1569,19 +1569,40 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: DashboardSender}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id024 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id024
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
     Name: DashboardPeriodic
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id024 []
+        name: Parameter presets
+        validators: null
+        value: *id024
+      Commands: !!robotbuilder.data.properties.ListProperty
+        default: &id025 []
+        name: Commands
+        validators: [List]
+        value: *id025
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command Group
+    Name: Shoot
   Properties: {}
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/cherian/workspace,
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/Keenan/workspace,
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: ../}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
@@ -1600,7 +1621,7 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: ./GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: /Users/cherian/,
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: /Users/Keenan/,
     extension: null, folder: true, name: Wiring file location, validators: null, value: ./}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: None}

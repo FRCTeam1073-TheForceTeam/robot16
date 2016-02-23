@@ -194,7 +194,7 @@ public class Robot extends IterativeRobot {
 	        isFirstStartup = false;
     	}
         
-        isDriveTrainPID = true;
+        isDriveTrainPID = false;
         
         leftDriveTrainPIDThread.enable();
         rightDriveTrainPIDThread.enable();
