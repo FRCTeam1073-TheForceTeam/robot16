@@ -39,8 +39,6 @@ public class Collector extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
-    private double rollerSpeed = Robot.rollerSpeed;
-    
 	/**************************
 	 * 
 	 * Method to role into the
@@ -48,8 +46,8 @@ public class Collector extends Subsystem {
 	 * 
 	 **************************/
 	public void rollerIn() {
-		if(Robot.invertRoller) rollerMotor.set(-rollerSpeed);
-		else rollerMotor.set(rollerSpeed);
+		if(Robot.invertRoller) rollerMotor.set(-Robot.rollerSpeed);
+		else rollerMotor.set(Robot.rollerSpeed);
 	}
 	
 	/**************************
@@ -59,8 +57,8 @@ public class Collector extends Subsystem {
 	 * 
 	 **************************/
 	public void rollerPurge() {
-		if(Robot.invertRoller) rollerMotor.set(rollerSpeed);
-		else rollerMotor.set(-rollerSpeed);
+		if(Robot.invertRoller) rollerMotor.set(Robot.rollerSpeed);
+		else rollerMotor.set(-Robot.rollerSpeed);
 	}
 	
 	/*****************************
