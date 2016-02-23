@@ -137,245 +137,6 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     public void setClosedMiddle(){
     	current = laucherState.closedMiddle;
     }
-
-    /*
-    public void prime(){
-    	if(isBackLimitHit() && isClamed()){
-    		stopLaucherMotor();
-    	}
-    	else if (isBackLimitHit() && !isClamed()){
-    		driveLaucherMotorForwards();
-    		toggleRelease();
-    		driveLaucherMotorBackwards();
-    	}
-    	else if (isFrontLimitHit() && isClamed()){
-    		driveLaucherMotorBackwards();
-    	}
-    	else if (isFrontLimitHit() && !isClamed()){
-    		toggleRelease();
-    		driveLaucherMotorBackwards();
-    	}
-    	else {
-    		System.out.println("Laucher Error in Load Method.");
-    	}
-    }
-    
-    public void shoot(){
-    	if(isFrontLimitHit() && isClamed()){
-    		toggleRelease();
-    		driveLaucherMotorForwards();
-    	}
-    	else {
-    		System.out.println("Laucher Error in Shoot Method.");
-    	}
-    }
-    
-    
-    public void move(laucherState destination) {
-    	
-    	// This uses the sensors to check the current position and will set the current position to where ever it actually is
-    	if(isFrontLimitHit() && isClamed()) setCurrentState(laucherState.primed);                                                // primed
-    	else if(isFrontLimitHit() && !isClamed()) setCurrentState(laucherState.emptyForwards);                                   // emptyForwards
-    	else if(isBackLimitHit() && isClamed()) setCurrentState(laucherState.loaded);                                            // loaded 
-    	else if(isBackLimitHit() && !isClamed()) setCurrentState(laucherState.emptyBackwards);                                   // emptyBackwards
-    	else if((!isFrontLimitHit() && !isBackLimitHit()) && isClamed()) setCurrentState(laucherState.primedMiddle);             // primedMiddle
-    	else setCurrentState(laucherState.emptyMiddle);                                                                          // emptyMiddle
-    	
-    	this.destination = destination; // Sets global to current destination
-    	
-    	switch(this.destination) {
-    	case emptyForwards:
-    		switch(this.current) {
-        	case emptyForwards:
-        		// Do nothing
-        		stopLaucherMotor();
-        	break;
-        	case emptyBackwards:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case emptyMiddle:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case primedMiddle:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-        	case primed:
-        		toggleRelease();
-        		setCurrentState(laucherState.emptyForwards);
-            break;
-        	case loaded:
-        		toggleRelease();
-        		setCurrentState(laucherState.emptyBackwards);
-            break;
-            default: 
-            	stopLaucherMotor();
-            break;
-        	}
-    	break;
-    	case emptyBackwards:
-    		switch(this.current) {
-        	case emptyForwards:
-        		toggleRelease();
-        		setCurrentState(laucherState.primed);
-        	break;
-        	case emptyBackwards:
-        		// Do nothing
-        		stopLaucherMotor();
-            break;
-        	case emptyMiddle:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case primedMiddle:
-        		driveLaucherMotorBackwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-        	case primed:
-        		driveLaucherMotorBackwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-        	case loaded:
-        		toggleRelease();
-        		setCurrentState(laucherState.emptyBackwards);
-            break;
-            default: 
-            	stopLaucherMotor();
-            break;
-        	}
-        break;
-    	case emptyMiddle:
-    		switch(this.current) {
-        	case emptyForwards:
-        		driveLaucherMotorBackwards();
-        		setCurrentState(laucherState.emptyMiddle);
-        	break;
-        	case emptyBackwards:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case emptyMiddle:
-        		// Do nothing
-        		stopLaucherMotor();
-            break;
-        	case primedMiddle:
-        		toggleRelease();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case primed:
-        		toggleRelease();
-        		setCurrentState(laucherState.emptyForwards);
-            break;
-        	case loaded:
-        		toggleRelease();
-        		setCurrentState(laucherState.emptyBackwards);
-            break;
-            default: 
-            	stopLaucherMotor();
-            break;
-        	}
-        break;
-    	case primedMiddle:
-    		switch(this.current) {
-        	case emptyForwards:
-        		toggleRelease();
-        		setCurrentState(laucherState.primed);
-        	break;
-        	case emptyBackwards:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case emptyMiddle:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case primedMiddle:
-        		// Do nothing
-        		stopElevationMotor();
-            break;
-        	case primed:
-        		driveLaucherMotorBackwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-        	case loaded:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-            default: 
-            	stopLaucherMotor();
-            break;
-        	}
-        break;
-    	case primed:
-    		switch(this.current) {
-        	case emptyForwards:
-        		toggleRelease();
-        		setCurrentState(laucherState.primed);
-        	break;
-        	case emptyBackwards:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case emptyMiddle:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case primedMiddle:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-        	case primed:
-        		// Do nothing
-        		stopLaucherMotor();
-            break;
-        	case loaded:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-            default: 
-            	stopLaucherMotor();
-            break;
-        	}
-        break;
-    	case loaded:
-    		switch(this.current) {
-        	case emptyForwards:
-        		toggleRelease();
-        		setCurrentState(laucherState.primed);
-        	break;
-        	case emptyBackwards:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case emptyMiddle:
-        		driveLaucherMotorForwards();
-        		setCurrentState(laucherState.emptyMiddle);
-            break;
-        	case primedMiddle:
-        		driveLaucherMotorBackwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-        	case primed:
-        		driveLaucherMotorBackwards();
-        		setCurrentState(laucherState.primedMiddle);
-            break;
-        	case loaded:
-        		// Do nothing
-        		stopLaucherMotor();
-            break;
-            default: 
-            	stopLaucherMotor();
-            break;
-        	}
-        break;
-        default: 
-        	stopLaucherMotor();
-        break;
-    	}
-    }
-    */
     
     /********************************
      * 
@@ -401,7 +162,8 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      * 
      *********************************/
     public void driveLaucherMotorForwards() {
-    	if(!isFrontLimitHit()) pullBackMotor.set(SPEED);
+    	if(!isFrontLimitHit()) 
+    		pullBackMotor.set(SPEED);
     	else stopLaucherMotor();
     }
     
@@ -412,7 +174,8 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      * 
      *********************************/
     public void driveLaucherMotorBackwards() {
-    	if(!isBackLimitHit()) pullBackMotor.set(-SPEED);
+    	if(!isBackLimitHit()) 
+    		pullBackMotor.set(-SPEED);
     	else stopElevationMotor();
     }
     
@@ -431,7 +194,8 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      * 
      *********************************/
     public void elevateLaucherUp() {
-    	if(!isHighElevationHit()) elevationMotor.set(ELEVATION_SPEED);
+    	if(!isHighElevationHit()) 
+    		elevationMotor.set(ELEVATION_SPEED);
     	else stopElevationMotor();
     }
     
@@ -442,7 +206,8 @@ public class Laucher extends Subsystem implements PIDSubsystem {
      * 
      *********************************/
     public void elevateLaucherDown() {
-    	if(!isLowElevationHit()) elevationMotor.set(-ELEVATION_SPEED);
+    	if(!isLowElevationHit()) 
+    		elevationMotor.set(-ELEVATION_SPEED);
     	else stopElevationMotor();
     }
     
@@ -488,10 +253,6 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     
     public boolean isClamed() {
     	return laucherRelease.get();
-    }
-    
-    public void resetDistance(){
-    	laucherLimitEncoder.reset();
     }
     
     public int getEncoderValue(){

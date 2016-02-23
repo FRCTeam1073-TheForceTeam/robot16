@@ -43,7 +43,7 @@ public class LauchBoulder extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.laucher.isBackLimitHit() && Robot.laucher.isClamed() && Robot.laucher.getEncoderValue() == AtBack){
+    	if(Robot.laucher.isClamed() && (Robot.laucher.isBackLimitHit() || Robot.laucher.getEncoderValue() >= AtBack)){
     		Robot.laucher.openClam();
     		init = true;
     		setTimeout(TravelTime);
@@ -59,7 +59,7 @@ public class LauchBoulder extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.laucher.isFrontLimitHit() || !init || isTimedOut() || Robot.laucher.getEncoderValue() == AtFront){
+    	if (Robot.laucher.isFrontLimitHit() || !init || isTimedOut() || Robot.laucher.getEncoderValue() >= AtFront){
     		return true;
     	}
     	return false;

@@ -48,12 +48,12 @@ public class LaucherPrime extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if (!Robot.laucher.getState().equals(laucherState.readyToLauch)){
-    		if (Robot.laucher.isFrontLimitHit()){
+    		if (Robot.laucher.isFrontLimitHit() || Robot.laucher.getEncoderValue() >= AtFront){
     			Robot.laucher.closeClam();
     			Robot.laucher.setClosedForwards();
     			setTimeout(TravelTimeShort);
     		}
-    		else if (Robot.laucher.isBackLimitHit()){
+    		else if (Robot.laucher.isBackLimitHit() || Robot.laucher.getEncoderValue() >= AtBack){
     			setTimeout(TravelTimeLong);
     			Robot.laucher.setEmptyBackwards();
     		}
@@ -80,7 +80,7 @@ public class LaucherPrime extends Command {
     		break;
     	case closedMiddle:
     		Robot.laucher.driveLaucherMotorBackwards();
-    		if (Robot.laucher.getEncoderValue() == AtBack){
+    		if (Robot.laucher.getEncoderValue() >= AtBack || Robot.laucher.isBackLimitHit()){
         		Robot.laucher.setReady();
     		}
     		break;
@@ -93,7 +93,7 @@ public class LaucherPrime extends Command {
     		break;
     	case emptyMiddle:
     		Robot.laucher.driveLaucherMotorForwards();
-    		if (Robot.laucher.getEncoderValue() == AtFront){
+    		if (Robot.laucher.getEncoderValue() >= AtFront || Robot.laucher.isFrontLimitHit()){
     			Robot.laucher.closeClam();
         		Robot.laucher.setClosedForwards();
     		}
