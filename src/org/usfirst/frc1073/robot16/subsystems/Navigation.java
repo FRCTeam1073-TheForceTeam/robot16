@@ -318,26 +318,10 @@ public class Navigation extends Subsystem {
 	
 	//Rock Wall
 	private void defense6(){
-		//The distance required for simply driving through a defense
-		this.targetDistance = 109; //TODO needs calibration
-		
-		//TODO Make sure units from drive train are correct
-		distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
-				
-		//Updates gyro angle
-		theta = navGyro.getAngle();
-				
-		//Modifies voltage output to motors based on a drift correction algorithm
-		Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
-		Vy = Vy * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
-				
-		//Prevents motors from receiving weird values outside their threshold 
-		if(Vx >= 0.25){Vx = 0.25;}
-		if(Vy >= 0.25){Vy = 0.25;}
-				
-		//Physically moves the robot using the PID move method
-		Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
-		
+		/*
+		 * 1. Drive to defense
+		 * 2. navigateWall()
+		 */
 	}
 	
 	//Rough Terrain
