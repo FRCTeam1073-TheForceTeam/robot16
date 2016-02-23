@@ -135,7 +135,7 @@ public class Navigation extends Subsystem {
 	 * @param defenseID - This identifies each type of defense
 	 */
 	public void defenseApproach(int defenseID){
-		switch(8){ //TODO Will be a variable, constant just for testing
+		switch(defenseID){
 		case 0: defense0();
 			break;
 		case 1: defense1();
