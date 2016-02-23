@@ -129,8 +129,8 @@ public class Drive extends Command implements PIDCommand {
     	// Checks if PID is enabled
     	if(Robot.isDriveTrainPID) {
     		if (Robot.driveTrain.isInverted()) {
-        		this.left = -right;
-        		this.right = -left;    			
+        		this.left = right;
+        		this.right = left;    			
     		}
     		else {
         		this.left = left;
@@ -141,7 +141,7 @@ public class Drive extends Command implements PIDCommand {
     	else {
     		// Regular tank drive
     		if (Robot.driveTrain.isInverted()) {
-        		Robot.driveTrain.move(-right, -left);    			    			
+        		Robot.driveTrain.move(right, left);    			    			
     		}
     		else {
         		Robot.driveTrain.move(left, right);    			
