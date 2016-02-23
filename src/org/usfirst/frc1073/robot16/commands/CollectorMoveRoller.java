@@ -12,6 +12,8 @@
 package org.usfirst.frc1073.robot16.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc1073.robot16.Robot;
 
 /**
@@ -47,8 +49,14 @@ public class CollectorMoveRoller extends Command {
      * 
      ***********************************************/
     public double checkDeadZone(double mag) {
-    	if(Math.abs(mag) <= Robot.deadZone) return 0;
-    	else return mag;
+    	if(Math.abs(mag) <= Robot.deadZone) 
+    	{
+    		return 0;
+   		}
+    	else
+    	{
+    		return mag;
+    	}
     }
     
     // Called just before this Command runs the first time
@@ -60,10 +68,22 @@ public class CollectorMoveRoller extends Command {
     	double mag = Robot.oi.getoperatorStick().getRawAxis(4); // MUM GET DA CAMERA BECAUSE I JUST 360 NOSCOPED THAT AXIS... I hope. I don't know what axis the slider is so this may need to be changed
     	mag = checkDeadZone(mag);
     	
-    	if(mag >= 0.3) Robot.collector.rollerIn();
-    	else if(mag <= -0.3) Robot.collector.rollerPurge();
-    	else Robot.collector.rollerOff();
+    	if(mag >= 0.3) 
+    	{
+    		Robot.collector.rollerIn();
+    		SmartDashboard.putString("We going up", "yup");
+    	}
+    	else if(mag <= -0.3)
+    	{
+    		Robot.collector.rollerPurge();
+    		SmartDashboard.putString("Where we going", "down");
+    	}
+    	else
+    	{
+    		Robot.collector.rollerOff();
+    	}
     }
+    	
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
