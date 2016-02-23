@@ -50,35 +50,24 @@ public class LaucherPrime extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (!Robot.laucher.getState().equals(laucherState.readyToLauch)){
-    		//if (Robot.laucher.isFrontLimitHit() || Robot.laucher.getEncoderValue() <= AtFront){
-    		if (Robot.laucher.isFrontLimitHit()){
-    			Robot.laucher.closeClamp();
-    			Robot.laucher.setClosedForwards();
-    			setTimeout(TravelTimeShort);
-    		}
-    		//else if (Robot.laucher.isBackLimitHit() || Robot.laucher.getEncoderValue() >= AtBack){
-    		else if (Robot.laucher.isBackLimitHit()){
-    			setTimeout(TravelTimeLong);
-    			if (Robot.laucher.isClamped()) {
-    				Robot.laucher.setReady();
-    			}
-    			else {
-    				Robot.laucher.openClamp();
-    				Robot.laucher.setEmptyBackwards();
-    			}
-    		}
-    		else {
-    			if (Robot.laucher.isClamped()){
-    				setTimeout(TravelTimeShort);
-    				Robot.laucher.setClosedMiddle();
-    			}
-    			else {
-    				setTimeout(TravelTimeLong);
-    				Robot.laucher.setEmptyMiddle();
-    			}
-    		}
+    	Robot.laucher.updateCurrentState();
+    	
+    	switch(Robot.laucher.getState()){
+    	case readyToLauch:
+    	case closedForwards: 
+    	case closedMiddle:
+    		setTimeout(TravelTimeShort);
+    		break;
+    	case emptyMiddle:
+    	case emptyForwards: 
+    	case emptyBackwards:
+    		setTimeout(TravelTimeLong);
+    		break;
+    	default:
+    		setTimeout(0);
+    		break;
     	}
+    	
     	SmartDashboard.putString("Launcher state", Robot.laucher.enumReturn(Robot.laucher.getState()));
     }
 
@@ -108,8 +97,8 @@ public class LaucherPrime extends Command {
     		Robot.laucher.stopLaucherMotor();
     		break;
     	case emptyForwards:
-    		Robot.laucher.closeClamp();
     		Robot.laucher.stopLaucherMotor();
+    		Robot.laucher.closeClamp();
     		Robot.laucher.setClosedForwards();
     		break;
     	case emptyBackwards:
@@ -120,6 +109,7 @@ public class LaucherPrime extends Command {
     		Robot.laucher.driveLaucherMotorForwards();
     		//if (Robot.laucher.getEncoderValue() <= AtFront || Robot.laucher.isFrontLimitHit()){
     		if (Robot.laucher.isFrontLimitHit()){
+        		Robot.laucher.stopLaucherMotor();
     			Robot.laucher.closeClamp();
         		Robot.laucher.setClosedForwards();
     		}
@@ -131,7 +121,6 @@ public class LaucherPrime extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	//if((Robot.laucher.isBackLimitHit() && Robot.laucher.isClamed())
     	if (Robot.laucher.isBackLimitHit() || Robot.laucher.getState().equals(laucherState.readyToLauch)){
     		Robot.laucher.stopLaucherMotor();
 			Robot.laucher.setReady();
@@ -139,11 +128,15 @@ public class LaucherPrime extends Command {
     		return true;
     	}
     	else if (isTimedOut()) {
-    		SmartDashboard.putString("Launcher state", Robot.laucher.enumReturn(Robot.laucher.getState()));
+    		Robot.laucher.updateCurrentState();
+    		Robot.laucher.stopLaucherMotor();
+    		SmartDashboard.putString("Launcher state Timedout", Robot.laucher.enumReturn(Robot.laucher.getState()));
     		return true;
     	}
-    	SmartDashboard.putString("Launcher state", Robot.laucher.enumReturn(Robot.laucher.getState()));
-    	return false;
+    	else {
+	    	SmartDashboard.putString("Launcher state", Robot.laucher.enumReturn(Robot.laucher.getState()));
+	    	return false;
+    	}
     }
 
     // Called once after isFinished returns true

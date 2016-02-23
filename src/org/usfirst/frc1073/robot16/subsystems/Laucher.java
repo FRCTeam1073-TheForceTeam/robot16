@@ -119,6 +119,33 @@ public class Laucher extends Subsystem implements PIDSubsystem
 		current = newState;
 	}
 
+	public void updateCurrentState() {
+		if (isBackLimitHit()) {
+			if (isClamped()) {
+				setCurrentState(laucherState.readyToLauch);
+			}
+			else {
+				setCurrentState(laucherState.emptyBackwards);
+			}
+		}
+		else if (isFrontLimitHit()) {
+			if (isClamped()) {
+				setCurrentState(laucherState.closedForwards);
+			}
+			else {
+				setCurrentState(laucherState.emptyForwards);
+			}
+		}
+		else {
+			if (isClamped()) {
+				setCurrentState(laucherState.closedMiddle);
+			}
+			else {
+				setCurrentState(laucherState.emptyMiddle);
+			}
+		}
+	}
+	
 	public void setReady()
 	{
 		current = laucherState.readyToLauch;

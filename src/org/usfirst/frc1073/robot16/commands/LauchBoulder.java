@@ -50,19 +50,10 @@ public class LauchBoulder extends Command
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		//setTimeout(2);
-		
 		Robot.laucher.openClamp();
 		
-		if (Robot.laucher.isBackLimitHit()) {
-			Robot.laucher.setEmptyBackwards();			
-		}
-		else if (Robot.laucher.isFrontLimitHit()) {
-			Robot.laucher.setEmptyForwards();
-		}
-		else {
-			Robot.laucher.setEmptyMiddle();
-		}
+		Robot.laucher.updateCurrentState();
+
 		SmartDashboard.putString("Launcher state", Robot.laucher.enumReturn(Robot.laucher.getState()));
 	}
 
