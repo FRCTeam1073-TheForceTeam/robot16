@@ -1,7 +1,7 @@
 package org.usfirst.frc1073.robot16.navClasses;
 
 //@author Michaela Dinman
-public class Defense {
+public class NavDefense {
 
 	
 	//Defense ID
@@ -46,7 +46,7 @@ public class Defense {
 	private int defenseYArray[];
 
 	//Assigns ID to Defense object
-	public Defense(int id) {
+	public NavDefense(int id) {
 		ID = id;
 		
 		defense1XOpposingStart = defenseXArray[1];
@@ -89,7 +89,7 @@ public class Defense {
 	 */
 	
 	//Returns Defense's ID
-	public int getDefenseID(Defense d) {
+	public int getDefenseID(NavDefense d) {
 		return ID;
 	}
 

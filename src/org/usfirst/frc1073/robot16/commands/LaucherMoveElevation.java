@@ -57,7 +57,7 @@ public class LaucherMoveElevation extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double mag = Robot.oi.getoperatorStick().getThrottle();
+    	double mag = Robot.oi.getoperatorStick().getRawAxis(2);
     	mag = checkDeadZone(mag);
     	
     	if(mag >= 0.3) Robot.laucher.elevateLaucherUp(1);

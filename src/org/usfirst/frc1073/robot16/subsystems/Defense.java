@@ -13,12 +13,11 @@ package org.usfirst.frc1073.robot16.subsystems;
 
 import org.usfirst.frc1073.robot16.Robot;
 import org.usfirst.frc1073.robot16.RobotMap;
-import org.usfirst.frc1073.robot16.commands.*;
+import org.usfirst.frc1073.robot16.commands.DefenseMoveElevation;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -81,6 +80,7 @@ public class Defense extends Subsystem {
     	elevationMotor.set(-1);
     }
 
+
     public Defense() {
     	elevationMotor.setInverted(Robot.invertDefenseDir);
     }
@@ -91,14 +91,12 @@ public class Defense extends Subsystem {
     	return defenseAngle.get() * 360.0;
     }
     
-    @Deprecated //Don't use until whoever wrote this fixes what's below
-    public boolean isExtended() {
-    	//return extended; TODO This isn't a variable
-    	return false; //TODO Remove once the above issue is solved
-    }
-    
     public void toggleArm() {
     	armExtension.set(!armExtension.get());
+    }
+    
+    public boolean isExtended() {
+    	return armExtension.get();
     }
     
     public void driveDefenseUp() {

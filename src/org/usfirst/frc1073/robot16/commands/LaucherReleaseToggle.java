@@ -38,7 +38,7 @@ public class LaucherReleaseToggle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.laucher.toggleRelease();
+    	//Robot.laucher.toggleRelease();
     }
 
     // Called repeatedly when this Command is scheduled to run

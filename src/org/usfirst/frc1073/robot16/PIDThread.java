@@ -2,8 +2,6 @@ package org.usfirst.frc1073.robot16;
 
 import org.usfirst.frc1073.robot16.commands.PIDCommand;
 import org.usfirst.frc1073.robot16.subsystems.PIDSubsystem;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 	/**
 	 * 
@@ -13,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 	 * A runnable, generic PID class. Runs on a separate thread and all system control can be re-routed around a PIDthread should something go wrong. 
 	 *
 	 */
-
 public class PIDThread implements Runnable {
 	
 	//PID constants
@@ -23,9 +20,6 @@ public class PIDThread implements Runnable {
 	
 	//thread refresh rate - recommended 5ms (200hz)
 	private long dt;
-	private double previous;
-	private double current;
-	private long dtMeasured;
 	
 	//tolerance specifies the "close enough factor" - when the error is within +- this tolerance, error is considered 0
 	private double tolerance;
@@ -52,26 +46,23 @@ public class PIDThread implements Runnable {
 	 * @param kP - the Proportional parameter
 	 * @param kI - the integral parameter
 	 * @param kD - the derivative parameter
-	 * @param tolerance - error considered 0 if error within +- this value
 	 * @param dt - thread refresh rate (5ms recommended)
+	 * @param tolerance - error considered 0 if error within +- this value
 	 * @param marker - VERY IMPORTANT - each new PID thread must have its own PID marker (0 through 3 reserved for PID Drive)
 	 */
 	public PIDThread(double kP, double kI, double kD, long dt, double tolerance, int marker) {
 		this.kP = kP;
 		this.kI = kI;
 		this.kD = kP;
+		this.dt = dt;
 		this.tolerance = tolerance;
 		this.setpoint = 0;
 		this.currentMeasurement = 0;
 		this.PIDinput = null;
 		this.PIDOutput =  null;
 		this.PIDSetpoint = null;
-		this.dt = dt;
 		this.marker = marker;
 		enabled = true;
-		previous = (long) Timer.getFPGATimestamp() * Math.pow(10, -3);
-		current = 0;
-		dtMeasured = 0;
 	}
 	
 	/**
@@ -81,12 +72,7 @@ public class PIDThread implements Runnable {
 		//TODO add sensor failure detection to abort loop and return to manual/variable voltage control
 		while (true) { 
 			//skip PID if the thread is disabled
-			if(enabled){
-				current = (long) Timer.getFPGATimestamp() * Math.pow(10, -3);
-				dtMeasured = (long) (current - previous);
-				if(dtMeasured == 0){
-					dtMeasured = 5;
-				}
+			if(enabled) {
 				//Core PID Code follows: 
 				//setpoint get the setpoint from the PIDSetpoint passed in (use this thread's marker)
 				//currentMeasurement gets the current reading from the PIDinput (use this thread's marker)
@@ -95,17 +81,16 @@ public class PIDThread implements Runnable {
 				//PID Calculation (includes tolerance adjustment)
 				double error = (setpoint) - (currentMeasurement);
 				error = toleranceAdjustment(error);
-				integral = integral + (error * dtMeasured);
-				double derivative = (error - previousError) / dtMeasured;
+				integral = integral + (error * dt);
+				double derivative = (error - previousError) / dt;
 				output = (kP * error) + (kI * integral) + (kD * derivative);
 				previousError = error;
 				//set the PIDoutput to the generated output (again, use the specific marker to prevent cross-thread data transmission, ex. left front encoder reading used in right front PID)
 				PIDOutput.setPIDOutput(output, marker);
-				previous = current;
 			}
 			//if PID disabled, just set output to 0 and 0 integral.
 			//IMPORTANT - if switching to manual control, implement a "disregard all data" catch in the setPIDOutput() method of your PIDOutput object to prevent 0 movement from actuator. 
-			else{
+			else {
 				PIDOutput.setPIDOutput(0.0, marker);
 				integral = 0;
 			}
@@ -157,6 +142,19 @@ public class PIDThread implements Runnable {
 		enabled = true;
 	}
 	
+	//unused methods but kept in for future reference
+	public void updateSetpoint(double newSetpoint) {
+		this.setpoint = newSetpoint;
+	}
+	
+	public void updateCurrentMeasurement(double newMeasurement) {
+		this.currentMeasurement = newMeasurement;
+	}
+	
+	public double getOutput() {
+		return output;
+	}
+	
 	/******************************
 	 * 
 	 * Method to toggle the thread
@@ -167,16 +165,4 @@ public class PIDThread implements Runnable {
 		enabled = !enabled;
 	}
 	
-	//unused methods but kept in for future reference
-	public void updateSetpoint(double newSetpoint){
-		this.setpoint = newSetpoint;
-	}
-	
-	public void updateCurrentMeasurement(double newMeasurement) {
-		this.currentMeasurement = newMeasurement;
-	}
-	
-	public double getOutput(){
-		return output;
-	}
 }

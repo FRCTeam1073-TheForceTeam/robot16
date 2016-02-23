@@ -85,7 +85,7 @@ public class Robot extends IterativeRobot {
     public static double cubicScale;
     public static double deadZone;
     public static double robotTopSpeed;
-    public static boolean isDriveTrainPID = true; // PID initializes on
+    public static boolean isDriveTrainPID = false; // PID initializes on
     public static boolean isCubic = true; // Cubic initializes on
     public static boolean inverseLeft = true; // Initialize one side inverted
     public static boolean inverseRight = false;
@@ -136,6 +136,7 @@ public class Robot extends IterativeRobot {
     
     // Collector
     rollerSpeed = prefs.getDouble("rollerSpeed", 0.90);
+    SmartDashboard.putNumber("rollerspeed", rollerSpeed);
     invertRoller = prefs.getBoolean("invertRoller", false);
     
     // Laucher
