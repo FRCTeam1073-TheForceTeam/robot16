@@ -48,8 +48,8 @@ public class LauchBoulder extends Command {
     protected void initialize() {
     	init = false;
     	//if(Robot.laucher.isClamed() && (Robot.laucher.isBackLimitHit() || Robot.laucher.getEncoderValue() >= AtBack)){
-    	if(Robot.laucher.isClamed() && Robot.laucher.isBackLimitHit()){
-    		Robot.laucher.openClam();
+    	if(Robot.laucher.isClamped() && Robot.laucher.isBackLimitHit()){
+    		Robot.laucher.openClamp();
     		init = true;
     		setTimeout(TravelTimeShort);
     	}

@@ -149,11 +149,11 @@ public class Laucher extends Subsystem implements PIDSubsystem {
 //    	laucherRelease.set(!laucherRelease.get());
 //    }
     
-    public void openClam(){
+    public void openClamp(){
     	laucherRelease.set(open);
     }
     
-    public void closeClam(){
+    public void closeClamp(){
     	laucherRelease.set(closed);
     }
     public String enumReturn(laucherState state)
@@ -263,7 +263,7 @@ public class Laucher extends Subsystem implements PIDSubsystem {
     	return !elevationHighLimit.get();
     }
     
-    public boolean isClamed() {
+    public boolean isClamped() {
     	return laucherRelease.get();
     }
 

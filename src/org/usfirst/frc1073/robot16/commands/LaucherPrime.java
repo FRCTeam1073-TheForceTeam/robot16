@@ -53,7 +53,7 @@ public class LaucherPrime extends Command {
     	if (!Robot.laucher.getState().equals(laucherState.readyToLauch)){
     		//if (Robot.laucher.isFrontLimitHit() || Robot.laucher.getEncoderValue() <= AtFront){
     		if (Robot.laucher.isFrontLimitHit()){
-    			Robot.laucher.closeClam();
+    			Robot.laucher.closeClamp();
     			Robot.laucher.setClosedForwards();
     			setTimeout(TravelTimeShort);
     		}
@@ -63,7 +63,7 @@ public class LaucherPrime extends Command {
     			Robot.laucher.setEmptyBackwards();
     		}
     		else {
-    			if (Robot.laucher.isClamed()){
+    			if (Robot.laucher.isClamped()){
     				setTimeout(TravelTimeShort);
     				Robot.laucher.setClosedMiddle();
     			}
@@ -103,7 +103,7 @@ public class LaucherPrime extends Command {
     		Robot.laucher.driveLaucherMotorForwards();
     		//if (Robot.laucher.getEncoderValue() <= AtFront || Robot.laucher.isFrontLimitHit()){
     		if (Robot.laucher.isFrontLimitHit()){
-    			Robot.laucher.closeClam();
+    			Robot.laucher.closeClamp();
         		Robot.laucher.setClosedForwards();
     		}
     		break;
