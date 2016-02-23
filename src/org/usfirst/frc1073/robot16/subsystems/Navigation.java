@@ -286,10 +286,25 @@ public class Navigation extends Subsystem {
 	
 	//Moat
 	private void defense2(){
-		/*
-		 * 1. Drive to defense
-		 * 2. navigateMoat()
-		 */
+		//distance for driving through a defense
+		this.targetDistance = 127; //TODO needs calibration
+		
+		//TODO Make sure units from drive train are correct
+		distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
+		
+		//Updates gyro angle
+		theta = navGyro.getAngle();
+		
+		//Modifies voltage output to motors based on a drift correction algorithm
+		Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+		Vy = Vy * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+		
+		//Prevents motors from receiving weird values outside their threshold 
+		if(Vx >= 0.25){Vx = 0.25;} //TODO needs calibration
+		if(Vy >= 0.25){Vy = 0.25;} //TODO needs calibration
+		
+		//Physically moves the robot using the PID move method
+		Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
 	}
 	
 	//Ramparts
