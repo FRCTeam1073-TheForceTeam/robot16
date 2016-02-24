@@ -46,10 +46,10 @@ public class AdjustLaucher extends Command {
     		throttle = 0.0;
     	}
     	
-    	if (throttle > 0){
+    	if (throttle > 0) {
     		Robot.laucher.elevateLaucherUp(throttle);
     	}
-    	else if (throttle < 0){
+    	else if (throttle < 0) {
     		Robot.laucher.elevateLaucherDown(-throttle); // function expects a positive scalar
     	}
     	else {

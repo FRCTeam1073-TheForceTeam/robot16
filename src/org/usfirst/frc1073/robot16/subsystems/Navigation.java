@@ -42,7 +42,7 @@ public class Navigation extends Subsystem {
 	 * @author Matt
 	 * Makes the map object that holds game regions
 	 */
-	public void initializeMap(){
+	public void initializeMap() {
 		//Map gameMap = new Map(0,0,lengthX,lengthY);
 	}
     public void initDefaultCommand() {

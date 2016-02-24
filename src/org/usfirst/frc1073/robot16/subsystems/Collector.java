@@ -78,7 +78,7 @@ public class Collector extends Subsystem {
 	 *	else false
 	 *
 	 ****************************************/
-	public boolean isLoaded(){
+	public boolean isLoaded() {
 		return ballSensor.get();
 	}
     

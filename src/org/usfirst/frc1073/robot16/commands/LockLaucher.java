@@ -44,27 +44,23 @@ public class LockLaucher extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() 
+    protected void execute() {
 
-    {
-    	if(!Robot.laucher.isLocked())
-		{
+    	if(!Robot.laucher.isLocked()) {
+		
 			Robot.laucher.unlockIt();
 			
 			isIt = true;
 		}
-		else
-		{
-			if(Robot.laucher.getAngle() > 172)
-    		{
+		else {
+		
+			if(Robot.laucher.getAngle() > 172) {
     			Robot.laucher.elevateLaucherUp(0.7);
     		}
-    		else if(Robot.laucher.getAngle() < 168)
-    		{
+    		else if(Robot.laucher.getAngle() < 168) {
     			Robot.laucher.elevateLaucherDown(0.7);
     		}
-    		else
-    		{
+    		else {
     			Robot.laucher.stopLaucherMotor();
     			Robot.laucher.lockIt();
     			
@@ -74,8 +70,7 @@ public class LockLaucher extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() 
-    {
+    protected boolean isFinished() {
     	return isIt;
     }
 
