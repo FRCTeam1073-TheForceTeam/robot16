@@ -300,12 +300,17 @@ public class Laucher extends Subsystem implements PIDSubsystem
 
 	public void lockIt()
 	{
-		lockLaucher.set(false);
+		lockLaucher.set(open);
 	}
 
 	public void unlockIt()
 	{
-		lockLaucher.set(true);
+		lockLaucher.set(closed);
+		
+	}
+	public boolean isLocked()
+	{
+		return lockLaucher.get();
 	}
 
 	public boolean isFrontLimitHit()

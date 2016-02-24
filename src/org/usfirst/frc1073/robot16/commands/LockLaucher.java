@@ -40,41 +40,53 @@ public class LockLaucher extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	while(!isIt)
-    	{
-    		if(Robot.laucher.getAngle() > .1)
+    protected void execute() 
+
+    {
+    	if(!Robot.laucher.isLocked())
+		{
+			Robot.laucher.unlockIt();
+			
+			isIt = true;
+		}
+		else
+		{
+			if(Robot.laucher.getAngle() > 172)
     		{
-    			Robot.laucher.elevateLaucherDown(1);
+    			Robot.laucher.elevateLaucherUp(0.7);
     		}
-    		else if(Robot.laucher.getAngle() < -.1)
+    		else if(Robot.laucher.getAngle() < 168)
     		{
-    			Robot.laucher.elevateLaucherUp(1);
+    			Robot.laucher.elevateLaucherDown(0.7);
     		}
     		else
     		{
+    			Robot.laucher.stopLaucherMotor();
     			Robot.laucher.lockIt();
+    			
     			isIt = true;
     		}
-    	}
-    	
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return isIt;
+    protected boolean isFinished() 
+    {
+    	return isIt;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.laucher.stopLaucherMotor();
+    	isIt = false;
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	
     }
 }
