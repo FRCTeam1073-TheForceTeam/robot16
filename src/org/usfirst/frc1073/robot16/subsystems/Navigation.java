@@ -15,6 +15,7 @@ import org.usfirst.frc1073.robot16.Robot;
 import org.usfirst.frc1073.robot16.RobotMap;
 import org.usfirst.frc1073.robot16.commands.NavManager;
 import org.usfirst.frc1073.robot16.navClasses.Map;
+import org.usfirst.frc1073.robot16.subsystems.Defense;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -296,7 +297,6 @@ public class Navigation extends Subsystem {
 			//TODO Needs distance to front of defense
 			this.targetDistance = 40;
 			
-			
 			/*
 			 * In theory, this method will be called at the beginning of a match. So won't
 			 * distanceTravelled initially equal 0? Or will defenseApproach() change it? If
@@ -323,21 +323,42 @@ public class Navigation extends Subsystem {
 			//Physically moves the robot using the PID move method
 			Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
 		}
-		
-		else{
-			//Move 
+		if (!stageTwoComplete){
 			
-			//TODO change distance to get from inside of defense to other side
+			//TODO calibrate angle to move up
+			Robot.defense.setElevationAngle(90);
+			
+			Robot.defense.extendArm();
+			
+			//TODO calibrate angle to move down
+			Robot.defense.setElevationAngle(20);
+			
+			stageTwoComplete = true;
+		}
+		if (!stageThreeComplete){
+			
+			//TODO update with distance from inside of defense to outside
 			this.targetDistance = 60;
 			
-			//TODO Make sure units from drive train are correct
 			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
 			
-			//Updates gyro
+				if (targetDistance == distanceTravelled)
+					stageThreeComplete = true;
+			
 			theta = navGyro.getAngle();
 			
+			//Modifies voltage output to motors based on a drift correction algorithm
+			Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+			Vy = Vy * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+						
+			//Prevents motors from receiving weird values outside their threshold
+			//TODO check voltage for fastfastfast
+			if(Vx >= 1.0){Vx = 1.0;}
+			if(Vy >= 1.0){Vy = 1.0;}
+						
+			//Physically moves the robot using the PID move method
+			Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
 		}
-		
 	}
 	
 	//Cheval De Frise
