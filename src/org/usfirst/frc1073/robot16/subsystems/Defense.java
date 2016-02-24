@@ -50,7 +50,7 @@ public class Defense extends Subsystem {
     	elevationMotor.setInverted(Robot.invertDefenseDir);
     }
     
-    private final double SPEED = 0.5;
+    private final double SPEED = 0.75;
     
     public double getAngle() {
     	return defenseAngle.get() * 360.0;

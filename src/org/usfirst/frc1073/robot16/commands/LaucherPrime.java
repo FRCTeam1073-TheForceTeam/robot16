@@ -32,7 +32,7 @@ public class LaucherPrime extends Command {
     private final double TravelLength = 4.0;
     private final int AtBack = (int)(TravelLength * CIMRevPerInch);
     private final int AtFront = 0;
-    private final double TravelTimeShort = 6.8;
+    private final double TravelTimeShort = 8;
     private final double TravelTimeLong = TravelTimeShort * 2;
     private static int MeCount = 0;
 
