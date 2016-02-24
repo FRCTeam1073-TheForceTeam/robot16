@@ -270,10 +270,74 @@ public class Navigation extends Subsystem {
 	
 	//Portcullis
 	private void defense0(){
+		// ~ Michaela ~ //
+		
 		/*
-		 * 1. Drive to defense
-		 * 2. navigatePortcullis()
+		 * Portcullis Steps
+		 *    Stage One
+		 * 1. Move to front of defense
+		 *    Stage Two
+		 * 2. Move manipulator down
+		 * 3. Extend manipulator
+		 * 4. Move manipulator way up
+		 *    Stage Three
+		 * 5. Drive hella fastfastfast
+		 * 6. Retract manipulator
+		 * 7. Move manipulator down
 		 */
+		
+		//TODO initialize and create earlier but too lazy to
+		boolean stageOneComplete = false;
+		boolean stageTwoComplete = false;
+		boolean stageThreeComplete = false;
+		
+		if (!stageOneComplete)
+		{
+			//TODO Needs distance to front of defense
+			this.targetDistance = 40;
+			
+			
+			/*
+			 * In theory, this method will be called at the beginning of a match. So won't
+			 * distanceTravelled initially equal 0? Or will defenseApproach() change it? If
+			 * it does, I can add another variable, initialDistance and in the if statement
+			 * below, subtract initialDistance from distanceTravelled in the check.
+			 */
+			//TODO Make sure units from drive train are correct
+			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
+		
+				if (this.targetDistance == distanceTravelled)
+					stageOneComplete = true;
+			
+			//Updates gyro angle
+			theta = navGyro.getAngle();
+						
+			//Modifies voltage output to motors based on a drift correction algorithm
+			Vx = Vx * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+			Vy = Vy * Math.cos(theta - targetTheta) + k * (Vx + Vy)/2 * Math.sin(theta - targetTheta);
+						
+			//Prevents motors from receiving weird values outside their threshold 
+			if(Vx >= 1.0){Vx = 1.0;}
+			if(Vy >= 1.0){Vy = 1.0;}
+						
+			//Physically moves the robot using the PID move method
+			Robot.driveTrain.getDriveCommand().movePID(Vx,Vy);
+		}
+		
+		else{
+			//Move 
+			
+			//TODO change distance to get from inside of defense to other side
+			this.targetDistance = 60;
+			
+			//TODO Make sure units from drive train are correct
+			distanceTravelled = distanceTravelled + (Robot.driveTrain.leftEncoderDistance() + Robot.driveTrain.rightEncoderDistance()) / 2;
+			
+			//Updates gyro
+			theta = navGyro.getAngle();
+			
+		}
+		
 	}
 	
 	//Cheval De Frise
