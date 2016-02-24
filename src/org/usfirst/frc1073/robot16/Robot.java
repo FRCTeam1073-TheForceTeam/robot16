@@ -207,15 +207,6 @@ public class Robot extends IterativeRobot {
     	
         Scheduler.getInstance().run();
         
-        // for dankboard dankness
-        
-        // for radio buttons
-        //SendableChooser chooser = new SendableChooser();
-        //SmartDashboard.putData("pickAuto", chooser);
-        //SmartDashboard.addDefault("string name / title", do);
-        //SmartDashboard.addObject("name", do this);
-        
-        // ribot
     }
 
     /**
