@@ -109,7 +109,7 @@ public class PIDThread implements Runnable {
 	* @param currentError - the current PID error
 	*/
 	private double toleranceAdjustment(double currentError) {
-		if(Math.abs(currentError) > tolerance) {
+		if(Math.abs(currentError) > tolerance){
 			return currentError;
 		}
 		return 0.0;

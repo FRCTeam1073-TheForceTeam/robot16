@@ -93,7 +93,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * Values are between -1 and 1
      * 
      *********************************************/
-    public void move(double left, double right) {
+    public void move(double left, double right){
     	
     	leftMotor1.set(left, leftSyncGroup);
     	leftMotor2.set(left, leftSyncGroup);
@@ -102,20 +102,20 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     }
     
     // SC: maybe rename these xyzEncoderDistanceInches to make it clear
-    public double leftEncoderDistance() {
+    public double leftEncoderDistance(){
     	return leftSideEncoder.getDistance();
     }
     
-    public double rightEncoderDistance() {
+    public double rightEncoderDistance(){
     	return rightSideEncoder.getDistance();  			
     }
     
     // SC: maybe rename these xyzEncoderInchesPerSec if that's correct, or put a comment here saying it returns inches/sec
-    public double leftEncoderRate() {
+    public double leftEncoderRate(){
     	return leftSideEncoder.getRate();
     }
     
-    public double rightEncoderRate() {
+    public double rightEncoderRate(){
     	return rightSideEncoder.getRate();
     }
     

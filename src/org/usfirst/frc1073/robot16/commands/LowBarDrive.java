@@ -64,20 +64,25 @@ public class LowBarDrive extends Command {
     	
     	double leftPower, rightPower;
     	
-    	if ((rightTraveled < 36) && (leftTraveled < 36)) {
+    	if ((rightTraveled < 36) && (leftTraveled < 36))
+    	{
     		leftPower = rightPower = 0.8;
     	}
-    	else if ((rightTraveled < 72) && (leftTraveled < 72)) {
+    	else if ((rightTraveled < 72) && (leftTraveled < 72))
+    	{
     		leftPower = rightPower = 0.5;
     	}
-    	else {
+    	else
+    	{
     		leftPower = rightPower = 0.2;
     	}
     		
-    	if (rightTraveled - leftTraveled > 3) {
+    	if (rightTraveled - leftTraveled > 3)
+    	{
     		leftPower += 0.05;
     	}
-    	else if (leftTraveled - rightTraveled > 3) {
+    	else if (leftTraveled - rightTraveled > 3)
+    	{
     		rightPower += 0.05;
     	}
     	
@@ -93,10 +98,12 @@ public class LowBarDrive extends Command {
     	double leftTraveled = leftEnc - initialLeftEnc; 
     	double rightTraveled = rightEnc - initialRightEnc;
 
-    	if ((rightTraveled >= 96 && leftTraveled >= 96) || isTimedOut()) {
+    	if ((rightTraveled >= 96 && leftTraveled >= 96) || isTimedOut())
+    	{
     		return true;
     	}
-    	else {
+    	else
+    	{
     		return false;
     	}
     }

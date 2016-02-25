@@ -45,26 +45,32 @@ public class LowerCheval extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    		if(Robot.defense.getAngle() > -19) {
+    protected void execute() 
+    {
+    		if(Robot.defense.getAngle() > -19)
+    		{
     			Robot.defense.driveDefenseDown();
     		}
-    		else if(Robot.defense.getAngle() < -21) {
+    		else if(Robot.defense.getAngle() < -21)
+    		{
     			Robot.defense.driveDefenseUp();
     		}
-    		else {
+    		else
+    		{
     			isIt = true;
     		}
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
+    protected boolean isFinished() 
+    {
     	return isIt;
     }
 
     // Called once after isFinished returns true
-    protected void end() {
+    protected void end() 
+    {
     	Robot.defense.stopDefenseMotor();
     }
 
@@ -73,5 +79,4 @@ public class LowerCheval extends Command {
     protected void interrupted() {
     	end();
     }
-    
 }
