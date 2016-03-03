@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.io.IOException;
+
 import org.usfirst.frc1073.robot16.commands.*;
 import org.usfirst.frc1073.robot16.subsystems.*;
 
@@ -145,6 +147,15 @@ public class Robot extends IterativeRobot {
         
         rightDriveTrainPIDThread = new PIDThread(driveTrainP, driveTrainI, driveTrainD, dt, driveTrainTolerance, 1);
         rightDriveTrainThread = new Thread(rightDriveTrainPIDThread);
+        
+        try
+        {
+        	new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
+        }
+        catch(IOException io)
+        {
+        	io.printStackTrace();
+        }
 
         isFirstStartup = true;
     }
