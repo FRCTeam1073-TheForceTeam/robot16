@@ -54,9 +54,6 @@ public class LauchBoulder extends Command
 		Robot.laucher.openClamp();
 		
 		Robot.laucher.updateCurrentState();
-
-		SmartDashboard.putString("Launcher state", Robot.laucher.enumReturn(Robot.laucher.getState()));
-		SmartDashboard.putNumber("LaunchInit", num);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

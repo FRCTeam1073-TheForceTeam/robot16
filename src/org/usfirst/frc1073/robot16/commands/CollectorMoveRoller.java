@@ -49,12 +49,10 @@ public class CollectorMoveRoller extends Command {
      * 
      ***********************************************/
     public double checkDeadZone(double mag) {
-    	if(Math.abs(mag) <= Robot.deadZone) 
-    	{
+    	if(Math.abs(mag) <= Robot.deadZone) {
     		return 0;
    		}
-    	else
-    	{
+    	else {
     		return mag;
     	}
     }
@@ -65,21 +63,16 @@ public class CollectorMoveRoller extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double mag = Robot.oi.getoperatorStick().getRawAxis(4); // MUM GET DA CAMERA BECAUSE I JUST 360 NOSCOPED THAT AXIS... I hope. I don't know what axis the slider is so this may need to be changed
+    	double mag = Robot.oi.getoperatorStick().getRawAxis(4);
     	mag = checkDeadZone(mag);
     	
-    	if(mag >= 0.3) 
-    	{
+    	if(mag >= 0.3) {
     		Robot.collector.rollerIn();
-    		SmartDashboard.putString("We going up", "yup");
     	}
-    	else if(mag <= -0.3)
-    	{
+    	else if(mag <= -0.3) {
     		Robot.collector.rollerPurge();
-    		SmartDashboard.putString("Where we going", "down");
     	}
-    	else
-    	{
+    	else {
     		Robot.collector.rollerOff();
     	}
     }
