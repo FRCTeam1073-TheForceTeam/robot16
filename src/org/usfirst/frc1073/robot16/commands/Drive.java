@@ -60,23 +60,6 @@ public class Drive extends Command implements PIDCommand {
     	this.right = right;
     }
     
-    /*************************************************
-     * 
-     * Method to change direction of the joystick
-     * based on angle
-     * 
-     * @param angle is the angle to the corresponding
-     * joystick magnitude
-     * 
-     * @return a 1 or -1 to change direction of
-     * magnitude of the joystick
-     * 
-     *************************************************/
-    private double checkDirection(double angle) {
-    	if((angle <= -90 && angle >= -180) || (angle <= 180 && angle >= 90)) return -1;
-    	else return 1;
-    }
-    
     /***********************************************
      * 
      * Method to adjust a dead zone on joystick
@@ -105,26 +88,24 @@ public class Drive extends Command implements PIDCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// Sets left and right
-    	double left = Robot.oi.getdriverLeftStick().getMagnitude();
-    	double right = Robot.oi.getdriverRightStick().getMagnitude();
+    	double left = Robot.oi.getdriverLeftStick().getY();
+    	double right = Robot.oi.getdriverRightStick().getY();
     	
     	// checks dead zone
     	left = checkDeadZone(left);
     	right = checkDeadZone(right);
     	
-    	// checks direction of magnitude
-    	left *= checkDirection(Robot.oi.getdriverLeftStick().getDirectionDegrees());
-    	right *= checkDirection(Robot.oi.getdriverRightStick().getDirectionDegrees());
-    	
-    	// Inverse Check
-    	if(Robot.inverseLeft) left *= -1;
-    	if(Robot.inverseRight) right *= -1;
+    	SmartDashboard.putNumber("left joystick", left);
+    	SmartDashboard.putNumber("right joystick", right);
     	
     	// Checks for cubic scaling
     	if(Robot.isCubic) {
     		left = cubicScale(left);
         	right = cubicScale(right);
     	}
+    	
+    	SmartDashboard.putNumber("left joystick cubic", left);
+    	SmartDashboard.putNumber("right joystick cubic", right);
     	
     	// Checks if PID is enabled
     	if(Robot.isDriveTrainPID) {

@@ -66,8 +66,8 @@ public class OI {
 
         operatorStick = new Joystick(2);
         
-        laucherToggleReleaseButton = new JoystickButton(operatorStick, 31);
-        laucherToggleReleaseButton.whenPressed(new LaucherReleaseToggle());
+        //laucherToggleReleaseButton = new JoystickButton(operatorStick, 31);
+        //laucherToggleReleaseButton.whenPressed(new LaucherReleaseToggle());
         defenseArmToggle = new JoystickButton(operatorStick, 1);
         defenseArmToggle.whenPressed(new DefenseArmToggle());
 //        pistonBut = new JoystickButton(operatorStick, 1);

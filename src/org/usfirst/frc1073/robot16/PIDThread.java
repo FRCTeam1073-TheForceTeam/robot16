@@ -3,6 +3,8 @@ package org.usfirst.frc1073.robot16;
 import org.usfirst.frc1073.robot16.commands.PIDCommand;
 import org.usfirst.frc1073.robot16.subsystems.PIDSubsystem;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 	/**
 	 * 
 	 * @author Derek Wider
@@ -73,10 +75,12 @@ public class PIDThread implements Runnable {
 		while (true) { 
 			//skip PID if the thread is disabled
 			if(enabled) {
+				SmartDashboard.putBoolean("isPID", true);
 				//Core PID Code follows: 
 				//setpoint get the setpoint from the PIDSetpoint passed in (use this thread's marker)
 				//currentMeasurement gets the current reading from the PIDinput (use this thread's marker)
 				setpoint = PIDSetpoint.getPIDSetpoint(marker);
+				SmartDashboard.putNumber("setpoint", setpoint);
 				currentMeasurement = PIDinput.getPIDSource(marker);
 				//PID Calculation (includes tolerance adjustment)
 				double error = (setpoint) - (currentMeasurement);
@@ -87,10 +91,13 @@ public class PIDThread implements Runnable {
 				previousError = error;
 				//set the PIDoutput to the generated output (again, use the specific marker to prevent cross-thread data transmission, ex. left front encoder reading used in right front PID)
 				PIDOutput.setPIDOutput(output, marker);
+				if(marker == 0) SmartDashboard.putNumber("left PID output", output);
+				if(marker == 1) SmartDashboard.putNumber("right PID output", output);
 			}
 			//if PID disabled, just set output to 0 and 0 integral.
 			//IMPORTANT - if switching to manual control, implement a "disregard all data" catch in the setPIDOutput() method of your PIDOutput object to prevent 0 movement from actuator. 
 			else {
+				SmartDashboard.putBoolean("isPID", false);
 				PIDOutput.setPIDOutput(0.0, marker);
 				integral = 0;
 			}

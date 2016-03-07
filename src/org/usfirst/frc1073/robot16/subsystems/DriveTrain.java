@@ -59,6 +59,10 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     public DriveTrain() {
     	leftSideEncoder.setDistancePerPulse(INCHES_PER_PULSE);
     	rightSideEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    	leftMotor1.setInverted(Robot.inverseLeft);
+    	leftMotor2.setInverted(Robot.inverseLeft);
+    	rightMotor1.setInverted(Robot.inverseRight);
+    	rightMotor2.setInverted(Robot.inverseRight);
     }
     
     /***************************
@@ -70,6 +74,7 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
     public double getLeftRateFps() {
     	double rate = leftSideEncoder.getRate();
     	double left = (rate) / 12; // divide by 12 to convert to feet
+    	left *= -1;
     	return left;
     }
     
@@ -94,7 +99,6 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
      * 
      *********************************************/
     public void move(double left, double right){
-    	
     	leftMotor1.set(left, leftSyncGroup);
     	leftMotor2.set(left, leftSyncGroup);
     	rightMotor1.set(right, rightSyncGroup);
@@ -169,11 +173,11 @@ public class DriveTrain extends Subsystem implements PIDSubsystem {
 			switch(marker) {
 			case 0:
 				leftMotor1.set(output, leftSyncGroup);
-				leftMotor2.set(-output, leftSyncGroup);
+				leftMotor2.set(output, leftSyncGroup);
 			break;
 			case 1:
 				rightMotor1.set(output, rightSyncGroup);
-				rightMotor2.set(-output, rightSyncGroup);
+				rightMotor2.set(output, rightSyncGroup);
 			break;
 			}
 		}

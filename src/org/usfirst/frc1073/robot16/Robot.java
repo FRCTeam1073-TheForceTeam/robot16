@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
     public static double cubicScale;
     public static double deadZone;
     public static double robotTopSpeed;
-    public static boolean isDriveTrainPID = false; // PID initializes on
+    public static boolean isDriveTrainPID = true; // PID initializes on
     public static boolean isCubic = true; // Cubic initializes on
     public static boolean inverseLeft = true; // Initialize one side inverted
     public static boolean inverseRight = false;
@@ -101,13 +101,12 @@ public class Robot extends IterativeRobot {
     // DriveTrain
     cubicScale = prefs.getDouble("cubicScale", 0.07);
     deadZone = prefs.getDouble("deadZone", 0.05);
-    inverseLeft = prefs.getBoolean("inverseLeft", true);
-    inverseRight = prefs.getBoolean("inverseRight", false);
+    inverseLeft = prefs.getBoolean("inverseLeft", false);
+    inverseRight = prefs.getBoolean("inverseRight", true);
     robotTopSpeed = prefs.getDouble("robotTopSpeed", 10.5);
     
     // Collector
     rollerSpeed = prefs.getDouble("rollerSpeed", 0.90);
-    SmartDashboard.putNumber("rollerspeed", rollerSpeed);
     invertRoller = prefs.getBoolean("invertRoller", false);
     
     // Laucher
@@ -194,8 +193,8 @@ public class Robot extends IterativeRobot {
 	        isFirstStartup = false;
     	}
         
-        isDriveTrainPID = false;
-        
+        SmartDashboard.putString("P I D", "" + driveTrainP + " " + driveTrainI + " " + driveTrainD);
+        isDriveTrainPID = true;
         leftDriveTrainPIDThread.enable();
         rightDriveTrainPIDThread.enable();
     }
@@ -206,16 +205,9 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	
         Scheduler.getInstance().run();
-        
-        // for dankboard dankness
-        
-        // for radio buttons
-        //SendableChooser chooser = new SendableChooser();
-        //SmartDashboard.putData("pickAuto", chooser);
-        //SmartDashboard.addDefault("string name / title", do);
-        //SmartDashboard.addObject("name", do this);
-        
-        // ribot
+        SmartDashboard.putNumber("RAW Right", driveTrain.getRightRateFps());
+        SmartDashboard.putNumber("RAW Left", driveTrain.getLeftRateFps());
+        SmartDashboard.putBoolean("isDriveTrainPID", isDriveTrainPID);
     }
 
     /**
