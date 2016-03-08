@@ -56,10 +56,10 @@ public class Robot extends IterativeRobot {
     public static boolean inverseLeft = true; // Initialize one side inverted
     public static boolean inverseRight = false;
     // PID Preferences
-    private static double driveTrainP; //P
-    private static double driveTrainI; //I
-    private static double driveTrainD; //D
-    private static double driveTrainTolerance; // tolerance
+    public static double driveTrainP; //P
+    public static double driveTrainI; //I
+    public static double driveTrainD; //D
+    public static double driveTrainTolerance; // tolerance
     // Collector Preferences
     public static double rollerSpeed;
     public static boolean invertRoller = false;
@@ -82,14 +82,13 @@ public class Robot extends IterativeRobot {
     driveTrainP = prefs.getDouble("driveTrainkP", 0.05);
     driveTrainI = prefs.getDouble("driveTrainkI", 0.05);
     driveTrainD = prefs.getDouble("driveTrainkD", 0.05);
-    driveTrainTolerance = prefs.getDouble("driveTrainTolerance", 0.1);
+    driveTrainTolerance = prefs.getDouble("driveTrainTolerance", 10);
     
     // DriveTrain
     cubicScale = prefs.getDouble("cubicScale", 0.07);
     deadZone = prefs.getDouble("deadZone", 0.05);
     inverseLeft = prefs.getBoolean("inverseLeft", false);
     inverseRight = prefs.getBoolean("inverseRight", true);
-    robotTopSpeed = prefs.getDouble("robotTopSpeed", 10.5);
     
     // Collector
     rollerSpeed = prefs.getDouble("rollerSpeed", 0.90);
@@ -132,7 +131,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	driveTrain.disablePID();
     }
 
     public void disabledPeriodic() {
@@ -140,6 +139,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
+    	driveTrain.startPIDAutonomous();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
@@ -157,6 +157,9 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        driveTrain.startPIDTeleop();
+        
     }
 
     /**
