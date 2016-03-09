@@ -65,6 +65,10 @@ public class Robot extends IterativeRobot {
     public static double launcherI;
     public static double launcherD;
     public static double launcherTolerance;
+    public static double defenseP;
+    public static double defenseI;
+    public static double defenseD;
+    public static double defenseTolerance;
     // Collector Preferences
     public static double rollerSpeed;
     public static boolean invertRoller = false;
@@ -92,6 +96,10 @@ public class Robot extends IterativeRobot {
     launcherI = prefs.getDouble("LauncherI", 0.05);
     launcherD = prefs.getDouble("LauncherD", 0.05);
     launcherTolerance = prefs.getDouble("LauncherTolerance", 10);
+    defenseP = prefs.getDouble("defenseP", 0.05);
+    defenseI = prefs.getDouble("defenseI", 0.05);
+    defenseD = prefs.getDouble("defenseD", 0.05);
+    launcherTolerance = prefs.getDouble("defenseTolerance", 10);
     
     // DriveTrain
     cubicScale = prefs.getDouble("cubicScale", 0.07);
@@ -186,6 +194,16 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("Left Side Encoder", driveTrain.getLeftRateFps());
         SmartDashboard.putNumber("Right Side Encoder", driveTrain.getRightRateFps());
+        SmartDashboard.putNumber("defense angle", defenseElevation.getAngle());
+        SmartDashboard.putNumber("launcher angle", launcherElevation.getAngle());
+        SmartDashboard.putBoolean("isLauncherPID", launcherElevation.isPID());
+        SmartDashboard.putBoolean("isdefensePID", defenseElevation.isPID());
+        SmartDashboard.putBoolean("isDriveTrainPID", driveTrain.isPID());
+
+        
+        double hat = oi.operatorStick.getPOV();
+        if(hat == 1) launcherElevation.togglePID();
+        else if(hat == 3) defenseElevation.togglePID();
     }
 
     /**

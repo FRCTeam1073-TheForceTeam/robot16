@@ -17,6 +17,7 @@ import org.usfirst.frc1073.robot16.commands.*;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -58,6 +59,8 @@ public class LauncherElevation extends Subsystem {
     
     public LauncherElevation() {
     	elevationMotor.setInverted(Robot.invertLauncherElevation);
+    	
+    	elevationAngle.setPIDSourceType(PIDSourceType.kDisplacement);
     	startingPosition = elevationAngle.get() * 360.0;
     	elevationPID.setContinuous();
     	elevationPID.setInputRange((bottomLimit / 360.0), (topLimit / 360.0));
