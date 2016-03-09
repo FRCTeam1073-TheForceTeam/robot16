@@ -61,13 +61,25 @@ public class LauncherMoveElevation extends Command {
     protected void execute() {
 		double mag = Robot.oi.getoperatorStick().getRawAxis(2);
 		mag = checkDeadZone(mag);
-
-		if (mag > 0 && !Robot.launcherElevation.isHighElevationHit())
-			Robot.launcherElevation.elevateLauncherUp(mag);
-		else if (mag < 0 && !Robot.launcherElevation.isLowElevationHit())
-			Robot.launcherElevation.elevateLauncherDown(-mag);
-		else
-			Robot.launcherElevation.stopElevationMotor();
+		
+		if(Robot.launcherElevation.isPID()) {
+			if(mag > 0) {
+				mag *= 40;
+				Robot.launcherElevation.movePID(mag);
+			}
+			else if(mag < 0){
+				mag *= 10;
+				Robot.launcherElevation.movePID(mag);
+			}
+		}
+		else {
+			if (mag > 0 && !Robot.launcherElevation.isHighElevationHit())
+				Robot.launcherElevation.elevateLauncherUp(mag);
+			else if (mag < 0 && !Robot.launcherElevation.isLowElevationHit())
+				Robot.launcherElevation.elevateLauncherDown(-mag);
+			else
+				Robot.launcherElevation.stopElevationMotor();	
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
