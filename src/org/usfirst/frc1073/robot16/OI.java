@@ -73,15 +73,15 @@ public class OI {
 
         operatorStick = new Joystick(2);
         
-        launcherPrimeBut = new JoystickButton(operatorStick, 1);
-        launcherPrimeBut.whileHeld(new LauncherPrime());
+        launcherPrimeBut = new JoystickButton(operatorStick, 7);
+        launcherPrimeBut.whenPressed(new LauncherPrime());
         launcherUnlockBut = new JoystickButton(operatorStick, 10);
         launcherUnlockBut.whenPressed(new LauncherUnlock());
         launcherLockBut = new JoystickButton(operatorStick, 2);
         launcherLockBut.whenPressed(new LauncherLock());
         defenseArmToggle = new JoystickButton(operatorStick, 1);
         defenseArmToggle.whenPressed(new DefenseManualArmToggle());
-        launcherReleaseBut = new JoystickButton(operatorStick, 7);
+        launcherReleaseBut = new JoystickButton(operatorStick, 6);
         launcherReleaseBut.whenPressed(new LauncherOpenClamp());
         driverRightStick = new Joystick(1);
         

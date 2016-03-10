@@ -52,7 +52,7 @@ public class DefenseElevation extends Subsystem {
     	elevationMotor.setInverted(Robot.invertDefenseDir);
     	
     	startingPoint = defenseAngle.get() * 360.0;
-    	defenseAngle.setPIDSourceType(PIDSourceType.kRate);
+    	//defenseAngle.setPIDSourceType(PIDSourceType.kRate);
     	elevationPID.setContinuous();
     }
     
@@ -90,7 +90,6 @@ public class DefenseElevation extends Subsystem {
 	}
 	
 	public void togglePID() {
-		resetPID();
 		if(elevationPID.isEnabled()) disablePID();
 		else enablePID();
 	}

@@ -70,15 +70,10 @@ public class DefenseMoveElevation extends Command {
     	double joyMag = Robot.oi.getoperatorStick().getY();
     	joyMag = checkDeadZone(joyMag);
     	joyMag = cubicScale(joyMag);
-    	
-    	if(Robot.defenseElevation.isPID()) {
-    		Robot.defenseElevation.movePID(joyMag);
-    	}
-    	else {
-    		if(joyMag >= 0.4) Robot.defenseElevation.driveDefenseUp();
-        	else if(joyMag <= -0.4) Robot.defenseElevation.driveDefenseDown();
-        	else Robot.defenseElevation.stopDefenseMotor();
-    	}
+    
+    	if(joyMag >= 0.4) Robot.defenseElevation.driveDefenseUp();
+        else if(joyMag <= -0.4) Robot.defenseElevation.driveDefenseDown();
+        else Robot.defenseElevation.stopDefenseMotor();
     }
 
     // Make this return true when this Command no longer needs to run execute()
