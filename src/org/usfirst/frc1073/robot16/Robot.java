@@ -158,8 +158,6 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-    	//driveTrain.startPIDAutonomous();
-    	//launcherElevation.enablePID();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
@@ -192,14 +190,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("Left Side Encoder", driveTrain.getLeftRateFps());
-        SmartDashboard.putNumber("Right Side Encoder", driveTrain.getRightRateFps());
-        SmartDashboard.putNumber("defense angle", defenseElevation.getAngle());
-        SmartDashboard.putNumber("launcher angle", launcherElevation.getAngle());
         SmartDashboard.putBoolean("isLauncherPID", launcherElevation.isPID());
-        SmartDashboard.putBoolean("isdefensePID", defenseElevation.isPID());
-        SmartDashboard.putBoolean("isDriveTrainPID", driveTrain.isPID());
-
     }
 
     /**

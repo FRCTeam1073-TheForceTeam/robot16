@@ -60,11 +60,9 @@ public class LauncherElevation extends Subsystem {
     public LauncherElevation() {
     	elevationMotor.setInverted(Robot.invertLauncherElevation);
     	
-    	elevationAngle.setPIDSourceType(PIDSourceType.kDisplacement);
     	startingPosition = elevationAngle.get() * 360.0;
-    	elevationPID.setContinuous();
     	elevationPID.setInputRange((bottomLimit / 360.0), (topLimit / 360.0));
-    	elevationPID.setOutputRange((bottomLimit / 360.0), (topLimit / 360.0));
+    	elevationPID.setOutputRange(-1.0, 1);
     }
     
     public void movePID(double angle) {
@@ -124,8 +122,12 @@ public class LauncherElevation extends Subsystem {
 	 * @return angle in degrees
 	 *
 	 ***************************/
-	public double getAngle() {
+	public double getAngleDegrees() {
 		return (elevationAngle.get() * 360.0) - startingPosition;
+	}
+	
+	public double getRawAngleDegrees() {
+		return (elevationAngle.get() * 360.0);
 	}
     
 	public void lockIt() {

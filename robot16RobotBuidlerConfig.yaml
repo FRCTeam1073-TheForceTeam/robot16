@@ -855,7 +855,7 @@ Children:
           name: Command
           type: Command
           validators: *id021
-          value: LauncherUnlock
+          value: LauncherToggle
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id022
           default: whileHeld
@@ -863,7 +863,7 @@ Children:
           validators: null
           value: whenPressed
       Base: Joystick Button
-      Name: launcherUnlockBut
+      Name: launcherToggle
     - Children: []
       Properties:
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
@@ -1194,6 +1194,24 @@ Children:
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
     Name: LauncherOpenClamp
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: LauncherElevation}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id025 []
+        name: Parameter presets
+        validators: null
+        value: *id025
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: false}
+    Base: Command
+    Name: LauncherToggle
   - Children: []
     Properties:
       Parameters: !!robotbuilder.data.properties.ParametersProperty

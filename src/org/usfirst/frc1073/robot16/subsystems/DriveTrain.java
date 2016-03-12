@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -75,25 +76,29 @@ private static final double INCHES_PER_PULSE = 0.017453; // Constant for the dis
     	rightMotor2.setInverted(Robot.inverseRight);
     	
     	//PID Decelerations and setup
-    	leftMotor1PID = new PIDController(Robot.driveTrainP, Robot.driveTrainI, Robot.driveTrainD, leftSideEncoder, leftMotor1, 5);
-    	leftMotor2PID = new PIDController(Robot.driveTrainP, Robot.driveTrainI, Robot.driveTrainD, leftSideEncoder, leftMotor2, 5);
-    	rightMotor1PID = new PIDController(Robot.driveTrainP, Robot.driveTrainI, Robot.driveTrainD, rightSideEncoder, rightMotor1, 5);
-    	rightMotor2PID = new PIDController(Robot.driveTrainP, Robot.driveTrainI, Robot.driveTrainD, rightSideEncoder, rightMotor2, 5);
+    	leftMotor1PID = new PIDController(Robot.driveTrainP, Robot.driveTrainI, 0, Robot.driveTrainD, leftSideEncoder, leftMotor1);
+    	LiveWindow.addActuator("DriveTrain", "leftMotor1PID", leftMotor1PID);
+    	leftMotor2PID = new PIDController(Robot.driveTrainP, Robot.driveTrainI, 0, Robot.driveTrainD, leftSideEncoder, leftMotor2);
+    	LiveWindow.addActuator("DriveTrain", "leftMotor2PID", leftMotor2PID);
+    	rightMotor1PID = new PIDController(Robot.driveTrainP, Robot.driveTrainI, 0, Robot.driveTrainD, rightSideEncoder, rightMotor1);
+    	LiveWindow.addActuator("DriveTrain", "rightMotor1PID", rightMotor1PID);
+    	rightMotor2PID = new PIDController(Robot.driveTrainP, Robot.driveTrainI, 0,Robot.driveTrainD, rightSideEncoder, rightMotor2);
+    	LiveWindow.addActuator("DriveTrain", "rightMotor2PID", rightMotor2PID);
     	
     	leftMotor1PID.setPercentTolerance(Robot.driveTrainTolerance);
-    	leftMotor1PID.setContinuous();
+    	leftMotor1PID.setInputRange(-120.0, 120.0);
     	leftMotor1PID.setOutputRange(-1.0, 1.0);
     	
     	leftMotor2PID.setPercentTolerance(Robot.driveTrainTolerance);
-    	leftMotor2PID.setContinuous();
+    	leftMotor2PID.setInputRange(-120.0, 120.0);
     	leftMotor2PID.setOutputRange(-1.0, 1.0);
     	
     	rightMotor1PID.setPercentTolerance(Robot.driveTrainTolerance);
-    	rightMotor1PID.setContinuous();
+    	rightMotor1PID.setInputRange(-120.0, 120.0);
     	rightMotor1PID.setOutputRange(-1.0, 1.0);
     	
     	rightMotor2PID.setPercentTolerance(Robot.driveTrainTolerance);
-    	rightMotor2PID.setContinuous();
+    	rightMotor2PID.setInputRange(-120.0, 120.0);
     	rightMotor2PID.setOutputRange(-1.0, 1.0);
     }
     
@@ -121,6 +126,7 @@ private static final double INCHES_PER_PULSE = 0.017453; // Constant for the dis
      * 
      *********************************************/
     public void movePIDRate(double left, double right) {
+    	
     	SmartDashboard.putString("DriveTrain P I D", leftMotor1PID.getP() + " " +leftMotor1PID.getI() + " " + leftMotor1PID.getD());
     	SmartDashboard.putNumber("left Setpoint", left);
     	SmartDashboard.putNumber("right setpoint", right);
@@ -147,7 +153,7 @@ private static final double INCHES_PER_PULSE = 0.017453; // Constant for the dis
      ***************************/
     public double getLeftRateFps() {
     	double rate = leftSideEncoder.getRate();
-    	double left = (rate) / 12; // divide by 12 to convert to feet
+    	double left = rate;
     	left *= -1;
     	return left;
     }
@@ -160,7 +166,7 @@ private static final double INCHES_PER_PULSE = 0.017453; // Constant for the dis
      ***************************/
     public double getRightRateFps() {
     	double rate = rightSideEncoder.getRate();
-    	double right = rate / 12; // divide by 12 to convert to feet
+    	double right = rate;
     	return right;
     }
     
@@ -300,6 +306,13 @@ private static final double INCHES_PER_PULSE = 0.017453; // Constant for the dis
 		leftMotor2PID.setSetpoint(left);
 		rightMotor1PID.setSetpoint(right);
 		rightMotor2PID.setSetpoint(right);
+	}
+	
+	public void setPID(double P, double I, double D) {
+		leftMotor1PID.setPID(P, I, D);
+		leftMotor2PID.setPID(P, I, D);
+		rightMotor1PID.setPID(P, I, D);
+		rightMotor2PID.setPID(P, I, D);
 	}
 	
     public void initDefaultCommand() {

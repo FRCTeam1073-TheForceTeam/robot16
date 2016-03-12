@@ -62,7 +62,7 @@ public class OI {
     public JoystickButton launcherReleaseBut;
     public JoystickButton defenseArmToggle;
     public JoystickButton launcherLockBut;
-    public JoystickButton launcherUnlockBut;
+    public JoystickButton launcherToggle;
     public JoystickButton launcherPrimeBut;
     public Joystick operatorStick;
 
@@ -75,8 +75,8 @@ public class OI {
         
         launcherPrimeBut = new JoystickButton(operatorStick, 7);
         launcherPrimeBut.whenPressed(new LauncherPrime());
-        launcherUnlockBut = new JoystickButton(operatorStick, 10);
-        launcherUnlockBut.whenPressed(new LauncherUnlock());
+        launcherToggle = new JoystickButton(operatorStick, 10);
+        launcherToggle.whenPressed(new LauncherToggle());
         launcherLockBut = new JoystickButton(operatorStick, 2);
         launcherLockBut.whenPressed(new LauncherLock());
         defenseArmToggle = new JoystickButton(operatorStick, 1);

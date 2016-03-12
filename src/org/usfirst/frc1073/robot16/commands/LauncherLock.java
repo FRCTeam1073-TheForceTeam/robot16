@@ -50,10 +50,10 @@ public class LauncherLock extends Command {
 			isLocked = true;
 		}
 		else {
-			if(Robot.launcherElevation.getAngle() > 172) {
+			if(Robot.launcherElevation.getRawAngleDegrees() > 172) {
     			Robot.launcherElevation.elevateLauncherUp(0.7);
     		}
-    		else if(Robot.launcherElevation.getAngle() < 168) {
+    		else if(Robot.launcherElevation.getRawAngleDegrees() < 168) {
     			Robot.launcherElevation.elevateLauncherDown(0.7);
     		}
     		else {
