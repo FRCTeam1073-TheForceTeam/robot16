@@ -73,12 +73,19 @@ public class LauncherMoveElevation extends Command {
 			}
 		}
 		else {
-			if (mag > 0 && !Robot.launcherElevation.isHighElevationHit())
+			if (mag > 0 && !Robot.launcherElevation.isHighElevationHit()){
 				Robot.launcherElevation.elevateLauncherUp(mag);
-			else if (mag < 0 && !Robot.launcherElevation.isLowElevationHit())
+				Robot.collector.rollerPurge(0.21);
+				
+			}
+			else if (mag < 0 && !Robot.launcherElevation.isLowElevationHit()) {
 				Robot.launcherElevation.elevateLauncherDown(-mag);
-			else
-				Robot.launcherElevation.stopElevationMotor();	
+				Robot.collector.rollerIn(0.21);
+			}
+			else {
+				Robot.launcherElevation.stopElevationMotor();
+				Robot.collector.rollerOff();
+			}
 		}
     }
 

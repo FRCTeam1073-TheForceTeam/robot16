@@ -45,7 +45,7 @@ public class DefenseElevation extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
-    private final double SPEED = 0.75;
+    private final double SPEED = 0.65;
     private double startingPoint;
     
     public DefenseElevation() {
@@ -72,8 +72,12 @@ public class DefenseElevation extends Subsystem {
     	elevationMotor.set(0.0);
     }
     
-    public double getAngle() {
+    public double getAngleDegrees() {
     	return (defenseAngle.get() * 360.0) - startingPoint;
+    }
+    
+    public double getRawAngle() {
+    	return defenseAngle.get();
     }
     
 	public void enablePID() {

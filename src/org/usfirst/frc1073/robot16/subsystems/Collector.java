@@ -45,9 +45,9 @@ public class Collector extends Subsystem {
 	 * robot
 	 * 
 	 **************************/
-	public void rollerIn() {
-		if(Robot.invertRoller) rollerMotor.set(-Robot.rollerSpeed);
-		else rollerMotor.set(Robot.rollerSpeed);
+	public void rollerIn(double speed) {
+		if(Robot.invertRoller) rollerMotor.set(-speed);
+		else rollerMotor.set(speed);
 	}
 	
 	/**************************
@@ -56,9 +56,9 @@ public class Collector extends Subsystem {
 	 * out of the robot
 	 * 
 	 **************************/
-	public void rollerPurge() {
-		if(Robot.invertRoller) rollerMotor.set(Robot.rollerSpeed);
-		else rollerMotor.set(-Robot.rollerSpeed);
+	public void rollerPurge(double speed) {
+		if(Robot.invertRoller) rollerMotor.set(speed);
+		else rollerMotor.set(-speed);
 	}
 	
 	/*****************************

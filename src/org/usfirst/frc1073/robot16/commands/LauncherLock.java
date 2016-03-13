@@ -44,7 +44,7 @@ public class LauncherLock extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!Robot.launcherElevation.isLocked()) {
+    	/* if(!Robot.launcherElevation.isLocked()) {
 			Robot.launcherElevation.unlockIt();
 			
 			isLocked = true;
@@ -62,7 +62,13 @@ public class LauncherLock extends Command {
     			
     			isLocked = true;
     		}
-		}
+		} */
+    	if(Robot.launcherElevation.isLocked()) {
+    		Robot.launcherElevation.unlockIt();
+    	}
+    	else {
+    			Robot.launcherElevation.lockIt();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

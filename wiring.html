@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Wiring</title>
+    <style type="text/css" media="screen">
+      table {
+          text-align: left;
+          width: 400px;
+
+          border-top: 2px solid black;
+          border-bottom: 2px solid black;
+          border-collapse:collapse;
+          border-spacing:0px;
+      }
+      th {
+          border-top: 2px solid black;
+          border-bottom: 2px solid black;
+      }
+      .pound {
+          width: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Wiring</h1>
+                    <h2>DIO</h2>
+	    <table><tr>
+	        <th class="pound">#</th>
+	        <th>Sensor</th></tr>
+	                                               <tr><td>0</td><td>DriveTrain leftSideEncoder</td><td></td></tr>
+            	                                         <tr><td>1</td><td>DriveTrain leftSideEncoder</td><td></td></tr>
+            	                                         <tr><td>2</td><td>DriveTrain rightSideEncoder</td><td></td></tr>
+            	                                         <tr><td>3</td><td>DriveTrain rightSideEncoder</td><td></td></tr>
+            	                                         <tr><td>4</td><td>LauncherElevation elevationHighLimit</td><td></td></tr>
+            	                                         <tr><td>5</td><td>LauncherElevation elevationLowLimit</td><td></td></tr>
+            	                                         <tr><td>6</td><td>Collector ballSensor</td><td></td></tr>
+            	                                         <tr><td>7</td><td>Launcher launcherBackLimit</td><td></td></tr>
+            	                                         <tr><td>8</td><td>Launcher launcherFrontLimit</td><td></td></tr>
+            	                                         <tr><td>9</td><td>DefenseElevation elevationHighLimit</td><td></td></tr>
+            	                                         <tr><td>10</td><td>Launcher launcherTravelEncoder</td><td></td></tr>
+            	                                         <tr><td>11</td><td>Launcher launcherTravelEncoder</td><td></td></tr>
+            	                                                                                                                                                                             	    </table>
+                    <h2>PWMs</h2>
+	    <table><tr>
+	        <th class="pound">#</th>
+	        <th>Motor</th>
+                <th>Type</th></tr>
+	                                               <tr><td>0</td><td>DriveTrain leftMotor1</td><td>VictorSP</td></tr>
+            	                                         <tr><td>1</td><td>DriveTrain leftMotor2</td><td>VictorSP</td></tr>
+            	                                         <tr><td>2</td><td>DriveTrain rightMotor1</td><td>VictorSP</td></tr>
+            	                                         <tr><td>3</td><td>DriveTrain rightMotor2</td><td>VictorSP</td></tr>
+            	                                         <tr><td>4</td><td>Launcher pullBackMotor</td><td>VictorSP</td></tr>
+            	                                         <tr><td>5</td><td>LauncherElevation elevationMotor</td><td>VictorSP</td></tr>
+            	                                         <tr><td>6</td><td>Climber climberMotor</td><td>VictorSP</td></tr>
+            	                                         <tr><td>7</td><td>Collector rollerMotor</td><td>VictorSP</td></tr>
+            	                                         <tr><td>8</td><td>DefenseElevation elevationMotor</td><td>VictorSP</td></tr>
+            	                                                                                                                                                                                                                 	    </table>
+     
+                <h2>CAN IDs</h2>
+	<table><tr>
+	<th class="pound">ID</th>
+	<th>Device</th></tr>
+	                                         <tr><td>0</td><td>DashboardSender PDP</td><td></td></tr>
+            	                                                                                                                                                                                                                                                                                                                 	</table>
+    
+            
+                    <h2>Analog Inputs</h2>
+	    <table><tr>
+	        <th class="pound">#</th>
+	        <th>Sensor</th></tr>
+	                                               <tr><td>0</td><td>LauncherElevation elevationAngle</td><td></td></tr>
+            	                                         <tr><td>1</td><td>DefenseElevation defenseAngle</td><td></td></tr>
+            	                                                                                                                                                                                                                                                                                                     	    </table>
+    
+                                <h2>PCM 1</h2>
+	    <table><tr>
+	        <th class="pound">#</th>
+	        <th>Solenoid</th></tr>
+	                                               <tr><td>0</td><td>DefenseArm armExtension Output </td><td></td></tr>
+            	                                         <tr><td>1</td><td>Climber extensionPiston Output </td><td></td></tr>
+            	                                         <tr><td>2</td><td>Launcher launcherRelease Output </td><td></td></tr>
+            	                                         <tr><td>3</td><td>LauncherElevation launcherLock Output </td><td></td></tr>
+            	                                                                                                                                                                                                                                                                             	    </table>
+                                                                                                                                                                                                                                        
+          </body>
+</html>

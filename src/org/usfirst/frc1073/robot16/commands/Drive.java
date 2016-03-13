@@ -54,6 +54,10 @@ public class Drive extends Command {
      ***********************************************/
     public double checkDeadZone(double mag) {
     	if(Math.abs(mag) <= Robot.deadZone) return 0;
+    	else if(Math.abs(mag) > Robot.deadZone && Robot.turboOn) {
+    		mag *= 666; // RIP Artemis. This is the turbo multiplier. We call it DEVIL SPEED. We need to go faster than light speed, we need to go ludicrous speed!!! 
+    		return mag;
+    	}
     	else return mag;
     }
     
@@ -77,17 +81,11 @@ public class Drive extends Command {
     	left = checkDeadZone(left);
     	right = checkDeadZone(right);
     	
-    	SmartDashboard.putNumber("left joystick", left);
-    	SmartDashboard.putNumber("right joystick", right);
-    	
     	// Checks for cubic scaling
     	if(Robot.isCubic) {
     		left = cubicScale(left);
         	right = cubicScale(right);
     	}
-    	
-    	SmartDashboard.putNumber("left joystick cubic", left);
-    	SmartDashboard.putNumber("right joystick cubic", right);
     	
     	if(Robot.driveTrain.isPID()) {
         	if(Robot.driveTrain.isInverted()) Robot.driveTrain.movePIDRate(right, left);

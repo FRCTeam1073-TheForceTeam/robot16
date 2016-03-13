@@ -51,7 +51,7 @@ public class LauncherElevation extends Subsystem {
     private final boolean open = false;
 	private final boolean closed = true;
 	
-	private final double ELEVATION_SPEED = 0.38;
+	private final double ELEVATION_SPEED = 0.85;
 	
 	private double startingPosition;
 	private double bottomLimit = startingPosition - 10;

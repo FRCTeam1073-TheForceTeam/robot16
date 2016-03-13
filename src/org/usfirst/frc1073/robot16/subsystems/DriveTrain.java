@@ -126,10 +126,6 @@ private static final double INCHES_PER_PULSE = 0.017453; // Constant for the dis
      * 
      *********************************************/
     public void movePIDRate(double left, double right) {
-    	
-    	SmartDashboard.putString("DriveTrain P I D", leftMotor1PID.getP() + " " +leftMotor1PID.getI() + " " + leftMotor1PID.getD());
-    	SmartDashboard.putNumber("left Setpoint", left);
-    	SmartDashboard.putNumber("right setpoint", right);
     	setSetpoint(left, right);
     }
     
