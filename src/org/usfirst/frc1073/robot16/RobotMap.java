@@ -43,7 +43,6 @@ public class RobotMap {
     public static DigitalInput launcherlauncherFrontLimit;
     public static DigitalInput launcherlauncherBackLimit;
     public static SpeedController launcherpullBackMotor;
-    public static Solenoid launcherElevationlauncherLock;
     public static DigitalInput launcherElevationelevationHighLimit;
     public static DigitalInput launcherElevationelevationLowLimit;
     public static SpeedController launcherElevationelevationMotor;
@@ -89,9 +88,6 @@ public class RobotMap {
         
         launcherpullBackMotor = new VictorSP(4);
         LiveWindow.addActuator("Launcher", "pullBackMotor", (VictorSP) launcherpullBackMotor);
-        
-        launcherElevationlauncherLock = new Solenoid(1, 3);
-        LiveWindow.addActuator("LauncherElevation", "launcherLock", launcherElevationlauncherLock);
         
         launcherElevationelevationHighLimit = new DigitalInput(4);
         LiveWindow.addSensor("LauncherElevation", "elevationHighLimit", launcherElevationelevationHighLimit);

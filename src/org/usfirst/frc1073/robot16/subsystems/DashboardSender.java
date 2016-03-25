@@ -39,8 +39,8 @@ public class DashboardSender extends Subsystem {
     // here. Call these from Commands.
     
     public void sendBaseData() {
-        SmartDashboard.putBoolean("Locking piston", Robot.launcherElevation.isLocked());
         SmartDashboard.putNumber("matchTime", Timer.getMatchTime());
+        
         //SmartDashboard.putNumber("batteryPercent", pDP.getVoltage() / 12);
         
         robotArray[0] = Robot.launcherElevation.getAngleDegrees();
@@ -51,7 +51,6 @@ public class DashboardSender extends Subsystem {
         
         // key to success : "the cheat sheet"
         //SmartDashboard.putNumber(key, value);
-        
 
     }
     

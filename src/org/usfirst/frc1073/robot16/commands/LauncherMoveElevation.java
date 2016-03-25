@@ -59,33 +59,21 @@ public class LauncherMoveElevation extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
 		double mag = Robot.oi.getoperatorStick().getRawAxis(2);
 		mag = checkDeadZone(mag);
 		
-		if(Robot.launcherElevation.isPID()) {
-			if(mag > 0) {
-				mag *= 40;
-				Robot.launcherElevation.movePID(mag);
-			}
-			else if(mag < 0){
-				mag *= 10;
-				Robot.launcherElevation.movePID(mag);
-			}
+		if (mag > 0 && !Robot.launcherElevation.isHighElevationHit()){
+			Robot.launcherElevation.elevateLauncherUp(mag);
+			Robot.collector.rollerPurge(0.21);
+		}
+		else if (mag < 0 && !Robot.launcherElevation.isLowElevationHit()) {
+			Robot.launcherElevation.elevateLauncherDown(-mag);
+			Robot.collector.rollerIn(0.21);
 		}
 		else {
-			if (mag > 0 && !Robot.launcherElevation.isHighElevationHit()){
-				Robot.launcherElevation.elevateLauncherUp(mag);
-				Robot.collector.rollerPurge(0.21);
-				
-			}
-			else if (mag < 0 && !Robot.launcherElevation.isLowElevationHit()) {
-				Robot.launcherElevation.elevateLauncherDown(-mag);
-				Robot.collector.rollerIn(0.21);
-			}
-			else {
-				Robot.launcherElevation.stopElevationMotor();
-				Robot.collector.rollerOff();
-			}
+			Robot.launcherElevation.stopElevationMotor();
+			Robot.collector.rollerOff();
 		}
     }
 

@@ -167,7 +167,6 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-    	launcherElevation.disablePID();
     }
 
     public void disabledPeriodic() {
@@ -198,8 +197,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        
-        launcherElevation.disablePID();
     }
 
     /**
@@ -208,7 +205,6 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putBoolean("isLauncherPID", launcherElevation.isPID());
         SmartDashboard.putNumber("left", driveTrain.getLeftRateFps());
         SmartDashboard.putNumber("right", driveTrain.getRightRateFps());
     }
