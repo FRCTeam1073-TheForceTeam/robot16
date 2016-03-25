@@ -87,14 +87,8 @@ public class Drive extends Command {
         	right = cubicScale(right);
     	}
     	
-    	if(Robot.driveTrain.isPID()) {
-        	if(Robot.driveTrain.isInverted()) Robot.driveTrain.movePIDRate(right, left);
-        	else Robot.driveTrain.movePIDRate(left, right);
-    	}
-    	else {
-        	if(Robot.driveTrain.isInverted()) Robot.driveTrain.move(right, left);
-        	else Robot.driveTrain.move(left, right);
-    	}
+        if(Robot.driveTrain.isInverted()) Robot.driveTrain.move(right, left);
+        else Robot.driveTrain.move(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

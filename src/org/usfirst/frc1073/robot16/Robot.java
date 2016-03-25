@@ -167,7 +167,6 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-    	driveTrain.disablePID();
     	launcherElevation.disablePID();
     }
 
@@ -200,10 +199,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         
-        driveTrain.disablePID();
         launcherElevation.disablePID();
-        
-        
     }
 
     /**
