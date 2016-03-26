@@ -205,11 +205,11 @@ public class Launcher extends Subsystem {
 	}
 
 	public boolean isFrontLimitHit() {
-		return !launcherFrontLimit.get();
+		return launcherFrontLimit.get();
 	}
 
 	public boolean isBackLimitHit() {
-		return !launcherBackLimit.get();
+		return launcherBackLimit.get();
 	}
     
 	public boolean isClamped() {

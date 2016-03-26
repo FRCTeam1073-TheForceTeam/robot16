@@ -45,8 +45,8 @@ public class RobotMap {
     public static SpeedController launcherpullBackMotor;
     public static DigitalInput launcherElevationelevationHighLimit;
     public static DigitalInput launcherElevationelevationLowLimit;
-    public static SpeedController launcherElevationelevationMotor;
     public static AnalogPotentiometer launcherElevationelevationAngle;
+    public static CANTalon launcherElevationelevationMotor;
     public static SpeedController collectorrollerMotor;
     public static DigitalInput collectorballSensor;
     public static SpeedController climberclimberMotor;
@@ -95,11 +95,11 @@ public class RobotMap {
         launcherElevationelevationLowLimit = new DigitalInput(5);
         LiveWindow.addSensor("LauncherElevation", "elevationLowLimit", launcherElevationelevationLowLimit);
         
-        launcherElevationelevationMotor = new VictorSP(5);
-        LiveWindow.addActuator("LauncherElevation", "elevationMotor", (VictorSP) launcherElevationelevationMotor);
-        
         launcherElevationelevationAngle = new AnalogPotentiometer(0, 1.0, 0.0);
         LiveWindow.addSensor("LauncherElevation", "elevationAngle", launcherElevationelevationAngle);
+        
+        launcherElevationelevationMotor = new CANTalon(6);
+        LiveWindow.addActuator("LauncherElevation", "elevationMotor", launcherElevationelevationMotor);
         
         collectorrollerMotor = new VictorSP(7);
         LiveWindow.addActuator("Collector", "rollerMotor", (VictorSP) collectorrollerMotor);
