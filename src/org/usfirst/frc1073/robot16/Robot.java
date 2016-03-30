@@ -50,23 +50,30 @@ public class Robot extends IterativeRobot {
     
  // Preferences 
     private Preferences prefs;
+    
     // DriveTrain Preferences
     public static double cubicScale;
     public static double deadZone;
-    public static boolean isCubic = true; // Cubic initializes on
+    public static boolean isCubic = true;
     public static boolean isOrientationSwitched = false;
+    
     // Collector Preferences
     public static double rollerSpeed;
     public static boolean invertRoller = false;
+    
     // Launcher Preferences
     public static boolean invertLauncher = false;
     public static boolean invertLauncherElevation = true;
+    
     // Defense Manipulator
     public static boolean invertDefenseDir = false;
     
+    // Camera
     private static CameraServer cam;
     public static SendableChooser autonomousChooser;
     
+    // Manual Mode
+    public static boolean isManual = false;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -120,7 +127,7 @@ public class Robot extends IterativeRobot {
         cam = CameraServer.getInstance();
         cam.startAutomaticCapture("cam0");
         cam.setSize(0);
-        cam.setQuality(35);
+        cam.setQuality(25);
         
         autonomousChooser = new SendableChooser();
         autonomousChooser.addObject("Do Nothing Auto", null);
@@ -168,7 +175,45 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("POV Hat", oi.operatorStick.getPOV());
+        SmartDashboard.putNumber("Raw Pot Reading", launcherElevation.getRawPot());
+        SmartDashboard.putBoolean("drivetrain pid", driveTrain.isPID());
+        SmartDashboard.putBoolean("launcher PID", launcherElevation.isPID());
         
+        if(isManual) {
+        	
+            int operatorHat = oi.operatorStick.getPOV();
+            switch(operatorHat) {
+            default:
+            case -1:
+            	launcherElevation.moveBasic(0);
+            	launcher.stopLauncherMotor();
+            break;
+            case 90:
+            	launcher.driveLauncherMotorForwards();
+            	launcherElevation.moveBasic(0);
+            break;
+            case 180:
+            	launcherElevation.moveBasic(0.5);
+            	launcher.stopLauncherMotor();
+            break;
+            case 270:
+            	launcher.driveLauncherMotorBackwards();
+            	launcherElevation.moveBasic(0);
+            break;
+            case 0:
+            	launcherElevation.moveBasic(-0.5);
+            	launcher.stopLauncherMotor();
+            break;
+            }
+            
+            int driverRightHat = oi.driverRightStick.getPOV();
+            switch(driverRightHat) {
+            default:
+            case -1:
+            	
+            }
+        }
     }
 
     /**
