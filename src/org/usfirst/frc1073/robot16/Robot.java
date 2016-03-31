@@ -131,7 +131,9 @@ public class Robot extends IterativeRobot {
         
         autonomousChooser = new SendableChooser();
         autonomousChooser.addObject("Do Nothing Auto", null);
-        autonomousChooser.addDefault("Low Bar Auto", new AutonomousLowBar());
+        autonomousChooser.addObject("Low Bar Auto", new AutonomousLowBar());
+        autonomousChooser.addDefault("Low Bar Drive Back Auto", new AutonomousLowBarThereAndBack());
+        autonomousChooser.addObject("Rock Wall Auto", new AutonomousRockWall());
         autonomousChooser.addObject("Basic Drive Auto", new AutonomousBasic());
         SmartDashboard.putData("Autonomous Chooser", autonomousChooser);
     }
