@@ -65,7 +65,8 @@ public class DefenseElevation extends Subsystem {
     	
     	if(elevationMotor.getControlMode() != TalonControlMode.Position) elevationMotor.changeControlMode(TalonControlMode.Position);
     	
-    	// NEED TO DO MATH MAYBE
+    	angle = convertFromDegrees(angle);
+    	
     	elevationMotor.set(angle);
     }
     
@@ -97,6 +98,18 @@ public class DefenseElevation extends Subsystem {
     
     public void enableSpeedPID() {
     	elevationMotor.changeControlMode(TalonControlMode.Speed);
+    }
+    
+    public double convertToDegrees(double rawPotReading) {
+    	return (rawPotReading * 90.0);
+    }
+    
+    public double convertFromDegrees(double degrees) {
+    	return (degrees / 90.0);
+    }
+    
+    public double getDegreeReading() {
+    	return convertToDegrees(getRawPot());
     }
     
     public void initDefaultCommand() {

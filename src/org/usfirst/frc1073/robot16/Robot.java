@@ -213,7 +213,14 @@ public class Robot extends IterativeRobot {
             switch(driverRightHat) {
             default:
             case -1:
-            	
+            	defenseElevation.moveBasic(0.0);
+            break;
+            case 0:
+            	defenseElevation.moveBasic(-0.35);
+            break;
+            case 180:
+            	defenseElevation.moveBasic(0.35);
+            break;
             }
         }
     }

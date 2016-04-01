@@ -64,7 +64,7 @@ public class LauncherElevation extends Subsystem {
     
     public void movePID(double angle) {
     	
-    	// NEED TO DO MATH MAYBE
+    	angle = convertFromDegrees(angle);
     	
     	elevationMotor.set(angle);
     	
@@ -87,6 +87,18 @@ public class LauncherElevation extends Subsystem {
     
     public void ZeroOutPosition() {
     	elevationMotor.setPosition(0);
+    }
+    
+    public double convertToDegrees(double rawPotReading) {
+    	return (rawPotReading * 50.0) - 10;
+    }
+    
+    public double convertFromDegrees(double degrees) {
+    	return (degrees / 50.0) + 10;
+    }
+    
+    public double getAngle() {
+    	return convertToDegrees(getRawPot());
     }
     
     public void initDefaultCommand() {
