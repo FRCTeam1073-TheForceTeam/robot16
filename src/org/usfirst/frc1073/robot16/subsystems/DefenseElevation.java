@@ -38,8 +38,7 @@ public class DefenseElevation extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
-    private static final double RAMP_RATE = 0;
-    private static final double MOTOR_TOP_RPM = 400;
+    private static final double MOTOR_TOP_RPM = 50;
     
     public DefenseElevation() {
     	elevationMotor.setInverted(Robot.invertDefenseDir);
@@ -48,15 +47,15 @@ public class DefenseElevation extends Subsystem {
     }
     
     private void setupPID() {
-    	elevationMotor.changeControlMode(TalonControlMode.PercentVbus);
+    	elevationMotor.changeControlMode(TalonControlMode.Speed);
     	
     	elevationMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogEncoder);
-    	// elevationMotor.configPotentiometerTurns(turns); not sure if this is needed
+    	elevationMotor.configPotentiometerTurns(360);
     	
     	elevationMotor.configNominalOutputVoltage(+0f, -0f);
-    	elevationMotor.configPeakOutputVoltage(+10f, -10f);
+    	elevationMotor.configPeakOutputVoltage(+12f, -12f);
     	
-    	elevationMotor.setPID(0.0, 0.0, 0.0, 0.0, 0, RAMP_RATE, 0);
+    	elevationMotor.setPID(20, 0.0, 0.0);
     	
     	ZeroOutPosition();
     }

@@ -72,6 +72,7 @@ public class Launcher extends Subsystem {
 		current = launcherState.emptyMiddle; // Robot starts emptyMiddle
 		pullBackMotor.setInverted(Robot.invertLauncher);
 		launcherTravelEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+		flashLight.set(Value.kReverse);
 	}
 
 	/**********************************
@@ -216,15 +217,15 @@ public class Launcher extends Subsystem {
 	}
 	
 	public void flashLightOn() {
-		flashLight.set(Value.kOn);
+		flashLight.set(Value.kForward);
 	}
 	
 	public void flashLightOff() {
-		flashLight.set(Value.kOff);
+		flashLight.set(Value.kReverse);
 	}
 	
 	public void flashLightToggle() {
-		if(flashLight.get() == Value.kOff) flashLightOn();
+		if(flashLight.get() == Value.kReverse) flashLightOn();
 		else flashLightOff();
 	}
 	

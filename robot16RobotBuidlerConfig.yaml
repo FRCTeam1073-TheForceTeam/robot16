@@ -391,7 +391,7 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '14'
+          value: '4'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
           name: Command
@@ -620,35 +620,6 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '1'
-        Command: !!robotbuilder.data.properties.TypeSelectionProperty
-          default: None
-          name: Command
-          type: Command
-          validators: *id015
-          value: LauncherFire
-        When to Run: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id016
-          default: whileHeld
-          name: When to Run
-          validators: null
-          value: whenPressed
-      Base: Joystick Button
-      Name: launcherReleaseBut
-    - Children: []
-      Properties:
-        Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
-          name: Joystick, validators: null, value: operatorStick}
-        Parameters: !!robotbuilder.data.properties.ParametersProperty
-          default: []
-          name: Parameters
-          validators: null
-          value: []
-        Button: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id014
-          default: '1'
-          name: Button
-          validators: null
           value: '9'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
@@ -664,6 +635,35 @@ Children:
           value: whileHeld
       Base: Joystick Button
       Name: launcherCollectBut
+    - Children: []
+      Properties:
+        Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
+          name: Joystick, validators: null, value: operatorStick}
+        Parameters: !!robotbuilder.data.properties.ParametersProperty
+          default: []
+          name: Parameters
+          validators: null
+          value: []
+        Button: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id014
+          default: '1'
+          name: Button
+          validators: null
+          value: '1'
+        Command: !!robotbuilder.data.properties.TypeSelectionProperty
+          default: None
+          name: Command
+          type: Command
+          validators: *id015
+          value: LauncherFire
+        When to Run: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id016
+          default: whileHeld
+          name: When to Run
+          validators: null
+          value: whileHeld
+      Base: Joystick Button
+      Name: launcherFireBut
     - Children: []
       Properties:
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
@@ -974,27 +974,6 @@ Children:
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command Group
-    Name: LauncherFire
-  - Children: []
-    Properties:
-      Parameters: !!robotbuilder.data.properties.ParametersProperty
-        default: []
-        name: Parameters
-        validators: null
-        value: []
-      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: []
-        name: Parameter presets
-        validators: null
-        value: []
-      Commands: !!robotbuilder.data.properties.ListProperty
-        default: []
-        name: Commands
-        validators: *id019
-        value: []
-      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
-        name: Button on SmartDashboard, validators: null, value: false}
-    Base: Command Group
     Name: LauncherLowGoal
   - Children: []
     Properties:
@@ -1034,6 +1013,27 @@ Children:
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
     Name: LauncherFlashLightToggle
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id020 []
+        name: Parameter presets
+        validators: null
+        value: *id020
+      Commands: !!robotbuilder.data.properties.ListProperty
+        default: &id021 []
+        name: Commands
+        validators: *id019
+        value: *id021
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: false}
+    Base: Command Group
+    Name: LauncherFire
   - Children: []
     Properties:
       Parameters: !!robotbuilder.data.properties.ParametersProperty

@@ -61,8 +61,8 @@ public class OI {
     public JoystickButton launcherPresetShortBut;
     public JoystickButton launcherPresetLongBut;
     public JoystickButton launcherPresetNuetralBut;
-    public JoystickButton launcherReleaseBut;
     public JoystickButton launcherCollectBut;
+    public JoystickButton launcherFireBut;
     public JoystickButton setManualModeBut;
     public JoystickButton setNormalPIDModeBut;
     public Joystick operatorStick;
@@ -78,10 +78,10 @@ public class OI {
         setNormalPIDModeBut.whenPressed(new SetNormalPIDMode());
         setManualModeBut = new JoystickButton(operatorStick, 11);
         setManualModeBut.whenPressed(new SetManualMode());
+        launcherFireBut = new JoystickButton(operatorStick, 1);
+        launcherFireBut.whileHeld(new LauncherFire());
         launcherCollectBut = new JoystickButton(operatorStick, 9);
         launcherCollectBut.whileHeld(new LauncherCollectGroup());
-        launcherReleaseBut = new JoystickButton(operatorStick, 1);
-        launcherReleaseBut.whenPressed(new LauncherFire());
         launcherPresetNuetralBut = new JoystickButton(operatorStick, 2);
         launcherPresetNuetralBut.whenPressed(new LauncherPreset(0));
         launcherPresetLongBut = new JoystickButton(operatorStick, 6);
@@ -98,7 +98,7 @@ public class OI {
         
         toggleOrientation = new JoystickButton(driverLeftStick, 1);
         toggleOrientation.whenPressed(new DriveTrainToggleOrientation());
-        flashLightToggleBut = new JoystickButton(driverLeftStick, 14);
+        flashLightToggleBut = new JoystickButton(driverLeftStick, 4);
         flashLightToggleBut.whenPressed(new LauncherFlashLightToggle());
 
 

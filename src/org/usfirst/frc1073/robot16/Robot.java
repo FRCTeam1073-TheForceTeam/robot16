@@ -162,6 +162,8 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Left Distance", Robot.driveTrain.getLeftDistanceInches());
+        SmartDashboard.putNumber("Right Distance", Robot.driveTrain.getRightDistanceInches());
     }
 
     public void teleopInit() {

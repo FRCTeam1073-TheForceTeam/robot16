@@ -55,10 +55,22 @@ public class DefenseMoveElevation extends Command {
     	else return mag;
     }
     
+    /***************************************
+     * 
+     * Method to scale a joystick value.
+     *    @param arg is the joystick value
+     *
+     ***************************************/
+    private double cubicScale(double arg) {
+    	return (Robot.cubicScale*arg + (1 - Robot.cubicScale) * Math.pow((double)arg, 3));
+    }
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double joyMag = Robot.oi.operatorStick.getY();
+    	
     	joyMag = checkDeadZone(joyMag);
+    	joyMag = cubicScale(joyMag);
     	
     	if(Robot.defenseElevation.isPID()) Robot.defenseElevation.movePIDSpeed(joyMag);
     	else Robot.defenseElevation.moveBasic(joyMag);

@@ -98,7 +98,7 @@ public class DriveTrain extends Subsystem {
     	
     	//leftMotor1.
     	
-    	setPID(0.64, 0.006, 0.0, 0.36341);
+    	setPID(0.62, 0.006, 0.0, 0.36341);
     }
     
     /********************************
@@ -198,8 +198,8 @@ public class DriveTrain extends Subsystem {
     	
     	current = profiles.SPEED;
     	
-    	leftMotor1.setProfile(profiles.SPEED.ordinal());
-    	rightMotor1.setProfile(profiles.SPEED.ordinal());
+    	leftMotor1.setProfile(0);
+    	rightMotor1.setProfile(0);
     	
     	leftMotor1.changeControlMode(CANTalon.TalonControlMode.Speed);
     	rightMotor1.changeControlMode(CANTalon.TalonControlMode.Speed);
@@ -234,8 +234,9 @@ public class DriveTrain extends Subsystem {
     	
     	current = profiles.POSITIONAL;
     	
-    	leftMotor1.setProfile(profiles.POSITIONAL.ordinal());
-    	rightMotor1.setProfile(profiles.POSITIONAL.ordinal());
+    	leftMotor1.setProfile(0);
+    	rightMotor1.setProfile(0);
+    	//rightMotor1.reverseSensor(true);
     	
     	leftMotor1.changeControlMode(CANTalon.TalonControlMode.Position);
     	rightMotor1.changeControlMode(CANTalon.TalonControlMode.Position);
@@ -255,15 +256,20 @@ public class DriveTrain extends Subsystem {
     	
     	if(getState() != CANTalon.TalonControlMode.Position) setPositional();
     	
-    	/********* POSITIONAL LOGIC NEEDS TO BE FIXED ***************
-    	leftDistanceInches /= (FINAL_RADIUS * 2 * Math.PI);
-    	rightDistanceInches /= (FINAL_RADIUS * 2 * Math.PI);
-    	
     	double travelDistanceLeft = getLeftDistanceInches() + leftDistanceInches;
     	double travelDistanceRight = getRightDistanceInches() + rightDistanceInches; 
     	
-    	leftMotor2.set(travelDistanceLeft);
-    	rightMotor1.set(travelDistanceRight); */
+    	travelDistanceLeft *= -1;
+    	travelDistanceRight *= -1;
+    	
+    	travelDistanceLeft /= ((FINAL_RADIUS * (2 * Math.PI)));
+    	//travelDistanceLeft *= 360.0;
+    	
+    	travelDistanceRight /= ((FINAL_RADIUS * (2 * Math.PI)));
+    	//travelDistanceRight *= 360.0;
+    	
+    	leftMotor1.set(travelDistanceLeft);
+    	rightMotor1.set(travelDistanceRight);
     }
     
     /*************************************
@@ -310,7 +316,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftDistanceInches() {
-    	return (getLeftRawDistance() * ((FINAL_RADIUS * 2 * Math.PI)) / 2) * 2;
+    	return getLeftRawDistance() * (FINAL_RADIUS * 2 * Math.PI);
     }
     
     public double getRightRawSpeed() {
@@ -326,7 +332,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getRightDistanceInches() {
-    	return (getRightRawDistance() * ((FINAL_RADIUS * 2 * Math.PI)) / 2) * 2;
+    	return getRightRawDistance() * (FINAL_RADIUS * 2 * Math.PI);
     }
     
     public void initDefaultCommand() {
