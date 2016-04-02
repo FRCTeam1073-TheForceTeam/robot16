@@ -36,7 +36,7 @@ public class LauncherElevation extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    private static final double RAMP_RATE = 0;
+    //private static final double RAMP_RATE = 0;
     
     public LauncherElevation() {
     	elevationMotor.setInverted(Robot.invertLauncherElevation);
@@ -48,12 +48,14 @@ public class LauncherElevation extends Subsystem {
     	elevationMotor.changeControlMode(TalonControlMode.Position);
     	
     	elevationMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogEncoder);
-    	// elevationMotor.configPotentiometerTurns(turns); not sure if this is needed
+    	elevationMotor.configPotentiometerTurns(360);
     	
     	elevationMotor.configNominalOutputVoltage(+0f, -0f);
-    	elevationMotor.configPeakOutputVoltage(+10f, -10f);
+    	elevationMotor.configPeakOutputVoltage(+12f, -12f);
     	
-    	elevationMotor.setPID(0.0, 0.0, 0.0, 0.0, 0, RAMP_RATE, 0);
+    	elevationMotor.setAllowableClosedLoopErr(0);
+    	
+    	elevationMotor.setPID(32.0, 0.0, 0.0);
     	
     	ZeroOutPosition();
     }
@@ -63,11 +65,7 @@ public class LauncherElevation extends Subsystem {
     }
     
     public void movePID(double angle) {
-    	
-    	angle = convertFromDegrees(angle);
-    	
-    	elevationMotor.set(angle);
-    	
+    	elevationMotor.set(-angle);
     }
     
     public void moveBasic(double speed) {
@@ -90,15 +88,19 @@ public class LauncherElevation extends Subsystem {
     }
     
     public double convertToDegrees(double rawPotReading) {
-    	return (rawPotReading * 50.0) - 10;
+    	return rawPotReading * (360.0 / 1024.0);
     }
     
     public double convertFromDegrees(double degrees) {
-    	return (degrees / 50.0) + 10;
+    	return degrees * (1024.0 / 360.0);
     }
     
     public double getAngle() {
     	return convertToDegrees(getRawPot());
+    }
+    
+    public double getRawSetpoint() {
+    	return elevationMotor.getSetpoint();
     }
     
     public void initDefaultCommand() {

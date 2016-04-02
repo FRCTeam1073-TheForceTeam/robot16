@@ -53,10 +53,10 @@ public class DriveTrain extends Subsystem {
     
     private profiles current;
     
-    private static final double MOTOR_TOP_RPM = 1169; // This is the top speed of the robot in RPM
+    private static final double MOTOR_TOP_RPM = 823; // This is the top speed of the robot in RPM
     private static final double RAMP_RATE = 0; // in Volts/Second. This means if it is 12V/1sec it will reach full speed in 1 second    
     private static final double GEAR_RATIO = 11.0 / 8.0;
-    private static final double WHEELE_RADIUS = 8.0; // in inches
+    private static final double WHEELE_RADIUS = 4.0; // in inches
     
     private static final double FINAL_RADIUS = WHEELE_RADIUS / GEAR_RATIO; // radius after gear ratio (in inches)
     
@@ -87,14 +87,16 @@ public class DriveTrain extends Subsystem {
      * 
      *****************************/
     private void setupPID() {
-    	leftMotor2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	leftMotor1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	rightMotor1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	
-    	leftMotor2.configNominalOutputVoltage(+0f, -0f);
+    	leftMotor1.configNominalOutputVoltage(+0f, -0f);
     	rightMotor1.configNominalOutputVoltage(+0f, -0f);
     	
-    	leftMotor2.configPeakOutputVoltage(+12.0f, -12.0f);
+    	leftMotor1.configPeakOutputVoltage(+12.0f, -12.0f);
     	rightMotor1.configPeakOutputVoltage(+12.0f, -12.0f);
+    	
+    	//leftMotor1.
     	
     	setPID(0.64, 0.006, 0.0, 0.36341);
     }
@@ -113,12 +115,12 @@ public class DriveTrain extends Subsystem {
     	rightMotor1.setInverted(invertRight);
     	rightMotor1.setInverted(invertRight);
     	
-    	leftMotor1.changeControlMode(CANTalon.TalonControlMode.Follower);
-    	leftMotor1.set(leftMotor2.getDeviceID());
+    	leftMotor2.changeControlMode(CANTalon.TalonControlMode.Follower);
+    	leftMotor2.set(leftMotor1.getDeviceID());
     	rightMotor2.changeControlMode(CANTalon.TalonControlMode.Follower);
     	rightMotor2.set(rightMotor1.getDeviceID());
     	
-    	leftMotor2.setVoltageRampRate(RAMP_RATE);
+    	leftMotor1.setVoltageRampRate(RAMP_RATE);
     	rightMotor1.setVoltageRampRate(RAMP_RATE);
     }
     
@@ -131,10 +133,10 @@ public class DriveTrain extends Subsystem {
      **********************************/
     private void setupEncoders() {
     	
-    	leftMotor2.reverseSensor(invertLeftEncoder);
+    	leftMotor1.reverseSensor(invertLeftEncoder);
     	rightMotor1.reverseSensor(invertRightEncoder);
     	
-    	leftMotor2.configEncoderCodesPerRev(360);
+    	leftMotor1.configEncoderCodesPerRev(360);
     	rightMotor1.configEncoderCodesPerRev(360);
     }
     
@@ -149,7 +151,7 @@ public class DriveTrain extends Subsystem {
      * 
      **************************************/
     public void setPID(double p, double i, double d, double f) {
-    	leftMotor2.setPID(p, i, d, f, 300, RAMP_RATE, 0);
+    	leftMotor1.setPID(p, i, d, f, 300, RAMP_RATE, 0);
     	rightMotor1.setPID(p, i, d, f, 300, RAMP_RATE, 0);
     }
     
@@ -164,7 +166,7 @@ public class DriveTrain extends Subsystem {
     	
     	current = profiles.BASIC;
     	
-    	leftMotor2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	leftMotor1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
     	rightMotor1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
     }
     
@@ -181,7 +183,7 @@ public class DriveTrain extends Subsystem {
     	
     	if(getState() != CANTalon.TalonControlMode.PercentVbus) setBasic();
     	
-    	leftMotor2.set(left);
+    	leftMotor1.set(left);
     	rightMotor1.set(right);
     }
     
@@ -196,10 +198,10 @@ public class DriveTrain extends Subsystem {
     	
     	current = profiles.SPEED;
     	
-    	leftMotor2.setProfile(profiles.SPEED.ordinal());
+    	leftMotor1.setProfile(profiles.SPEED.ordinal());
     	rightMotor1.setProfile(profiles.SPEED.ordinal());
     	
-    	leftMotor2.changeControlMode(CANTalon.TalonControlMode.Speed);
+    	leftMotor1.changeControlMode(CANTalon.TalonControlMode.Speed);
     	rightMotor1.changeControlMode(CANTalon.TalonControlMode.Speed);
     	
     }
@@ -216,7 +218,7 @@ public class DriveTrain extends Subsystem {
     	
     	if(getState() != CANTalon.TalonControlMode.Speed) setSpeedMode();
     	
-    	leftMotor2.set(leftSpeed * MOTOR_TOP_RPM); // Multiply by the top RPM because the -1 to 1 is the percent of the top RPM you would like to travel
+    	leftMotor1.set(leftSpeed * MOTOR_TOP_RPM); // Multiply by the top RPM because the -1 to 1 is the percent of the top RPM you would like to travel
     	rightMotor1.set(rightSpeed * MOTOR_TOP_RPM);
     	
     }
@@ -232,10 +234,10 @@ public class DriveTrain extends Subsystem {
     	
     	current = profiles.POSITIONAL;
     	
-    	leftMotor2.setProfile(profiles.POSITIONAL.ordinal());
+    	leftMotor1.setProfile(profiles.POSITIONAL.ordinal());
     	rightMotor1.setProfile(profiles.POSITIONAL.ordinal());
     	
-    	leftMotor2.changeControlMode(CANTalon.TalonControlMode.Position);
+    	leftMotor1.changeControlMode(CANTalon.TalonControlMode.Position);
     	rightMotor1.changeControlMode(CANTalon.TalonControlMode.Position);
     }
     
@@ -287,7 +289,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public CANTalon.TalonControlMode getState() {
-    	return leftMotor2.getControlMode();
+    	return leftMotor1.getControlMode();
     }
     
     public boolean isPID() {
@@ -296,19 +298,19 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftRawSpeed() {
-    	return leftMotor2.getSpeed();
+    	return leftMotor1.getSpeed();
     }
     
     public double getLeftSpeedFps() {
-    	return getLeftRawSpeed() * ((FINAL_RADIUS * 2 * Math.PI) / 720.0);
+    	return (getLeftRawSpeed() * (((FINAL_RADIUS * 2 * Math.PI) / 60.0)) / 24.0) * 2;
     }
     
     public double getLeftRawDistance() {
-    	return leftMotor2.getPosition();
+    	return leftMotor1.getPosition();
     }
     
     public double getLeftDistanceInches() {
-    	return getLeftRawDistance() * (FINAL_RADIUS * 2 * Math.PI);
+    	return (getLeftRawDistance() * ((FINAL_RADIUS * 2 * Math.PI)) / 2) * 2;
     }
     
     public double getRightRawSpeed() {
@@ -316,7 +318,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getRightSpeedFps() {
-    	return getRightRawSpeed() * ((FINAL_RADIUS * 2 * Math.PI) / 720.0);
+    	return (getRightRawSpeed() * (((FINAL_RADIUS * 2 * Math.PI) / 60.0)) / 24.0) * 2;
     }
     
     public double getRightRawDistance() {
@@ -324,7 +326,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getRightDistanceInches() {
-    	return getRightRawDistance() * (FINAL_RADIUS * 2 * Math.PI);
+    	return (getRightRawDistance() * ((FINAL_RADIUS * 2 * Math.PI)) / 2) * 2;
     }
     
     public void initDefaultCommand() {

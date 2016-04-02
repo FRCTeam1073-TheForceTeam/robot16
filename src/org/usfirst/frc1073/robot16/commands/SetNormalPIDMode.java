@@ -38,8 +38,8 @@ public class SetNormalPIDMode extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.isManual = false;
-    	Robot.launcherElevation.ZeroOutPosition();
-    	Robot.defenseElevation.ZeroOutPosition();
+    	//Robot.launcherElevation.ZeroOutPosition();
+    	//Robot.defenseElevation.ZeroOutPosition();
     }
 
     // Called repeatedly when this Command is scheduled to run

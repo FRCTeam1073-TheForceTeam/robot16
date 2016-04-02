@@ -177,10 +177,14 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putNumber("POV Hat", oi.operatorStick.getPOV());
-        SmartDashboard.putNumber("Raw Pot Reading", launcherElevation.getRawPot());
-        SmartDashboard.putBoolean("drivetrain pid", driveTrain.isPID());
-        SmartDashboard.putBoolean("launcher PID", launcherElevation.isPID());
+        
+        SmartDashboard.putNumber("Left Speed", driveTrain.getLeftRawSpeed());
+        SmartDashboard.putNumber("Right Speed", driveTrain.getRightRawSpeed());
+        SmartDashboard.putNumber("left Speed FPS", driveTrain.getLeftSpeedFps());
+        SmartDashboard.putNumber("Right Speed FPS", driveTrain.getRightSpeedFps());
+        SmartDashboard.putNumber("Left Distance", driveTrain.getLeftDistanceInches());
+        SmartDashboard.putNumber("Right Distance", driveTrain.getRightDistanceInches());
+
         
         if(isManual) {
         	

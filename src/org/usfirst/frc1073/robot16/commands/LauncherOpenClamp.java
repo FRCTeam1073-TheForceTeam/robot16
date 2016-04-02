@@ -39,6 +39,7 @@ public class LauncherOpenClamp extends Command {
     protected void initialize() {
     	Robot.launcher.openClamp();
     	Robot.launcher.updateCurrentState();
+    	Robot.launcher.flashLightOff();
     }
 
     // Called repeatedly when this Command is scheduled to run
