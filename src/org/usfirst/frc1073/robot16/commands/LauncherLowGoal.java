@@ -46,6 +46,5 @@ public class LauncherLowGoal extends CommandGroup {
     	
     	addParallel(new LauncherPreset(3));
     	addParallel(new CollectorPurge());
-    	
     } 
 }

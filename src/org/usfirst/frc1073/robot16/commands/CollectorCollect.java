@@ -39,7 +39,7 @@ public class CollectorCollect extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Timer.delay(0.35);
+    	Timer.delay(0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run

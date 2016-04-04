@@ -57,6 +57,7 @@ public class OI {
     public Joystick driverLeftStick;
     public JoystickButton togglePID;
     public Joystick driverRightStick;
+    public JoystickButton launcherPrimeBut;
     public JoystickButton launcherLowGoalBut;
     public JoystickButton launcherPresetShortBut;
     public JoystickButton launcherPresetLongBut;
@@ -90,6 +91,8 @@ public class OI {
         launcherPresetShortBut.whenPressed(new LauncherPreset(2));
         launcherLowGoalBut = new JoystickButton(operatorStick, 4);
         launcherLowGoalBut.whileHeld(new LauncherLowGoal());
+        launcherPrimeBut = new JoystickButton(operatorStick, 1);
+        launcherPrimeBut.whenReleased(new LauncherPrime());
         driverRightStick = new Joystick(1);
         
         togglePID = new JoystickButton(driverRightStick, 1);

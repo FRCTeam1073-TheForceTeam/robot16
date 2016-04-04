@@ -37,27 +37,31 @@ public class AutonomousBasicDrive extends Command {
     }
     
     private static final double DISTANCE = 65;
+    private static final double SPEED = 0.5;
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.movePIDPositional(DISTANCE, DISTANCE);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.driveTrain.movePIDSpeed(SPEED, SPEED);
+    	//Robot.driveTrain.moveBasic(SPEED, SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return true;
+    	return Robot.driveTrain.getLeftDistanceInches() >= DISTANCE || Robot.driveTrain.getRightDistanceInches() >= DISTANCE;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.movePIDSpeed(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

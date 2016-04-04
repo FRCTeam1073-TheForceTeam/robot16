@@ -64,7 +64,14 @@ public class LauncherElevation extends Subsystem {
     	elevationMotor.changeControlMode(TalonControlMode.PercentVbus);
     }
     
+    public void setPIDPositional() {
+    	elevationMotor.changeControlMode(TalonControlMode.Position);
+    }
+    
     public void movePID(double angle) {
+    	
+    	if(!isPID()) setPIDPositional();
+    	
     	elevationMotor.set(-angle);
     }
     
@@ -84,23 +91,11 @@ public class LauncherElevation extends Subsystem {
     }
     
     public void ZeroOutPosition() {
-    	elevationMotor.setPosition(0);
+    	elevationMotor.setPosition(+0f);
     }
     
-    public double convertToDegrees(double rawPotReading) {
-    	return rawPotReading * (360.0 / 1024.0);
-    }
-    
-    public double convertFromDegrees(double degrees) {
-    	return degrees * (1024.0 / 360.0);
-    }
-    
-    public double getAngle() {
-    	return convertToDegrees(getRawPot());
-    }
-    
-    public double getRawSetpoint() {
-    	return elevationMotor.getSetpoint();
+    public double getSpeed() {
+    	return elevationMotor.getSpeed();
     }
     
     public void initDefaultCommand() {
