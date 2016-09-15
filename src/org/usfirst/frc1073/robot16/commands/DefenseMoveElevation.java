@@ -12,6 +12,8 @@
 package org.usfirst.frc1073.robot16.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc1073.robot16.Robot;
 
 /**
@@ -50,10 +52,12 @@ public class DefenseMoveElevation extends Command {
      * set in Robot Main
      * 
      ***********************************************/
-    public double checkDeadZone(double mag) {
-    	if(Math.abs(mag) <= Robot.deadZone) return 0;
-    	else return mag;
-    }
+	public double checkDeadZone(double mag) {
+		if (Math.abs(mag) <= Robot.deadZone)
+			return 0;
+		else
+			return mag;
+	}
     
     /***************************************
      * 
@@ -71,9 +75,8 @@ public class DefenseMoveElevation extends Command {
     	
     	joyMag = checkDeadZone(joyMag);
     	joyMag = cubicScale(joyMag);
-    	
-    	if(Robot.defenseElevation.isPID()) Robot.defenseElevation.movePIDSpeed(joyMag);
-    	else Robot.defenseElevation.moveBasic(joyMag);
+    	// && Robot.defenseElevation.getRawPot() >= -10 && Robot.defenseElevation.getRawPot() <= 190
+		Robot.defenseElevation.moveBasic(joyMag);
     }
 
     // Make this return true when this Command no longer needs to run execute()

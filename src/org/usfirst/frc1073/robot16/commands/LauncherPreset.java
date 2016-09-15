@@ -51,7 +51,7 @@ public class LauncherPreset extends Command {
 			Robot.launcherElevation.movePID(50);
 		break;
 		case 2:
-			Robot.launcherElevation.movePID(45);
+			Robot.launcherElevation.movePID(48);
 		break;
 		case 3:
 			Robot.launcherElevation.movePID(-12);
