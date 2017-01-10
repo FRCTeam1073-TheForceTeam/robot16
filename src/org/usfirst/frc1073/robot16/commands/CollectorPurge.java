@@ -12,6 +12,8 @@
 package org.usfirst.frc1073.robot16.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc1073.robot16.Robot;
 
 /**
@@ -38,11 +40,19 @@ public class CollectorPurge extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putString("Hello_World", "First_Troiiiiiiii");
+    	try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.collector.rollerPurge(Robot.rollerSpeed);
+    	SmartDashboard.putString("Hello_World", "play_Pretend");
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -52,6 +62,7 @@ public class CollectorPurge extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("Hello_World", "Goodbye_World");
     	Robot.collector.rollerOff();
     	Robot.launcherElevation.movePID(0);
     }
