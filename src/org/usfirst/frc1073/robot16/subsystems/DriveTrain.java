@@ -179,7 +179,8 @@ public class DriveTrain extends Subsystem {
      * @param right is right drive value (+) for forward (-) for reverse
      * 
      **************************************************/
-    public void moveBasic(double left, double right) {
+    public void 
+(double left, double right) {
     	
     	if(getState() != CANTalon.TalonControlMode.PercentVbus) setBasic();
     	
