@@ -13,8 +13,8 @@ package org.usfirst.frc1073.robot16.subsystems;
 
 import org.usfirst.frc1073.robot16.RobotMap;
 import org.usfirst.frc1073.robot16.commands.*;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -179,8 +179,7 @@ public class DriveTrain extends Subsystem {
      * @param right is right drive value (+) for forward (-) for reverse
      * 
      **************************************************/
-    public void 
-(double left, double right) {
+    public void moveBasic(double left, double right) {
     	
     	if(getState() != CANTalon.TalonControlMode.PercentVbus) setBasic();
     	

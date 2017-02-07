@@ -16,8 +16,8 @@ import org.usfirst.frc1073.robot16.RobotMap;
 import org.usfirst.frc1073.robot16.commands.*;
 import org.usfirst.frc1073.robot16.subsystems.DriveTrain.profiles;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
