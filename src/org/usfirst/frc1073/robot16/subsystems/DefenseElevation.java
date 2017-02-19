@@ -38,6 +38,7 @@ public class DefenseElevation extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
+	private final CANTalon elevationMotor = RobotMap.defenseElevationelevationMotor;
     private static final double MOTOR_TOP_RPM = 50;
     
     public DefenseElevation() {
